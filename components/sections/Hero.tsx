@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { Button, WhatsAppButton } from "@/components/ui/Button";
+import { Button, AuditButton } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Icon } from "@/components/ui/Icon";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { heroHeading, site } from "@/data/site";
-import { cn } from "@/lib/utils";
+import { whatsappLink } from "@/lib/utils";
+import { heroHeading, heroSub, heroTrust, site } from "@/content/site";import { cn } from "@/lib/utils";
 
 const heroSelectors = {
   badge: "[data-hero-badge]",
@@ -134,8 +134,8 @@ export function Hero() {
       <Container className="relative flex flex-col items-center text-center">
         <div data-hero-badge className="opacity-0">
           <a
-            href={site.heroBadge.href}
-            className="group inline-flex items-center gap-2 rounded-full border border-ink/10 bg-cream px-4 py-1.5 text-xs font-medium text-ink/70 transition-colors hover:border-ink/25 hover:text-ink sm:text-sm"
+            href="#system"
+            className="group inline-flex items-center gap-2 rounded-full border border-ink/10 bg-mist px-4 py-1.5 text-xs font-medium text-ink/70 transition-colors hover:border-ink/25 hover:text-ink sm:text-sm"
           >
             <span aria-hidden="true" className="size-2 rounded-full bg-brand" />
             <span>{site.heroBadge.label}</span>
@@ -150,25 +150,22 @@ export function Hero() {
           data-hero-subtitle
           className="mt-7 max-w-2xl text-base leading-relaxed text-ink/70 opacity-0 sm:text-lg md:text-xl"
         >
-          Website, ads, social media, content — sab ek hi team se sambhalta hai.
-          Aap dhande pe focus karo; growth har mahine report mein dikhegi.
+          {heroSub}
         </p>
         <div
           data-hero-actions
           className="mt-10 flex flex-wrap items-center justify-center gap-3 opacity-0"
         >
-          <WhatsAppButton text={site.whatsapp.ctaText} size="lg">
-            Free strategy call book karo
-          </WhatsAppButton>
-          <Button href="#plans" variant="outline" size="lg">
-            Pehle plans dekho
+          <AuditButton size="lg">{site.cta.audit}</AuditButton>
+          <Button href={whatsappLink(site.phone.primary.number, site.whatsapp.ctaText)} variant="outline" size="lg">
+            {site.cta.whatsapp}
           </Button>
         </div>
         <div
           data-hero-trust
           className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 opacity-0"
         >
-          {site.heroTrust.map((item) => (
+          {heroTrust.map((item) => (
             <div
               key={item.label}
               className="flex items-center gap-2 text-xs font-medium text-ink/70 sm:text-sm"

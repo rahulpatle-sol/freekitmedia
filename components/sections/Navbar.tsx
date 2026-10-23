@@ -10,7 +10,7 @@ import { Logo } from "@/components/ui/Logo";
 import { SoundToggle } from "@/components/ui/SoundToggle";
 import { prefersReducedMotion } from "@/lib/gsap";
 import { cn, whatsappLink } from "@/lib/utils";
-import { navLinks, site } from "@/data/site";
+import { site } from "@/content/site";
 import type Lenis from "lenis";
 
 function scrollToHash(hash: string, lenis: Lenis | null) {
@@ -45,7 +45,14 @@ export function Navbar() {
     scrollToHash(href, lenisRef?.current ?? null);
   };
 
-  const waHref = whatsappLink(site.whatsapp.number, site.whatsapp.ctaText);
+  const waHref = whatsappLink(site.phone.primary.number, site.whatsapp.ctaText);
+  const onAuditClick = (event: MouseEvent) => {
+    const hash = "#contact";
+    const target = document.querySelector<HTMLElement>(hash);
+    if (!target) return;
+    event.preventDefault();
+    scrollToHash(hash, lenisRef?.current ?? null);
+  };
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 pt-3 sm:pt-4">
@@ -61,7 +68,7 @@ export function Navbar() {
           </Link>
           <nav aria-label="Primary" className="hidden md:block">
             <ul className="flex items-center gap-1">
-              {navLinks.map((link) => (
+              {site.navLinks.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
@@ -76,12 +83,8 @@ export function Navbar() {
           </nav>
           <div className="flex items-center gap-2">
             <SoundToggle />
-            <Button
-              href={waHref}
-              size="sm"
-              className="hidden sm:inline-flex"
-            >
-              Free strategy call
+            <Button href="#contact" size="sm" onClick={onAuditClick} className="hidden sm:inline-flex">
+              {site.cta.audit}
             </Button>
             <button
               type="button"
@@ -105,20 +108,23 @@ export function Navbar() {
           )}
         >
           <ul className="flex flex-col">
-            {navLinks.map((link) => (
+            {site.navLinks.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
                   onClick={onHashClick(link.href)}
-                  className="block rounded-2xl px-4 py-3 text-base font-medium text-ink transition-colors hover:bg-cream"
+                  className="block rounded-2xl px-4 py-3 text-base font-medium text-ink transition-colors hover:bg-mist"
                 >
                   {link.label}
                 </a>
               </li>
             ))}
           </ul>
-          <Button href={waHref} size="md" className="mt-3 w-full">
-            Free strategy call
+          <Button href={waHref} variant="outline" size="md" className="mt-3 w-full">
+            {site.cta.whatsapp}
+          </Button>
+          <Button href="#contact" size="md" className="mt-2 w-full" onClick={onAuditClick}>
+            {site.cta.audit}
           </Button>
         </div>
       </Container>

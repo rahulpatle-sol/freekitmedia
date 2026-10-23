@@ -1,0 +1,94 @@
+import type { IconName } from "@/components/ui/Icon";
+
+export const contactBusinessTypes = [
+  "Jewellery / Retail",
+  "Healthcare / Doctor",
+  "Real Estate / Automobile",
+  "Education / Hotel",
+  "Founder / Personal brand",
+  "Other",
+] as const;
+
+export const site = {
+  name: "FreeKit Media",
+  legalName: "FreeKit Media",
+  tagline: "Aapka brand dikhega, tabhi toh bikega.",
+  headlineEn: "Building Brands Through Digital Presence",
+  description:
+    "FreeKit Media — Chhattisgarh ka full-service digital marketing agency. Content, ads, website, social media aur branding, sab ek in-house team se. Bilaspur, Ambikapur, Korba.",
+  url: "https://www.freekitmedia.com",
+  logo: { src: "/images/logo.jpg", width: 220, height: 220 },
+  cta: {
+    audit: "Free Digital Audit Lo",
+    whatsapp: "WhatsApp Karo",
+    auditNote: "30 minute meeting, aapke office par ya online.",
+  },
+  phone: {
+    primary: { number: "+918839801546", display: "+91 88398 01546" },
+    secondary: { number: "+918358803679", display: "+91 83588 03679" },
+  },
+  email: "hello@freekitmedia.com",
+  instagram: {
+    handle: "@freekitmedia_hub",
+    url: "https://www.instagram.com/freekitmedia_hub",
+  },
+  socials: [
+    { icon: "instagram", label: "Instagram", href: "https://www.instagram.com/freekitmedia_hub" },
+    { icon: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/" },
+    { icon: "youtube", label: "YouTube", href: "https://www.youtube.com/" },
+  ] as const,
+  cities: ["Bilaspur", "Ambikapur", "Korba"] as const,
+  heroBadge: {
+    label: "Full-service agency — Chhattisgarh",
+    href: "#system",
+  },
+  address: {
+    line: "Bilaspur, Chhattisgarh, India",
+  },
+  whatsapp: {
+    ctaText:
+      "Hi FreeKit Media, mujhe apne business ke liye Free Digital Audit ke baare mein baat karni hai.",
+  },
+  navLinks: [
+    { label: "System", href: "#system" },
+    { label: "Services", href: "#services" },
+    { label: "Process", href: "#process" },
+    { label: "Partners", href: "#partners" },
+    { label: "FAQ", href: "#faq" },
+  ] as const,
+} as const;
+
+export const marqueeNames = [
+  "Tanishq",
+  "Kisna",
+  "Pathsure",
+  "Next World",
+  "Mixxit",
+  "& many more",
+] as const;
+
+export const proofStats = [
+  { value: "100+", label: "businesses ka bharosa", icon: "users" },
+  { value: "9", label: "industries served", icon: "globe" },
+  { value: "₹6,00,000+", label: "ek din mein, Instagram ads se", icon: "trendingUp" },
+  { value: "3", label: "shehar — Bilaspur, Ambikapur, Korba", icon: "mapPin" },
+] as const;
+
+export type HeroHeadingPart = { text: string; highlight?: boolean } | "\n";
+
+export const heroHeading: HeroHeadingPart[] = [
+  { text: "Aapka brand dikhega," },
+  "\n",
+  { text: "tabhi toh bikega.", highlight: true },
+];
+
+export const heroSub =
+  "Poora marketing department, ek hi chhat ke neeche. Content, ads, website aur branding — sab ek team se.";
+
+export type TrustItem = { icon: IconName; label: string };
+
+export const heroTrust: TrustItem[] = [
+  { icon: "users", label: "100+ businesses" },
+  { icon: "badgeCheck", label: "Tanishq & Kisna jaise brands" },
+  { icon: "star", label: "Real reviews, real results" },
+];

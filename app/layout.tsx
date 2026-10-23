@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import { LenisProvider } from "@/components/providers/LenisProvider";
 import { SoundProvider } from "@/components/providers/SoundProvider";
-import { site } from "@/data/site";
+import { site } from "@/content/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -20,7 +20,7 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — Business badhao, ek jagah se sab sambhalo`,
+    default: `${site.name} — ${site.tagline}`,
     template: `%s · ${site.name}`,
   },
   description: site.description,
@@ -38,17 +38,37 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: "#ffffff",
+  viewportFit: "cover",
 };
 
 const orgJsonLd = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
+  "@type": ["ProfessionalService", "LocalBusiness"],
   name: site.name,
   url: site.url,
   description: site.description,
-  telephone: site.whatsapp.display,
+  telephone: site.phone.primary.number,
   email: site.email,
-  areaServed: "IN",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: site.cities[0],
+    addressRegion: "Chhattisgarh",
+    addressCountry: "IN",
+  },
+  areaServed: site.cities.map((city) => ({
+    "@type": "City",
+    name: city,
+  })),
+  openingHours: "Mo-Su 10:00-19:00",
+  makesOffer: [
+    "Content Creation & Branding",
+    "Meta Ads & Google Ads",
+    "Website & Social Media Management",
+    "Personal Branding & Influencer Marketing",
+  ].map((name) => ({
+    "@type": "Offer",
+    itemOffered: { "@type": "Service", name },
+  })),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
