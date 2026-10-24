@@ -14,7 +14,7 @@ import { FinalCta } from "@/components/sections/FinalCta";
 import { Cursor } from "@/components/sections/Cursor";
 import { FloatingWhatsApp, StickyMobileBar } from "@/components/sections/ReachBars";
 import { Footer } from "@/components/sections/Footer";
-
+import {Testimonials} from '@/components/sections/Testimonials'
 export default function Home() {
   return (
     <>
@@ -22,6 +22,7 @@ export default function Home() {
       <main id="main" className="flex-1 pb-16 lg:pb-0">
         <Hero />
         <PartnerMarquee />
+        <Testimonials />
         <SystemSection />
         <ProblemSection />
         <ServicesSection />

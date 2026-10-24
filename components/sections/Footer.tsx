@@ -4,6 +4,7 @@ import { Icon } from "@/components/ui/Icon";
 import { Logo } from "@/components/ui/Logo";
 import { services } from "@/content/services";
 import { site } from "@/content/site";
+import { whatsappLink } from "@/lib/utils";
 
 const contactItems = [
   {
@@ -13,7 +14,7 @@ const contactItems = [
   },
   {
     icon: "whatsapp",
-    href: `tel:${site.phone.secondary.number}`,
+    href: whatsappLink(site.phone.secondary.number, site.whatsapp.ctaText),
     label: site.phone.secondary.display,
   },
   { icon: "mail", href: `mailto:${site.email}`, label: site.email },
@@ -22,7 +23,7 @@ const contactItems = [
     href: site.instagram.url,
     label: site.instagram.handle,
   },
-  { icon: "mapPin", href: "#top", label: "Cities: Bilaspur | Ambikapur | Korba", plain: true },
+  { icon: "mapPin", href: "#top", label: "Cities: Bilaspur, Ambikapur, Korba", plain: true },
 ] as const;
 
 const socials = site.socials;

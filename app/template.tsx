@@ -1,5 +1,10 @@
-import { cn } from "@/lib/utils";
+import { HashScrollBridge } from "@/components/providers/HashScrollBridge";
 
 export default function Template({ children }: LayoutProps<"/">) {
-  return <div className={cn("page-in")}>{children}</div>;
+  return (
+    <>
+      <HashScrollBridge />
+      {children}
+    </>
+  );
 }

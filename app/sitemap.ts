@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     { url: base, lastModified: now, priority: 1 },
+    { url: `${base}/contact`, lastModified: now, priority: 0.9 },
     { url: `${base}/blog`, lastModified: now, priority: 0.6 },
     ...repo.services.list().map((entry) => ({
       url: `${base}/services/${entry.slug}`,

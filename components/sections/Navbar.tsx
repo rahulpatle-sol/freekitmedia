@@ -32,58 +32,61 @@ export function Navbar() {
   const lenisRef = useLenis();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 16);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const onHashClick = (href: string) => (event: MouseEvent) => {
-    if (!href.startsWith("#")) return;
+    if (!href.startsWith("/#") || window.location.pathname !== "/") {
+      setOpen(false);
+      return;
+    }
+    const hash = href.slice(1);
+    if (!document.querySelector(hash)) {
+      setOpen(false);
+      return;
+    }
     event.preventDefault();
     setOpen(false);
-    scrollToHash(href, lenisRef?.current ?? null);
-  };
-
-  const waHref = whatsappLink(site.phone.primary.number, site.whatsapp.ctaText);
-  const onAuditClick = (event: MouseEvent) => {
-    const hash = "#contact";
-    const target = document.querySelector<HTMLElement>(hash);
-    if (!target) return;
-    event.preventDefault();
     scrollToHash(hash, lenisRef?.current ?? null);
   };
 
+  const waHref = whatsappLink(site.phone.primary.number, site.whatsapp.ctaText);
+
   return (
-    <header className="fixed inset-x-0 top-0 z-50 pt-3 sm:pt-4">
+    <header className="fixed inset-x-0 top-0 z-50">
       <Container className="relative">
         <div
           className={cn(
-            "flex h-14 items-center justify-between rounded-full border border-ink/10 bg-white/85 pl-3 pr-2.5 backdrop-blur-md transition-shadow duration-300 sm:h-16 sm:pl-4 sm:pr-3",
-            scrolled && "shadow-[0_10px_40px_-12px_rgba(29,23,0,0.18)]",
+            "flex h-16 items-center justify-between transition-colors duration-300",
+            scrolled
+              ? "bg-paper/90 shadow-[0_1px_0_0_rgba(23,23,23,0.08)] backdrop-blur-md"
+              : "bg-transparent",
           )}
         >
-          <Link href="/" className="rounded-full" aria-label={site.name}>
+          <Link href="/" className="py-2" aria-label={site.name}>
             <Logo />
           </Link>
           <nav aria-label="Primary" className="hidden md:block">
             <ul className="flex items-center gap-1">
               {site.navLinks.map((link) => (
                 <li key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={onHashClick(link.href)}
-                    className="rounded-full px-3.5 py-2 text-sm font-medium text-ink/70 transition-colors hover:bg-ink/5 hover:text-ink"
+                  <Link
+                    href={`/${link.href}`}
+                    onClick={onHashClick(`/${link.href}`)}
+                    className="px-3.5 py-2 text-sm font-medium text-ink/70 transition-colors hover:text-ink"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
           </nav>
           <div className="flex items-center gap-2">
             <SoundToggle />
-            <Button href="#contact" size="sm" onClick={onAuditClick} className="hidden sm:inline-flex">
+            <Button href="/contact" size="sm" className="hidden sm:inline-flex">
               {site.cta.audit}
             </Button>
             <button
@@ -92,7 +95,7 @@ export function Navbar() {
               aria-expanded={open}
               aria-controls="mobile-nav"
               aria-label={open ? "Menu band karo" : "Menu kholo"}
-              className="grid size-10 cursor-pointer place-items-center rounded-full border border-ink/15 text-ink md:hidden"
+              className="grid size-10 cursor-pointer place-items-center border border-ink/15 text-ink md:hidden"
             >
               <Icon name={open ? "x" : "menu"} className="size-5" />
             </button>
@@ -101,31 +104,33 @@ export function Navbar() {
         <div
           id="mobile-nav"
           className={cn(
-            "absolute inset-x-3 top-[4.4rem] rounded-3xl border border-ink/10 bg-white p-3 shadow-xl transition-all duration-200 md:hidden",
+            "absolute inset-x-0 top-16 border border-ink/10 bg-paper p-2 shadow-[0_32px_70px_-40px_rgba(23,23,23,0.45)] transition-all duration-200 md:hidden",
             open
               ? "visible translate-y-0 opacity-100"
               : "invisible -translate-y-2 opacity-0",
           )}
         >
-          <ul className="flex flex-col">
+          <ul className="divide-y divide-grey-200">
             {site.navLinks.map((link) => (
               <li key={link.href}>
-                <a
-                  href={link.href}
-                  onClick={onHashClick(link.href)}
-                  className="block rounded-2xl px-4 py-3 text-base font-medium text-ink transition-colors hover:bg-mist"
+                <Link
+                  href={`/${link.href}`}
+                  onClick={onHashClick(`/${link.href}`)}
+                  className="block px-3 py-3.5 text-base font-medium text-ink transition-colors hover:text-brand-deep"
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
-          <Button href={waHref} variant="outline" size="md" className="mt-3 w-full">
-            {site.cta.whatsapp}
-          </Button>
-          <Button href="#contact" size="md" className="mt-2 w-full" onClick={onAuditClick}>
-            {site.cta.audit}
-          </Button>
+          <div className="grid grid-cols-2 gap-2 pt-3">
+            <Button href={waHref} variant="outline" size="md">
+              {site.cta.whatsapp}
+            </Button>
+            <Button href="/contact" size="md" onClick={() => setOpen(false)}>
+              {site.cta.audit}
+            </Button>
+          </div>
         </div>
       </Container>
     </header>

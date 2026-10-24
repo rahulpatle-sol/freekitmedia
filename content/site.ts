@@ -34,13 +34,11 @@ export const site = {
   },
   socials: [
     { icon: "instagram", label: "Instagram", href: "https://www.instagram.com/freekitmedia_hub" },
-    { icon: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/" },
-    { icon: "youtube", label: "YouTube", href: "https://www.youtube.com/" },
   ] as const,
   cities: ["Bilaspur", "Ambikapur", "Korba"] as const,
   heroBadge: {
-    label: "Full-service agency — Chhattisgarh",
-    href: "#system",
+  
+  
   },
   address: {
     line: "Bilaspur, Chhattisgarh, India",

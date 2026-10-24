@@ -1,39 +1,90 @@
+import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { Icon } from "@/components/ui/Icon";
 import { Logo } from "@/components/ui/Logo";
+import { services } from "@/content/services";
 import { site } from "@/content/site";
-import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <main id="main" className="flex flex-1 items-center justify-center py-32">
-      <Container className="flex flex-col items-center text-center">
-        <Logo />
-        <p className="font-display mt-10 text-hero font-bold leading-none tracking-[-0.03em] text-ink">
-          4<span className="text-brand">0</span>4
-        </p>
-        <p className="font-display mt-6 text-h3 font-bold tracking-tight">
-          Yeh page mila nahi —{" "}
-          <span className="text-brand-deep">par aapka brand ban sakta hai</span>
-        </p>
-        <p className="mt-3 max-w-md text-lead text-grey-600">
-          Chinta mat karo. Home pe wapas jao, ya seedha free digital audit lo —
-          hum sambhal lenge.
-        </p>
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-          <Button href="/" variant="primary" size="lg">
-            Home pe chalein
-          </Button>
-          <Button href="/#contact" variant="outline" size="lg">
-            {site.cta.audit}
-          </Button>
+    <main id="main" className="relative flex flex-1 flex-col bg-mist">
+      <Container className="flex flex-1 flex-col py-10 sm:py-14">
+        <div className="flex items-center justify-between">
+          <Link href="/" className="py-2" aria-label={site.name}>
+            <Logo />
+          </Link>
           <Link
-            href="/blog"
-            className="px-3 py-2 text-sm font-medium text-grey-600 underline-offset-4 hover:underline"
+            href="/contact"
+            className="link-underline text-sm font-semibold text-ink"
           >
-            Blog dekho
+            Free Digital Audit
           </Link>
         </div>
+
+        <div className="flex flex-1 flex-col justify-center py-14">
+          <p className="font-display flex items-start text-hero leading-none font-extrabold tracking-[-0.04em] text-ink sm:text-hero">
+            <span>4</span>
+            <span
+              aria-hidden="true"
+              className="mx-[0.06em] inline-block bg-ink px-[0.14em] text-brand"
+            >
+              0
+            </span>
+            <span>4</span>
+          </p>
+          <h1 className="font-display mt-10 max-w-2xl text-h1 leading-[1.08] font-extrabold tracking-[-0.02em]">
+            Yeh page mila nahi.{" "}
+            <span className="bg-brand px-2.5 box-decoration-clone">
+              Aapka brand ban sakta hai.
+            </span>
+          </h1>
+          <p className="mt-5 max-w-md text-lead leading-relaxed text-grey-600">
+            Chinta mat karo — home se poora site, services aur partners sab
+            yahan se pahunchte hain.
+          </p>
+          <div className="mt-10 flex flex-wrap items-center gap-3">
+            <Button href="/" size="lg">
+              Home pe chalein
+            </Button>
+            <Button href="/contact" variant="outline" size="lg">
+              {site.cta.audit}
+            </Button>
+            <Link
+              href="/blog"
+              className="link-underline px-2 text-sm font-medium text-grey-600"
+            >
+              Blog dekho
+            </Link>
+          </div>
+        </div>
+
+        <nav
+          aria-label="Services"
+          className="border-t border-ink/10 pt-8 pb-4 sm:pb-8"
+        >
+          <p className="text-xs font-semibold tracking-[0.18em] text-brand-deep uppercase">
+            Seedha services tak
+          </p>
+          <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+            {services.map((service) => (
+              <li key={service.slug}>
+                <Link
+                  href={`/services/${service.slug}`}
+                  className="group flex items-center justify-between gap-4 border-t border-ink/10 py-4"
+                >
+                  <span className="font-display text-sm font-bold tracking-tight text-ink">
+                    {service.title}
+                  </span>
+                  <Icon
+                    name="arrowRight"
+                    className="size-4 text-ink/40 transition-all group-hover:translate-x-0.5 group-hover:text-ink"
+                  />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </Container>
     </main>
   );

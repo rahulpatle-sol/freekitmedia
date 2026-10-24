@@ -1,49 +1,41 @@
 "use client";
 
-import { useRef } from "react";
 import { Container } from "@/components/ui/Container";
 import { Icon } from "@/components/ui/Icon";
 import { noShortcuts } from "@/content/page-sections";
+import { useRef } from "react";
 import { useReveal } from "@/lib/use-reveal";
-
-const itemIcons: ("x")[] = ["x", "x", "x"];
 
 export function NoShortcuts() {
   const ref = useRef<HTMLElement>(null);
   useReveal(ref);
   return (
-    <section ref={ref} className="bg-ink py-24 text-paper sm:py-32">
-      <Container>
+    <section ref={ref} className="bg-olive text-paper">
+      <Container className="grid gap-10 py-16 sm:py-20 lg:grid-cols-[1fr_1.6fr] lg:gap-16">
         <div data-reveal>
-          <p className="text-xs font-semibold tracking-[0.18em] text-brand uppercase">
+          <p className="text-xs font-semibold tracking-[0.18em] uppercase text-paper/70">
             Na lalach, na dhoka
           </p>
-          <h2 className="font-display mt-4 max-w-3xl text-h1 font-bold leading-[1.05] tracking-[-0.02em]">
+          <h2 className="font-display mt-3 text-h2 leading-tight font-extrabold tracking-tight">
             {noShortcuts.title}
           </h2>
+          <p className="font-display mt-5 text-sm font-bold leading-relaxed text-paper/85">
+            &ldquo;{noShortcuts.line}&rdquo;
+          </p>
         </div>
-        <div data-reveal-stagger className="mt-14 grid gap-4 md:grid-cols-3">
-          {noShortcuts.items.map((item, i) => (
-            <article
-              key={item.title}
-              className="rounded-3xl border border-paper/10 bg-paper/[0.03] p-8 transition-colors hover:border-brand/60"
-            >
-              <Icon name={itemIcons[i]} className="size-6 text-brand" />
-              <h3 className="font-display mt-4 text-h3 font-bold tracking-tight">
+        <div data-reveal className="grid gap-8 sm:grid-cols-3">
+          {noShortcuts.items.map((item) => (
+            <article key={item.title}>
+              <Icon name="x" className="size-5 text-brand" />
+              <h3 className="font-display mt-3 text-base font-extrabold tracking-tight">
                 {item.title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-paper/60">
+              <p className="mt-2 text-sm leading-relaxed text-paper/70">
                 {item.text}
               </p>
             </article>
           ))}
         </div>
-        <p
-          data-reveal
-          className="font-display mt-12 max-w-3xl text-h3 font-bold leading-snug tracking-tight text-brand [&_q]:text-brand"
-        >
-          &ldquo;{noShortcuts.line}&rdquo;
-        </p>
       </Container>
     </section>
   );

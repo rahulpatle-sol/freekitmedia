@@ -12,7 +12,7 @@ type Size = "sm" | "md" | "lg";
 
 const variantClasses: Record<Variant, string> = {
   primary:
-    "bg-brand text-ink hover:bg-brand-bright shadow-[0_1px_2px_rgba(11,11,11,0.12)] hover:shadow-[0_12px_32px_-8px_rgba(232,176,32,0.65)]",
+    "bg-brand text-ink hover:bg-brand-soft shadow-[0_1px_2px_rgba(23,23,23,0.12)] hover:shadow-[0_12px_32px_-8px_rgba(247,201,40,0.65)]",
   ink: "bg-ink text-paper hover:bg-grey-800 hover:shadow-[0_12px_32px_-10px_rgba(11,11,11,0.45)]",
   outline: "border border-ink/20 bg-white text-ink hover:border-ink/50",
   outlineLight:
@@ -48,7 +48,7 @@ export function Button({
 }: ButtonProps) {
   const { play } = useSound();
   const classes = cn(
-    "group inline-flex cursor-pointer items-center justify-center gap-2 rounded-full font-semibold whitespace-nowrap transition-[background-color,border-color,color,transform,box-shadow] duration-200 hover:-translate-y-px active:translate-y-0 active:transition-none",
+    "group inline-flex cursor-pointer items-center justify-center gap-2 rounded-md font-semibold whitespace-nowrap transition-[background-color,border-color,color,transform,box-shadow] duration-200 hover:-translate-y-px active:translate-y-0 active:transition-none",
     variantClasses[variant],
     sizeClasses[size],
     className,

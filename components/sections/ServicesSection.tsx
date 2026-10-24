@@ -13,12 +13,12 @@ export function ServicesSection() {
   return (
     <section id="services" ref={ref} className="bg-mist py-24 sm:py-32">
       <Container>
-        <div data-reveal className="flex flex-wrap items-end justify-between gap-6">
+        <div data-reveal className="flex flex-wrap items-end justify-between gap-8">
           <div className="max-w-2xl">
-            <p className="text-xs font-semibold tracking-[0.18em] text-grey-400 uppercase">
+            <p className="text-xs font-semibold tracking-[0.18em] text-brand-deep uppercase">
               Services
             </p>
-            <h2 className="font-display mt-4 text-h1 font-bold leading-[1.05] tracking-[-0.02em]">
+            <h2 className="font-display mt-4 text-h1 leading-[1.05] font-extrabold tracking-[-0.02em]">
               Poora marketing department, ek hi chhat ke neeche
             </h2>
           </div>
@@ -27,67 +27,76 @@ export function ServicesSection() {
             chaar milke chalte hain.
           </p>
         </div>
-        <div
-          data-reveal-stagger
-          className="mt-14 grid gap-4 md:grid-cols-2"
-        >
-          {services.map((service) => (
+
+        <div className="mt-14 border-t border-ink/10">
+          {services.map((service, i) => (
             <article
               key={service.slug}
-              className="group flex flex-col rounded-3xl border border-grey-200 bg-white p-8 transition-[border-color,box-shadow] hover:border-ink/20 hover:shadow-[0_24px_60px_-28px_rgba(11,11,11,0.3)]"
+              data-reveal
+              className="group grid gap-6 border-b border-ink/10 py-9 transition-colors hover:bg-paper sm:py-11"
             >
-              <div className="flex items-center justify-between">
-                <span className="flex items-center gap-3">
-                  <span className="grid size-11 place-items-center rounded-2xl bg-brand/15 text-brand-deep">
-                    <Icon name={service.icon} className="size-5" />
-                  </span>
-                  <span className="font-mono text-xs font-semibold text-grey-400">
-                    {service.num}
-                  </span>
+              <div className="grid items-start gap-6 sm:grid-cols-[2.5rem_1.35fr_1fr] lg:grid-cols-[2.5rem_1.15fr_1.1fr_auto] lg:gap-10">
+                <span className="font-display text-sm font-bold text-grey-400 tabular-nums">
+                  {service.num}
                 </span>
+                <div>
+                  <span className="flex items-center gap-3">
+                    <span className="grid size-10 shrink-0 place-items-center bg-brand text-ink">
+                      <Icon name={service.icon} className="size-4.5" />
+                    </span>
+                    <h3 className="font-display text-h3 leading-tight font-extrabold tracking-tight">
+                      {service.title}
+                    </h3>
+                  </span>
+                  <p className="mt-3 max-w-md text-sm leading-relaxed text-grey-600">
+                    {service.description}
+                  </p>
+                </div>
+                <ul className="space-y-2 sm:border-l sm:border-ink/10 sm:pl-6">
+                  {service.points.slice(0, 4).map((point) => (
+                    <li
+                      key={point}
+                      className="flex items-start gap-2.5 text-sm leading-relaxed text-ink/80"
+                    >
+                      <Icon
+                        name="check"
+                        className="mt-0.5 size-4 shrink-0 text-brand-deep"
+                      />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
                 <Link
                   href={`/services/${service.slug}`}
                   aria-label={`${service.title} ki detail page`}
-                  className="link-underline inline-flex items-center gap-1 text-sm font-semibold text-ink/60 hover:text-ink"
+                  className="link-underline inline-flex items-center gap-1.5 self-center text-sm font-semibold text-ink/60 transition-colors hover:text-ink lg:justify-self-end"
                 >
                   Detail
-                  <Icon name="arrowRight" className="size-4" />
+                  <Icon
+                    name="arrowRight"
+                    className="size-4 transition-transform group-hover:translate-x-0.5"
+                  />
+                  <span className="sr-only">- {String(i + 1).padStart(2, "0")}</span>
                 </Link>
               </div>
-              <h3 className="font-display mt-6 text-h3 font-bold tracking-tight">
-                {service.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-grey-600">
-                {service.description}
-              </p>
-              <ul className="mt-6 space-y-2.5">
-                {service.points.slice(0, 4).map((point) => (
-                  <li
-                    key={point}
-                    className="flex items-start gap-2.5 text-sm leading-relaxed text-ink/80"
-                  >
-                    <Icon name="check" className="mt-0.5 size-4 text-brand-deep" />
-                    {point}
-                  </li>
-                ))}
-              </ul>
             </article>
           ))}
         </div>
+
         <div
           data-reveal
-          className="mt-4 rounded-3xl bg-brand p-8 text-ink sm:p-10"
+          className="mt-14 bg-brand p-8 text-ink sm:p-12"
         >
-          <div className="flex flex-wrap items-start justify-between gap-6">
+          <div className="flex flex-wrap items-start justify-between gap-8">
             <div className="max-w-2xl">
-              <p className="font-display text-h3 font-bold tracking-tight">
+              <p className="font-display text-h3 font-extrabold tracking-tight">
                 {offlineSupport.title}
               </p>
-              <p className="mt-2 text-sm leading-relaxed sm:text-base">
+              <p className="mt-3 text-sm leading-relaxed sm:text-base">
                 {offlineSupport.text}
               </p>
             </div>
-            <p className="font-display max-w-xs text-sm font-semibold leading-relaxed">
+            <p className="font-display max-w-xs text-sm font-bold leading-relaxed sm:border-l sm:border-ink/30 sm:pl-6">
               {offlineSupport.line}
             </p>
           </div>

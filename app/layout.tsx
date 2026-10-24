@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, Manrope } from "next/font/google";
 import { LenisProvider } from "@/components/providers/LenisProvider";
 import { SoundProvider } from "@/components/providers/SoundProvider";
 import { site } from "@/content/site";
@@ -11,10 +11,10 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const manrope = Manrope({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-space-grotesk",
+  variable: "--font-manrope",
 });
 
 export const metadata: Metadata = {
@@ -75,7 +75,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en-IN"
-      className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
+      className={`${inter.variable} ${manrope.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-paper font-sans text-ink">
         <a
