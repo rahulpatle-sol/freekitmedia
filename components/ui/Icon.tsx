@@ -1,3 +1,4 @@
+
 "use client";
 
 import type { ComponentType } from "react";
@@ -35,9 +36,15 @@ import {
   VolumeX,
   X,
 } from "lucide-react";
+
 import { cn } from "@/lib/utils";
 
-function InstagramIcon({ className }: { className?: string; strokeWidth?: number }) {
+function InstagramIcon({
+  className,
+}: {
+  className?: string;
+  strokeWidth?: number;
+}) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -56,7 +63,12 @@ function InstagramIcon({ className }: { className?: string; strokeWidth?: number
   );
 }
 
-function YoutubeIcon({ className }: { className?: string; strokeWidth?: number }) {
+function YoutubeIcon({
+  className,
+}: {
+  className?: string;
+  strokeWidth?: number;
+}) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -69,12 +81,21 @@ function YoutubeIcon({ className }: { className?: string; strokeWidth?: number }
       className={cn("size-5 shrink-0", className)}
     >
       <rect x="2.5" y="5.5" width="19" height="13" rx="3.5" />
-      <path d="m10 9.5 5 2.5-5 2.5Z" fill="currentColor" stroke="none" />
+      <path
+        d="m10 9.5 5 2.5-5 2.5Z"
+        fill="currentColor"
+        stroke="none"
+      />
     </svg>
   );
 }
 
-function LinkedinIcon({ className }: { className?: string; strokeWidth?: number }) {
+function LinkedinIcon({
+  className,
+}: {
+  className?: string;
+  strokeWidth?: number;
+}) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -174,12 +195,25 @@ const icons: Record<IconName, IconComponent> = {
   smartphone: Smartphone,
   landmark: Landmark,
   sparkles: Sparkles,
-} as const;
+};
 
-type IconProps = { name: IconName; className?: string };
+type IconProps = {
+  name: IconName;
+  className?: string;
+};
 
 export function Icon({ name, className }: IconProps) {
   const BrandOrLucide = icons[name];
+
+  if (!BrandOrLucide) {
+    console.error(
+      `[Icon] Unknown icon: "${name}". Available icons:`,
+      Object.keys(icons),
+    );
+
+    return null;
+  }
+
   return (
     <BrandOrLucide
       aria-hidden="true"

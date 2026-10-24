@@ -44,7 +44,7 @@ async function Content({ slugPromise }: { slugPromise: Promise<Params> }) {
         blocks: entry.blocks,
       }}
       backHref="/blog"
-      backLabel="Sab articles dekho"
+      backLabel="Browse all articles"
     />
   );
 }

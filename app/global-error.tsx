@@ -42,7 +42,7 @@ export default function GlobalError({
               backgroundColor: "#f7c928",
             }}
           >
-            Dobara try karo
+            Try again
           </button>
         </div>
       </body>

@@ -22,7 +22,7 @@ function SubmitButton() {
       disabled={pending}
       className="inline-flex h-12 w-full items-center justify-center gap-2 bg-brand px-7 font-semibold whitespace-nowrap text-ink transition-colors hover:bg-brand-soft disabled:opacity-60 sm:w-auto"
     >
-      {pending ? "Bhej rahe hain..." : site.cta.audit}
+      {pending ? "Sending your request..." : site.cta.submitAudit}
       <Icon name="arrowRight" className="size-4" />
     </button>
   );
@@ -41,11 +41,11 @@ export function ContactForm() {
       <div className="border border-olive/30 bg-mist p-8 text-ink">
         <Icon name="badgeCheck" className="size-8 text-olive" />
         <p className="font-display mt-4 text-h3 font-extrabold tracking-tight">
-          Mila, Thanks!
+          Thank you — we’ve received your request.
         </p>
         <p className="mt-2 text-sm leading-relaxed text-grey-600">
-          24 ghanton mein call karenge. Urgent ho toh WhatsApp par seedha
-          detail chhod do — audit slot turant book ho jaayega.
+          We’ll be in touch within one business day. If you prefer, you can
+          also message us on WhatsApp.
         </p>
         <a
           href={whatsappLink(site.phone.primary.number, site.whatsapp.ctaText)}
@@ -54,7 +54,7 @@ export function ContactForm() {
           className="mt-6 inline-flex items-center gap-2 border border-ink/30 px-5 py-2 text-sm font-semibold text-ink transition-colors hover:border-ink hover:bg-brand/20"
         >
           <Icon name="whatsapp" className="size-4" />
-          WhatsApp Karo
+          {site.cta.whatsapp}
         </a>
       </div>
     );
@@ -68,11 +68,10 @@ export function ContactForm() {
           className="mb-5 border border-brand bg-brand/15 p-5 text-ink"
         >
           <p className="font-display text-base font-extrabold tracking-tight">
-            Request fail ho gayi.
+            We couldn’t send your request.
           </p>
           <p className="mt-1.5 text-sm leading-relaxed text-grey-600">
-            Kuch galat ho gaya server par. Dusri baar try karo — ya seedha
-            WhatsApp par message chhod do.
+            Please try again, or get in touch with us on WhatsApp.
           </p>
           <a
             href={whatsappLink(
@@ -84,19 +83,19 @@ export function ContactForm() {
             className="link-underline mt-3 inline-flex items-center gap-2 text-sm font-semibold text-ink"
           >
             <Icon name="whatsapp" className="size-4" />
-            WhatsApp Karo
+            {site.cta.whatsapp}
           </a>
         </div>
       )}
       <form ref={formRef} action={formAction} className="space-y-4">
         <div>
           <label htmlFor="contact-name" className="sr-only">
-            Naam
+            Your name
           </label>
           <input
             id="contact-name"
             name="name"
-            placeholder="Naam"
+            placeholder="Your name"
             autoComplete="name"
             aria-invalid={Boolean(state.errors?.name)}
             aria-describedby={
@@ -115,14 +114,14 @@ export function ContactForm() {
         </div>
         <div>
           <label htmlFor="contact-phone" className="sr-only">
-            Phone
+            Phone number
           </label>
           <input
             id="contact-phone"
             name="phone"
             type="tel"
             inputMode="numeric"
-            placeholder="Mobile number"
+            placeholder="Your mobile number"
             autoComplete="tel"
             aria-invalid={Boolean(state.errors?.phone)}
             aria-describedby={
@@ -159,7 +158,7 @@ export function ContactForm() {
               )}
             >
               <option value="" disabled>
-                Business type chuno
+                Choose your business type
               </option>
               {contactBusinessTypes.map((type) => (
                 <option key={type} value={type}>
@@ -188,7 +187,7 @@ export function ContactForm() {
         />
         <SubmitButton />
         <p className="pl-1 text-xs text-grey-600">
-          Number sirf aapko call karne ke liye — spam nahi.
+          We’ll only use your number to follow up about your request. No spam.
         </p>
       </form>
     </div>

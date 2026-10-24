@@ -217,7 +217,7 @@ export const pitchItems = [
     problem:
       "Achhe doctor ka naam sirf muh-bol ke pahunchta hai; online reviews aur profile weak hote hain.",
     weDo: "Doctor personal branding, patient stories, aur Google My Business optimisation — bharosa pehle, appointment baad mein.",
-    cta: "Doctor branding ka example dekho",
+    cta: "Explore the healthcare example",
   },
   {
     slug: "real-estate-automobile",
@@ -233,7 +233,7 @@ export const pitchItems = [
     problem:
       "Admission aur booking ka faisla content aur reviews se hota hai — jo abhi online dikh nahi raha.",
     weDo: "Campus/property tours, result aur reviews ki storytelling, seasonal offer campaigns.",
-    cta: "Admission & booking plan dekho",
+    cta: "Explore the admissions and booking plan",
   },
   {
     slug: "founders-personal-brand",
@@ -241,7 +241,7 @@ export const pitchItems = [
     problem:
       "Founder khud brand ka best influencer hai, par camera ke peeche chhota ho gaya hai.",
     weDo: "Face-of-the-brand content, founder story, interview snippets aur LinkedIn/Instagram presence.",
-    cta: "Founder branding ka roadmap dekho",
+    cta: "Explore the founder branding roadmap",
   },
 ] as const;
 

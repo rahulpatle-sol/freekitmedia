@@ -18,7 +18,7 @@ export default function NotFound() {
             href="/contact"
             className="link-underline text-sm font-semibold text-ink"
           >
-            Free Digital Audit
+            {site.cta.audit}
           </Link>
         </div>
 
@@ -45,7 +45,7 @@ export default function NotFound() {
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <Button href="/" size="lg">
-              Home pe chalein
+              Return home
             </Button>
             <Button href="/contact" variant="outline" size="lg">
               {site.cta.audit}
@@ -54,7 +54,7 @@ export default function NotFound() {
               href="/blog"
               className="link-underline px-2 text-sm font-medium text-grey-600"
             >
-              Blog dekho
+              Browse the blog
             </Link>
           </div>
         </div>
@@ -64,7 +64,7 @@ export default function NotFound() {
           className="border-t border-ink/10 pt-8 pb-4 sm:pb-8"
         >
           <p className="text-xs font-semibold tracking-[0.18em] text-brand-deep uppercase">
-            Seedha services tak
+            Explore our services
           </p>
           <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
             {services.map((service) => (

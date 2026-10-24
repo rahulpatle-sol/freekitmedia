@@ -48,10 +48,10 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         type: "cta",
-        title: "Aapke business ka bhi quick win ho sakta hai",
-        text: "Aapka business bataye — hum dikhate hain kahan pehla quick win hai.",
+        title: "Let’s explore what could work for your business",
+        text: "Tell us about your goals and we’ll discuss a practical place to begin.",
         href: "/#contact",
-        label: "Free Digital Audit Lo",
+        label: "Request a free audit",
       },
     ],
   },

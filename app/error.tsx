@@ -27,11 +27,11 @@ export default function ErrorBoundary({
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <Button onClick={reset}>
-              Dobara try karo
+              Try again
               <Icon name="arrowRight" className="size-4" />
             </Button>
             <Button href="/" variant="outlineLight">
-              Home pe chalein
+              Return home
             </Button>
             <a
               href={`https://wa.me/${site.phone.primary.number.replace(/\D/g, "")}`}
@@ -40,7 +40,7 @@ export default function ErrorBoundary({
               className="link-underline inline-flex items-center gap-2 px-2 text-sm font-medium text-paper/75"
             >
               <Icon name="whatsapp" className="size-4 text-brand" />
-              WhatsApp Karo
+              {site.cta.whatsapp}
             </a>
           </div>
           {error.digest ? (

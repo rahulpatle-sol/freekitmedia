@@ -46,15 +46,15 @@ async function Content({ slugPromise }: { slugPromise: Promise<Params> }) {
           { type: "list", items: entry.points },
           {
             type: "cta",
-            title: "Is service aapke business mein fit hai ya nahi?",
-            text: "30 minute ke free audit mein bata denge — bilkul honest.",
+            title: "Could this service fit your business?",
+            text: "Request a relaxed, 30-minute audit and we’ll talk through your goals and next steps.",
             href: "/#contact",
-            label: "Free Digital Audit Lo",
+            label: "Request a free audit",
           },
         ],
       }}
       backHref="/#services"
-      backLabel="Sab services dekho"
+      backLabel="Browse all services"
     />
   );
 }

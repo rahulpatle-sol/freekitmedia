@@ -46,7 +46,7 @@ async function Content({ slugPromise }: { slugPromise: Promise<Params> }) {
         blocks: entry.blocks,
       }}
       backHref="/#proof"
-      backLabel="Proof dekho"
+      backLabel="Browse all case studies"
     />
   );
 }

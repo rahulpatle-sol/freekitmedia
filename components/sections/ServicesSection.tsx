@@ -1,107 +1,222 @@
+
 "use client";
 
 import Link from "next/link";
-import { Container } from "@/components/ui/Container";
+import { useEffect, useRef, useState, type PointerEvent } from "react";
 import { Icon } from "@/components/ui/Icon";
-import { offlineSupport, services } from "@/content/services";
-import { useRef } from "react";
-import { useReveal } from "@/lib/use-reveal";
+import { services } from "@/content/services";
 
-export function ServicesSection() {
-  const ref = useRef<HTMLElement>(null);
-  useReveal(ref);
+type PreviewPosition = {
+  x: number;
+  y: number;
+};
+
+export function ServiceHoverPreview() {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [position, setPosition] = useState<PreviewPosition>({
+    x: 0,
+    y: 0,
+  });
+  const pendingPosition = useRef<PreviewPosition | null>(null);
+  const animationFrame = useRef<number | null>(null);
+
+  const activeService =
+    activeIndex !== null ? services[activeIndex] : null;
+
+  useEffect(
+    () => () => {
+      if (animationFrame.current !== null) {
+        cancelAnimationFrame(animationFrame.current);
+      }
+    },
+    [],
+  );
+
+  function handlePointerMove(event: PointerEvent<HTMLDivElement>) {
+    // Avoid cursor-following on touch devices.
+    if (event.pointerType === "touch") return;
+
+    const previewWidth = Math.min(360, window.innerWidth * 0.8);
+    const previewHeight = 250;
+    const offset = 28;
+    const edge = 16;
+
+    let x = event.clientX + offset;
+    let y = event.clientY + offset;
+
+    // Keep the floating preview inside the viewport.
+    if (x + previewWidth > window.innerWidth - edge) {
+      x = event.clientX - previewWidth - offset;
+    }
+
+    if (y + previewHeight > window.innerHeight - edge) {
+      y = window.innerHeight - previewHeight - edge;
+    }
+
+    x = Math.max(edge, x);
+    y = Math.max(edge, y);
+
+    pendingPosition.current = { x, y };
+    if (animationFrame.current === null) {
+      animationFrame.current = requestAnimationFrame(() => {
+        if (pendingPosition.current) {
+          setPosition(pendingPosition.current);
+        }
+        animationFrame.current = null;
+      });
+    }
+  }
+
   return (
-    <section id="services" ref={ref} className="bg-mist py-24 sm:py-32">
-      <Container>
-        <div data-reveal className="flex flex-wrap items-end justify-between gap-8">
-          <div className="max-w-2xl">
-            <p className="text-xs font-semibold tracking-[0.18em] text-brand-deep uppercase">
-              Services
-            </p>
-            <h2 className="font-display mt-4 text-h1 leading-[1.05] font-extrabold tracking-[-0.02em]">
-              Poora marketing department, ek hi chhat ke neeche
-            </h2>
+    <section
+      id="services"
+      className="relative overflow-clip bg-[#F8F7F4] py-16 text-[#20201E] sm:py-24"
+    >
+      <div
+        onPointerMove={handlePointerMove}
+        onPointerLeave={() => setActiveIndex(null)}
+        className="relative"
+      >
+        {/* Editorial header */}
+        <div className="mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-12">
+          <div className="flex items-center justify-between gap-4 border-t border-black/20 py-4 text-[9px] font-semibold uppercase tracking-[0.14em] sm:text-[11px]">
+            <span>Marketing Studio®</span>
+            <span className="hidden sm:block">
+              Strategy, design & technology
+            </span>
+            <span>Services / 0{services.length}</span>
           </div>
-          <p className="max-w-xs text-sm leading-relaxed text-grey-600">
-            Har service alag le sakte hain. Par asli leverage tab milti hai jab
-            chaar milke chalte hain.
-          </p>
-        </div>
 
-        <div className="mt-14 border-t border-ink/10">
-          {services.map((service, i) => (
-            <article
-              key={service.slug}
-              data-reveal
-              className="group grid gap-6 border-b border-ink/10 py-9 transition-colors hover:bg-paper sm:py-11"
-            >
-              <div className="grid items-start gap-6 sm:grid-cols-[2.5rem_1.35fr_1fr] lg:grid-cols-[2.5rem_1.15fr_1.1fr_auto] lg:gap-10">
-                <span className="font-display text-sm font-bold text-grey-400 tabular-nums">
-                  {service.num}
-                </span>
-                <div>
-                  <span className="flex items-center gap-3">
-                    <span className="grid size-10 shrink-0 place-items-center bg-brand text-ink">
-                      <Icon name={service.icon} className="size-4.5" />
-                    </span>
-                    <h3 className="font-display text-h3 leading-tight font-extrabold tracking-tight">
-                      {service.title}
-                    </h3>
-                  </span>
-                  <p className="mt-3 max-w-md text-sm leading-relaxed text-grey-600">
-                    {service.description}
-                  </p>
-                </div>
-                <ul className="space-y-2 sm:border-l sm:border-ink/10 sm:pl-6">
-                  {service.points.slice(0, 4).map((point) => (
-                    <li
-                      key={point}
-                      className="flex items-start gap-2.5 text-sm leading-relaxed text-ink/80"
-                    >
-                      <Icon
-                        name="check"
-                        className="mt-0.5 size-4 shrink-0 text-brand-deep"
-                      />
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href={`/services/${service.slug}`}
-                  aria-label={`${service.title} ki detail page`}
-                  className="link-underline inline-flex items-center gap-1.5 self-center text-sm font-semibold text-ink/60 transition-colors hover:text-ink lg:justify-self-end"
-                >
-                  Detail
-                  <Icon
-                    name="arrowRight"
-                    className="size-4 transition-transform group-hover:translate-x-0.5"
-                  />
-                  <span className="sr-only">- {String(i + 1).padStart(2, "0")}</span>
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
-
-        <div
-          data-reveal
-          className="mt-14 bg-brand p-8 text-ink sm:p-12"
-        >
-          <div className="flex flex-wrap items-start justify-between gap-8">
-            <div className="max-w-2xl">
-              <p className="font-display text-h3 font-extrabold tracking-tight">
-                {offlineSupport.title}
+          {/* Main typography layout */}
+          <div className="grid gap-12 pt-12 lg:grid-cols-12 lg:gap-8 lg:pt-16">
+            <div className="lg:col-span-5">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-black/50 sm:text-xs">
+                One connected system
               </p>
-              <p className="mt-3 text-sm leading-relaxed sm:text-base">
-                {offlineSupport.text}
+
+              <h2 className="mt-7 font-display text-[clamp(3.5rem,8vw,8rem)] font-black uppercase leading-[0.79] tracking-[-0.075em]">
+                Poora
+                <br />
+                marketing
+                <br />
+                department,
+                <br />
+                ek hi chhat
+                <br />
+                ke neeche<span className="text-[#A69C82]">.</span>
+              </h2>
+
+              <p className="mt-8 max-w-xs text-sm leading-relaxed text-black/55 sm:text-base">
+                Har service alag. Har effort connected.
+                Sab kuch tumhare brand ki growth ke liye.
               </p>
             </div>
-            <p className="font-display max-w-xs text-sm font-bold leading-relaxed sm:border-l sm:border-ink/30 sm:pl-6">
-              {offlineSupport.line}
-            </p>
+
+            <div className="lg:col-span-7 lg:pt-1">
+              <div className="border-t border-black/20">
+                {services.map((service, index) => {
+                  const isActive = activeIndex === index;
+
+                  return (
+                    <Link
+                      key={service.slug}
+                      href={`/services/${service.slug}`}
+                      onPointerEnter={(event) => {
+                        if (event.pointerType !== "touch") {
+                          setActiveIndex(index);
+                        }
+                      }}
+                      onFocus={() => setActiveIndex(index)}
+                      onBlur={() => setActiveIndex(null)}
+                      className={`group flex items-start gap-3 border-b border-black/20 py-6 outline-none transition-colors duration-300 sm:py-8 ${
+                        isActive
+                          ? "text-[#91856A]"
+                          : "text-[#20201E] hover:text-black/55"
+                      } focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#65745B] motion-reduce:transition-none`}
+                    >
+                      <span className="pt-2 text-[10px] tabular-nums text-black/45 sm:text-xs">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+
+                      <span className="min-w-0 flex-1">
+                        <span className="block font-display text-[clamp(2.25rem,5.5vw,5.7rem)] font-black uppercase leading-[0.84] tracking-[-0.065em] [overflow-wrap:anywhere]">
+                          {service.title}
+                        </span>
+
+                        <span
+                          className={`mt-3 block max-w-md text-xs leading-relaxed text-black/55 transition-opacity duration-300 sm:text-sm ${
+                            isActive
+                              ? "opacity-100"
+                              : "opacity-70 sm:opacity-0 sm:group-hover:opacity-100"
+                          }`}
+                        >
+                          {service.description}
+                        </span>
+                      </span>
+
+                      <span className="pt-1 text-xl transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 sm:text-2xl">
+                        ↗
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
+
+              <div className="flex items-center justify-between gap-4 pt-5 text-[10px] uppercase tracking-wider text-black/50">
+                <span>Hover to explore</span>
+                <Link
+                  href="/contact"
+                  className="text-[#20201E] underline underline-offset-4"
+                >
+                  Discuss a project ↗
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-      </Container>
+
+        {/* Cursor-following floating preview */}
+        <div
+          aria-hidden="true"
+          className={`pointer-events-none fixed z-[100] hidden overflow-hidden border border-white/60 bg-[#222] shadow-[0_24px_80px_rgba(0,0,0,0.24)] transition-[opacity,transform,left,top] duration-300 ease-out motion-reduce:transition-none md:block ${
+            activeService
+              ? "visible"
+              : "invisible"
+          }`}
+          style={{
+            left: position.x,
+            top: position.y,
+            width: "min(360px, 80vw)",
+            height: 250,
+            opacity: activeService ? 1 : 0,
+            transform: activeService
+              ? "scale(1) rotate(-2deg)"
+              : "scale(0.88) rotate(2deg)",
+          }}
+        >
+          {activeService && (
+            <div className="absolute inset-0 flex flex-col justify-between bg-paper p-5 text-ink">
+              <div className="flex items-center justify-between border-b border-ink/15 pb-3">
+                <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-ink/55">
+                  What we do / {String((activeIndex ?? 0) + 1).padStart(2, "0")}
+                </span>
+                <Icon name={activeService.icon} className="size-5 text-brand-deep" />
+              </div>
+              <div>
+                <p className="font-display text-3xl font-extrabold uppercase leading-[0.95] tracking-[-0.06em]">
+                  {activeService.title}
+                </p>
+                <p className="mt-3 max-w-xs text-xs leading-relaxed text-ink/60">
+                  {activeService.short}
+                </p>
+              </div>
+              <span className="flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.16em] text-ink/45">
+                Explore service <span aria-hidden="true">↗</span>
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
     </section>
   );
 }

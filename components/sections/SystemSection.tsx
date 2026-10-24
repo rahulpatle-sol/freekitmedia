@@ -1,6 +1,7 @@
 
 "use client";
 
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { systemPillars } from "@/content/page-sections";
 
@@ -90,11 +91,13 @@ export function SystemSection() {
                       reverse ? "lg:order-2" : "lg:order-1",
                     ].join(" ")}
                   >
-                    <img
+                    <Image
                       src={image.src}
                       alt={image.alt}
-                      loading={index === 0 ? "eager" : "lazy"}
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      priority={index === 0}
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035] motion-reduce:transition-none"
                     />
 
                     {/* Restrained image treatment */}
@@ -173,7 +176,7 @@ export function SystemSection() {
             href="#contact"
             className="inline-flex w-fit items-center gap-3 text-sm font-semibold text-[#25251F] transition-colors hover:text-brand"
           >
-            Let&apos;s build your system
+            Explore a plan together
             <span className="transition-transform duration-300 group-hover:translate-x-1">
               ↗
             </span>

@@ -1,15 +1,16 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { useLenis } from "@/components/providers/LenisProvider";
 import { prefersReducedMotion } from "@/lib/gsap";
 
 export function HashScrollBridge() {
+  const pathname = usePathname();
   const lenisRef = useLenis();
 
   useEffect(() => {
     const hash = window.location.hash;
-    if (!hash || hash === "#") return;
 
     let cancelled = false;
     let frame = 0;
@@ -25,7 +26,7 @@ export function HashScrollBridge() {
       }
       if (!target) return;
       if (lenisRef?.current) {
-        lenisRef.current.scrollTo(target as HTMLElement, { offset: -88 });
+        lenisRef.current.scrollTo(target as HTMLElement, { offset: 16 });
       } else {
         target.scrollIntoView({
           behavior: prefersReducedMotion() ? "auto" : "smooth",
@@ -34,7 +35,16 @@ export function HashScrollBridge() {
     };
 
     frame = requestAnimationFrame(() => {
-      timeout = window.setTimeout(run, 200);
+      if (hash && hash !== "#") {
+        timeout = window.setTimeout(run, 200);
+      } else if (!cancelled) {
+        const lenis = lenisRef?.current;
+        if (lenis) {
+          lenis.scrollTo(0, { immediate: true });
+        } else {
+          window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+        }
+      }
     });
 
     return () => {
@@ -42,7 +52,7 @@ export function HashScrollBridge() {
       cancelAnimationFrame(frame);
       window.clearTimeout(timeout);
     };
-  }, [lenisRef]);
+  }, [lenisRef, pathname]);
 
   return null;
 }

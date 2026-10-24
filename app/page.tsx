@@ -3,7 +3,7 @@ import { Hero } from "@/components/sections/Hero";
 import { PartnerMarquee } from "@/components/sections/PartnerMarquee";
 import { SystemSection } from "@/components/sections/SystemSection";
 import { ProblemSection } from "@/components/sections/ProblemSection";
-import { ServicesSection } from "@/components/sections/ServicesSection";
+import { ServiceHoverPreview } from "@/components/sections/ServicesSection";
 import { NoShortcuts } from "@/components/sections/NoShortcuts";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { ProofSection } from "@/components/sections/ProofSection";
@@ -14,7 +14,8 @@ import { FinalCta } from "@/components/sections/FinalCta";
 import { Cursor } from "@/components/sections/Cursor";
 import { FloatingWhatsApp, StickyMobileBar } from "@/components/sections/ReachBars";
 import { Footer } from "@/components/sections/Footer";
-import {Testimonials} from '@/components/sections/Testimonials'
+import { Testimonials } from "@/components/sections/Testimonials";
+
 export default function Home() {
   return (
     <>
@@ -25,7 +26,7 @@ export default function Home() {
         <Testimonials />
         <SystemSection />
         <ProblemSection />
-        <ServicesSection />
+        <ServiceHoverPreview />
         <NoShortcuts />
         <ProcessSection />
         <ProofSection />

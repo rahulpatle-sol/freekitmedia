@@ -53,7 +53,7 @@ export default function BlogIndex() {
                   href={`/blog/${post.slug}`}
                   className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-ink transition-colors hover:text-brand-deep"
                 >
-                  Padho
+                  Explore this article
                   <Icon
                     name="arrowRight"
                     className="size-4 transition-transform group-hover:translate-x-0.5"

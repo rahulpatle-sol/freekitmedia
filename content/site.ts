@@ -19,9 +19,10 @@ export const site = {
   url: "https://www.freekitmedia.com",
   logo: { src: "/images/logo.jpg", width: 220, height: 220 },
   cta: {
-    audit: "Free Digital Audit Lo",
-    whatsapp: "WhatsApp Karo",
-    auditNote: "30 minute meeting, aapke office par ya online.",
+    audit: "Request a free audit",
+    submitAudit: "Send my request",
+    whatsapp: "Let's chat",
+    auditNote: "A relaxed 30-minute conversation, online or at your office.",
   },
   phone: {
     primary: { number: "+918839801546", display: "+91 88398 01546" },
@@ -37,15 +38,15 @@ export const site = {
   ] as const,
   cities: ["Bilaspur", "Ambikapur", "Korba"] as const,
   heroBadge: {
-  
-  
+    label: "Full-service agency — Chhattisgarh",
+    href: "#system",
   },
   address: {
     line: "Bilaspur, Chhattisgarh, India",
   },
   whatsapp: {
     ctaText:
-      "Hi FreeKit Media, mujhe apne business ke liye Free Digital Audit ke baare mein baat karni hai.",
+      "Hello FreeKit Media, I’d like to request a free digital audit for my business.",
   },
   navLinks: [
     { label: "System", href: "#system" },

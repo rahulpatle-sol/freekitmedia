@@ -10,6 +10,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: base, lastModified: now, priority: 1 },
     { url: `${base}/contact`, lastModified: now, priority: 0.9 },
     { url: `${base}/blog`, lastModified: now, priority: 0.6 },
+    { url: `${base}/services`, lastModified: now, priority: 0.8 },
+    { url: `${base}/partners`, lastModified: now, priority: 0.6 },
+    { url: `${base}/industries`, lastModified: now, priority: 0.6 },
+    { url: `${base}/case-studies`, lastModified: now, priority: 0.7 },
     ...repo.services.list().map((entry) => ({
       url: `${base}/services/${entry.slug}`,
       lastModified: now,

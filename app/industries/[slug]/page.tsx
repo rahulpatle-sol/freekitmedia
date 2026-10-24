@@ -42,10 +42,10 @@ async function Content({ slugPromise }: { slugPromise: Promise<Params> }) {
     { type: "list", items: entry.weDo },
     {
       type: "cta",
-      title: `${entry.name} business ho toh pehle yahi karo`,
-      text: "Free digital audit mein hum aapki current online position check karke batate hain — customer aapko kahan miss kar raha hai.",
-      href: "/#contact",
-      label: "Free Digital Audit Lo",
+      title: `Talk through your ${entry.name.toLowerCase()} business goals`,
+      text: "Request a relaxed digital audit. We’ll review your online presence and discuss practical next steps.",
+      href: "/contact",
+      label: "Request a free audit",
     },
   ];
   return (
@@ -56,8 +56,8 @@ async function Content({ slugPromise }: { slugPromise: Promise<Params> }) {
         intro: entry.problemLine,
         blocks,
       }}
-      backHref="/#proof"
-      backLabel="Sab industries dekho"
+      backHref="/industries"
+      backLabel="Browse all industries"
     />
   );
 }
