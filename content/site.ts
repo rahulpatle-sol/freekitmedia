@@ -38,7 +38,7 @@ export const site = {
   ] as const,
   cities: ["Bilaspur", "Ambikapur", "Korba"] as const,
   heroBadge: {
-    label: "Full-service agency — Chhattisgarh",
+    label: "Content & Digital marketing service  agency — Chhattisgarh",
     href: "#system",
   },
   address: {
@@ -67,7 +67,7 @@ export const marqueeNames = [
 ] as const;
 
 export const proofStats = [
-  { value: "100+", label: "businesses ka bharosa", icon: "users" },
+  { value: "150+", label: "businesses ka bharosa", icon: "users" },
   { value: "9", label: "industries served", icon: "globe" },
   { value: "₹6,00,000+", label: "ek din mein, Instagram ads se", icon: "trendingUp" },
   { value: "3", label: "shehar — Bilaspur, Ambikapur, Korba", icon: "mapPin" },
@@ -87,7 +87,7 @@ export const heroSub =
 export type TrustItem = { icon: IconName; label: string };
 
 export const heroTrust: TrustItem[] = [
-  { icon: "users", label: "100+ businesses" },
-  { icon: "badgeCheck", label: "Tanishq & Kisna jaise brands" },
+  { icon: "users", label: "150+ businesses" },
+  { icon: "badgeCheck", label: " Brands like Tanishq & Kisna  " },
   { icon: "star", label: "Real reviews, real results" },
 ];

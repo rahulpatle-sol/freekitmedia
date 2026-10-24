@@ -1,6 +1,6 @@
 
 "use client";
-
+import { FaWhatsapp } from "react-icons/fa";
 import { useRef } from "react";
 import { Button, AuditButton } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -266,17 +266,17 @@ export function Hero() {
             className="mt-8 flex w-full flex-col items-stretch justify-center gap-3 opacity-0 sm:w-auto sm:flex-row sm:items-center sm:gap-3"
           >
             <AuditButton size="lg">{site.cta.audit}</AuditButton>
-
-            <Button
-              href={whatsappLink(
-                site.phone.primary.number,
-                site.whatsapp.ctaText
-              )}
-              variant="outline"
-              size="lg"
-            >
-              {site.cta.whatsapp}
-            </Button>
+<Button
+  href={whatsappLink(
+    site.phone.primary.number,
+    site.whatsapp.ctaText
+  )}
+  variant="outline"
+  size="lg"
+>
+  <FaWhatsapp className="mr-2 h-5 w-5" aria-hidden="true" />
+  {site.cta.whatsapp}
+</Button>
           </div>
 
           <div
@@ -307,13 +307,13 @@ export function Hero() {
         >
           <div className="relative">
             {/* Small editorial label above the video */}
-            <div className="mb-3 flex flex-wrap items-center justify-between gap-3 px-1 text-[10px] font-semibold uppercase tracking-[0.17em] text-ink/45 sm:text-xs">
+            {/* <div className="mb-3 flex flex-wrap items-center justify-between gap-3 px-1 text-[10px] font-semibold uppercase tracking-[0.17em] text-ink/45 sm:text-xs">
               <span className="flex items-center gap-2">
                 <span className="size-1.5 rounded-full bg-brand-deep" />
                 FreeKit Media / Showreel
               </span>
               <span>Strategy · Creative · Growth</span>
-            </div>
+            </div> */}
 
             <div className="overflow-hidden rounded-[1.25rem] border border-white/80 bg-ink shadow-[0_35px_100px_-35px_rgba(45,35,12,0.38)] sm:rounded-[1.75rem]">
               <div
@@ -364,10 +364,10 @@ export function Hero() {
                   </a>
                 </div>
 
-                <div className="pointer-events-none absolute left-4 top-4 flex items-center gap-2 rounded-full border border-white/20 bg-black/20 px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-white/85 backdrop-blur-md sm:left-6 sm:top-6 sm:text-[10px]">
+                {/* <div className="pointer-events-none absolute left-4 top-4 flex items-center gap-2 rounded-full border border-white/20 bg-black/20 px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-white/85 backdrop-blur-md sm:left-6 sm:top-6 sm:text-[10px]">
                   <span className="size-1.5 rounded-full bg-brand" />
                   Brand film / 001
-                </div>
+                </div> */}
               </div>
             </div>
 

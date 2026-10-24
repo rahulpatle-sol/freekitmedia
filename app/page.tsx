@@ -24,11 +24,12 @@ export default function Home() {
         <Hero />
         <PartnerMarquee />
         <Testimonials />
-        <SystemSection />
-        <ProblemSection />
+
+        {/* <ProblemSection /> */}
+         <ProcessSection />
         <ServiceHoverPreview />
         <NoShortcuts />
-        <ProcessSection />
+       
         <ProofSection />
         <ComparisonSection />
         <PitchSection />
