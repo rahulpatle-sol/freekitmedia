@@ -20,10 +20,25 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — ${site.tagline}`,
+    default: `Digital Marketing Agency Chhattisgarh — ${site.name}`,
     template: `%s · ${site.name}`,
   },
   description: site.description,
+  category: "Digital Marketing",
+  classification: "Digital Marketing Agency",
+  creator: site.name,
+  publisher: site.name,
+  keywords: [
+    "digital marketing agency Chhattisgarh",
+    "digital marketing agency Bilaspur",
+    "marketing agency Ambikapur",
+    "social media marketing Korba",
+    "Instagram ads agency",
+    "Google ads agency Chhattisgarh",
+    "content creation branding Bilaspur",
+    "website management Chhattisgarh",
+    "FreeKit Media",
+  ],
   openGraph: {
     siteName: site.name,
     type: "website",
@@ -31,9 +46,10 @@ export const metadata: Metadata = {
     description: site.description,
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     description: site.description,
   },
+  alternates: { canonical: "/" },
 };
 
 export const viewport: Viewport = {
@@ -47,10 +63,14 @@ const orgJsonLd = {
   name: site.name,
   url: site.url,
   description: site.description,
+  slogan: site.tagline,
+  image: `${site.url}${site.logo.src}`,
   telephone: site.phone.primary.number,
   email: site.email,
+  sameAs: [site.instagram.url],
   address: {
     "@type": "PostalAddress",
+    streetAddress: site.address.line,
     addressLocality: site.cities[0],
     addressRegion: "Chhattisgarh",
     addressCountry: "IN",

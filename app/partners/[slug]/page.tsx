@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { DocPage, DocFallback } from "@/components/blocks/DocPage";
+import { JsonLd, breadcrumbJsonLd, openGraph } from "@/lib/seo";
 import { repo } from "@/lib/content";
 
 export const collectionKey = "partners";
@@ -18,9 +19,17 @@ export async function generateMetadata({
   const { slug } = await params;
   const entry = repo.partners.bySlug(slug);
   if (!entry) return {};
+  const title = `${entry.name} — ${entry.industry}`;
   return {
-    title: `${entry.name} — ${entry.industry}`,
+    title,
     description: entry.oneLine,
+    alternates: { canonical: `/partners/${entry.slug}` },
+    openGraph: openGraph({
+      title,
+      description: entry.oneLine,
+      path: `/partners/${entry.slug}`,
+      image: `/og/partners/${entry.slug}.png`,
+    }),
   };
 }
 
@@ -37,20 +46,29 @@ async function Content({ slugPromise }: { slugPromise: Promise<Params> }) {
   const entry = repo.partners.bySlug(slug);
   if (!entry) notFound();
   return (
-    <DocPage
-      entry={{
-        eyebrow: `Partner — ${entry.industry}`,
-        title: entry.name,
-        intro: entry.oneLine,
-        chips: [entry.industry, entry.city],
-        blocks: [
-          { type: "heading", text: "Humne kya kiya", level: 2 },
-          { type: "text", text: entry.whatWeDid },
-          ...entry.blocks,
-        ],
-      }}
-      backHref="/partners"
-      backLabel="Browse all partners"
-    />
+    <>
+      <DocPage
+        entry={{
+          eyebrow: `Partner — ${entry.industry}`,
+          title: entry.name,
+          intro: entry.oneLine,
+          chips: [entry.industry, entry.city],
+          blocks: [
+            { type: "heading", text: "Humne kya kiya", level: 2 },
+            { type: "text", text: entry.whatWeDid },
+            ...entry.blocks,
+          ],
+        }}
+        backHref="/partners"
+        backLabel="Browse all partners"
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Partners", path: "/partners" },
+          { name: entry.name, path: `/partners/${entry.slug}` },
+        ])}
+      />
+    </>
   );
 }

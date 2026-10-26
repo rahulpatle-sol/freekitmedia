@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Blog",
   description:
     "FreeKit Media ka blog — digital growth ki simple guide, Hinglish mein.",
+  alternates: { canonical: "/blog" },
 };
 
 export default function BlogIndex() {

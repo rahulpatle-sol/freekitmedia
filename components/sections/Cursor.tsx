@@ -39,28 +39,34 @@ export function Cursor() {
       }
     };
 
-    const shouldGrow = (clientX: number, clientY: number) =>
+    // Hover state comes from event delegation (pointerover/out) so we never
+    // call elementFromPoint per move — that forced a layout read every frame.
+    const isInteractive = (target: EventTarget | null) =>
       Boolean(
-        document
-          .elementFromPoint(clientX, clientY)
-          ?.closest("a, button, summary, [data-cursor-grow]"),
+        target instanceof Element &&
+          target.closest("a, button, summary, [data-cursor-grow]"),
       );
 
-    const applyGrow = (clientX: number, clientY: number) => {
-      const nextGrow = shouldGrow(clientX, clientY);
-      if (nextGrow !== grow) {
-        grow = nextGrow;
-        gsap.to(ring, {
-          scale: grow ? 1.9 : 1,
-          duration: 0.35,
-          ease: "power3.out",
-        });
-      }
+    const onOver = (event: PointerEvent) => {
+      if (!isInteractive(event.target)) return;
+      if (grow) return;
+      grow = true;
+      gsap.to(ring, {
+        scale: grow ? 1.9 : 1,
+        duration: 0.35,
+        ease: "power3.out",
+      });
     };
 
-    const onPointerMove = (event: PointerEvent) => {
-      onMove(event);
-      applyGrow(event.clientX, event.clientY);
+    const onOut = (event: PointerEvent) => {
+      if (isInteractive(event.target)) return;
+      if (!grow) return;
+      grow = false;
+      gsap.to(ring, {
+        scale: 1,
+        duration: 0.35,
+        ease: "power3.out",
+      });
     };
 
     const onLeave = () => {
@@ -68,11 +74,15 @@ export function Cursor() {
       gsap.to([dot, ring], { autoAlpha: 0, duration: 0.3 });
     };
 
-    window.addEventListener("pointermove", onPointerMove, { passive: true });
+    window.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("pointerover", onOver, { passive: true });
+    window.addEventListener("pointerout", onOut, { passive: true });
     document.documentElement.addEventListener("pointerleave", onLeave);
 
     return () => {
-      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerover", onOver);
+      window.removeEventListener("pointerout", onOut);
       document.documentElement.removeEventListener("pointerleave", onLeave);
     };
   }, []);

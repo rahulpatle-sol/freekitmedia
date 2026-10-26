@@ -251,6 +251,7 @@ export function Hero() {
 
   <Container className="relative">
     {/* Hero intro */}
+    <link rel="preload" as="image" href="/videos/hero-poster.jpg" fetchPriority="high" />
     <div className="mx-auto flex max-w-5xl flex-col items-center text-center">
       {/* Badge */}
    <div

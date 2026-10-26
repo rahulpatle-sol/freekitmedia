@@ -10,6 +10,7 @@ import { site } from "@/content/site";
 export const metadata: Metadata = {
   title: "Request a Free Digital Audit",
   description: `${site.cta.auditNote} Tell us about your business and we’ll be in touch.`,
+  alternates: { canonical: "/contact" },
   openGraph: {
     type: "website",
     description: `${site.cta.auditNote} Tell us about your business and we’ll be in touch.`,

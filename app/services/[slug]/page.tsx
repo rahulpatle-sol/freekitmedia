@@ -6,6 +6,7 @@ import { Footer } from "@/components/sections/Footer";
 import { SubpageHeader } from "@/components/sections/SubpageHeader";
 import { ServiceDetail } from "@/components/services/ServiceDetail";
 import { servicePageBySlug } from "@/content/service-pages";
+import { JsonLd, breadcrumbJsonLd, faqJsonLd, openGraph, serviceJsonLd } from "@/lib/seo";
 import { repo } from "@/lib/content";
 
 type Params = { slug: string };
@@ -20,10 +21,18 @@ export async function generateMetadata({
   const { slug } = await params;
   const page = servicePageBySlug(slug);
   if (!page) return {};
+  const title = `${page.title} — Service ${page.num}`;
   return {
-    title: `${page.title} — Service ${page.num}`,
+    title,
     description: page.metaDescription,
+    keywords: [page.title, "FreeKit Media service", page.tag],
     alternates: { canonical: `/services/${page.slug}` },
+    openGraph: openGraph({
+      title,
+      description: page.metaDescription,
+      path: `/services/${page.slug}`,
+      image: `/og/services/${page.slug}.png`,
+    }),
   };
 }
 
@@ -44,6 +53,21 @@ async function Content({ slugPromise }: { slugPromise: Promise<Params> }) {
       <SubpageHeader />
       <ServiceDetail service={page} />
       <Footer />
+      <JsonLd
+        data={serviceJsonLd({
+          name: page.title,
+          description: page.metaDescription,
+          path: `/services/${page.slug}`,
+        })}
+      />
+      <JsonLd data={faqJsonLd(page.faqs)} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: page.title, path: `/services/${page.slug}` },
+        ])}
+      />
     </>
   );
 }
