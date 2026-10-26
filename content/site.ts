@@ -39,7 +39,7 @@ export const site = {
   cities: ["Bilaspur", "Ambikapur", "Korba"] as const,
   heroBadge: {
     label: "Content & Digital marketing service  agency — Chhattisgarh",
-    href: "#system",
+    href: "#home",
   },
   address: {
     line: "Bilaspur, Chhattisgarh, India",

@@ -1,11 +1,8 @@
 import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { PartnerMarquee } from "@/components/sections/PartnerMarquee";
-import { SystemSection } from "@/components/sections/SystemSection";
-import { ProblemSection } from "@/components/sections/ProblemSection";
-import { ServiceHoverPreview } from "@/components/sections/ServicesSection";
-import { NoShortcuts } from "@/components/sections/NoShortcuts";
 import { ProcessSection } from "@/components/sections/ProcessSection";
+import { ServiceHoverPreview } from "@/components/sections/ServicesSection";
 import { ProofSection } from "@/components/sections/ProofSection";
 import { ComparisonSection } from "@/components/sections/ComparisonSection";
 import { PitchSection } from "@/components/sections/PitchSection";
@@ -28,7 +25,7 @@ export default function Home() {
         {/* <ProblemSection /> */}
          <ProcessSection />
         <ServiceHoverPreview />
-        <NoShortcuts />
+        {/* <NoShortcuts /> */}
        
         <ProofSection />
         <ComparisonSection />

@@ -1,31 +1,92 @@
+
+import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { marqueeNames } from "@/content/site";
-import { cn } from "@/lib/utils";
+import { partners } from "@/content/partners";
 
 export function PartnerMarquee() {
-  const names = [...marqueeNames, ...marqueeNames];
+  const items = [...partners, ...partners];
+
   return (
-    <section aria-label="Hamare partner brands" className="overflow-hidden border-y border-grey-200 bg-paper py-6">
-      <Container className="mb-4 text-xs font-semibold tracking-[0.18em] text-grey-400 uppercase">
-        Kin brands ke saath kaam hua hai
+    <section
+      aria-label="Our partner brands"
+      className="overflow-hidden border-y border-[#171517]/10 bg-white py-8 sm:py-10"
+    >
+      <Container className="mb-7">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#171517]/50 sm:text-xs">
+          Brands we’ve worked with
+        </p>
       </Container>
-      <div className="marquee overflow-hidden">
-        <div className="marquee-track flex w-max items-center">
-          {names.map((name, i) => (
-            <span
-              key={`${name}-${i}`}
-              aria-hidden={i >= marqueeNames.length}
-              className={cn(
-                "font-display flex items-center text-xl font-extrabold tracking-tight whitespace-nowrap",
-                i % 2 === 0 ? "text-ink" : "text-grey-400",
-              )}
-            >
-              <span className="px-7">{name}</span>
-              <span aria-hidden="true" className="size-1.5 bg-brand" />
-            </span>
-          ))}
-        </div>
+
+      <div className="brand-marquee relative overflow-hidden">
+        {/* Edge fades */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-white to-transparent sm:w-24"
+        />
+
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-white to-transparent sm:w-24"
+        />
+
+        <ul className="brand-marquee-track flex w-max items-center">
+          {items.map((partner, index) => {
+            const duplicate = index >= partners.length;
+
+            return (
+              <li
+                key={`${partner.slug}-${index}`}
+                aria-hidden={duplicate || undefined}
+                className="flex h-16 w-40 shrink-0 items-center justify-center px-8 sm:h-20 sm:w-52 sm:px-10"
+              >
+                <Link
+                  href={`/partners/${partner.slug}`}
+                  tabIndex={duplicate ? -1 : undefined}
+                  aria-label={`View our work with ${partner.name}`}
+                  className="flex h-full w-full items-center justify-center outline-offset-4"
+                >
+                  <Image
+                    src={partner.logo}
+                    alt={duplicate ? "" : `${partner.name} logo`}
+                    width={300}
+                    height={100}
+                    unoptimized
+                    className="max-h-10 w-full object-contain opacity-65 transition duration-300 hover:scale-105 hover:opacity-100 motion-reduce:transition-none sm:max-h-12"
+                  />
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
       </div>
+
+      <style>{`
+        .brand-marquee-track {
+          animation: brand-logo-scroll 30s linear infinite;
+        }
+
+        .brand-marquee:hover .brand-marquee-track,
+        .brand-marquee:focus-within .brand-marquee-track {
+          animation-play-state: paused;
+        }
+
+        @keyframes brand-logo-scroll {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .brand-marquee-track {
+            animation: none;
+            transform: none;
+          }
+        }
+      `}</style>
     </section>
   );
 }

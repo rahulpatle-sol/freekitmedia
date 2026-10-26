@@ -15,20 +15,17 @@ type RoadState = {
   width: number;
   height: number;
   progress: number;
-  length: number;
 };
 
 export function ProcessSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const listRef = useRef<HTMLOListElement>(null);
-  const pathRef = useRef<SVGPathElement>(null);
 
   const [road, setRoad] = useState<RoadState>({
     path: "",
     width: 0,
     height: 0,
     progress: 0,
-    length: 0,
   });
 
   useReveal(sectionRef);
@@ -41,7 +38,7 @@ export function ProcessSection() {
     let disposed = false;
 
     const measureRoad = () => {
-      if (disposed) return;
+      if (disposed || window.innerWidth < 640) return;
 
       const nodes = Array.from(
         list.querySelectorAll<HTMLElement>("[data-road-node]"),
@@ -70,13 +67,11 @@ export function ProcessSection() {
         const previous = points[i - 1];
         const current = points[i];
         const middleY = (previous.y + current.y) / 2;
-
-        // A gentle alternating curve, like a hand-drawn road.
         const bend = Math.min(28, width * 0.055) * (i % 2 ? 1 : -1);
 
         d += ` C ${previous.x + bend} ${middleY - 18},
-                  ${current.x + bend} ${middleY + 18},
-                  ${current.x} ${current.y}`;
+          ${current.x + bend} ${middleY + 18},
+          ${current.x} ${current.y}`;
       }
 
       setRoad((previous) => {
@@ -88,12 +83,7 @@ export function ProcessSection() {
           return previous;
         }
 
-        return {
-          ...previous,
-          path: d,
-          width,
-          height,
-        };
+        return { ...previous, path: d, width, height };
       });
     };
 
@@ -101,7 +91,7 @@ export function ProcessSection() {
       cancelAnimationFrame(frame);
 
       frame = requestAnimationFrame(() => {
-        if (disposed) return;
+        if (disposed || window.innerWidth < 640) return;
 
         if (prefersReducedMotion()) {
           setRoad((previous) => ({ ...previous, progress: 1 }));
@@ -109,11 +99,8 @@ export function ProcessSection() {
         }
 
         const rect = list.getBoundingClientRect();
-        const viewport = window.innerHeight;
-
-        // The line draws while this list moves through the viewport.
-        const start = viewport * 0.82;
-        const finish = viewport * 0.28;
+        const start = window.innerHeight * 0.82;
+        const finish = window.innerHeight * 0.28;
         const distance = rect.height + start - finish;
 
         const progress = Math.max(
@@ -134,7 +121,6 @@ export function ProcessSection() {
       updateProgress();
     };
 
-    // Measure after the initial DOM layout.
     refresh();
 
     const resizeObserver = new ResizeObserver(refresh);
@@ -160,32 +146,32 @@ export function ProcessSection() {
     <section
       id="process"
       ref={sectionRef}
-      className="relative overflow-clip bg-paper py-24 sm:py-32"
+      className="relative overflow-clip bg-paper py-16 sm:py-24 lg:py-32"
     >
-      <Container className="grid gap-14 lg:grid-cols-12 lg:gap-16">
+      <Container className="grid min-w-0 gap-10 sm:gap-14 lg:grid-cols-12 lg:gap-16">
         {/* Section introduction */}
-        <div data-reveal className="lg:col-span-4">
+        <div data-reveal className="min-w-0 lg:col-span-4">
           <div className="lg:sticky lg:top-28">
-            <p className="text-xs font-semibold tracking-[0.18em] text-brand-deep uppercase">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-deep">
               Process
             </p>
 
-            <h2 className="font-display mt-4 text-h1 leading-[1.08] font-extrabold tracking-[-0.02em]">
+            <h2 className="font-display mt-4 text-h1 font-extrabold leading-[1.08] tracking-[-0.02em]">
               {processData.headline}
             </h2>
 
-            <p className="mt-5 text-lead leading-relaxed text-grey-600">
+            <p className="mt-5 leading-relaxed text-grey-600">
               {processData.sub}
             </p>
 
             <div
-              className="mt-8 flex flex-wrap gap-2"
+              className="mt-6 flex flex-wrap gap-2 sm:mt-8"
               aria-label="Har mahine kya badhta hai"
             >
               {processData.grows.map((grow) => (
                 <span
                   key={grow.name}
-                  className="flex items-center gap-2 border border-ink/10 bg-mist px-3.5 py-2 text-sm font-semibold text-ink"
+                  className="flex items-center gap-2 border border-ink/10 bg-mist px-3 py-2 text-sm font-semibold text-ink sm:px-3.5"
                 >
                   <Icon
                     name={grow.icon as IconName}
@@ -198,13 +184,21 @@ export function ProcessSection() {
           </div>
         </div>
 
-        {/* Connected roadmap */}
+        {/* Mobile horizontal carousel; desktop vertical roadmap */}
         <div className="min-w-0 lg:col-span-8">
           <ol
             ref={listRef}
-            className="relative isolate space-y-5 sm:space-y-0"
+            aria-label="Our process"
+            className={cn(
+              "relative isolate flex w-full flex-nowrap items-stretch gap-3",
+              "overflow-x-auto overflow-y-hidden overscroll-x-contain",
+              "snap-x snap-mandatory scroll-smooth pb-4 pt-1",
+              "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+              "sm:block sm:overflow-visible sm:pb-0 sm:pt-0",
+              "sm:snap-none sm:scroll-auto sm:space-y-0",
+            )}
           >
-            {/* SVG stays inside this list, never the whole page */}
+            {/* Animated roadmap on desktop */}
             {road.path && road.width > 0 && road.height > 0 && (
               <svg
                 aria-hidden="true"
@@ -214,7 +208,6 @@ export function ProcessSection() {
                 viewBox={`0 0 ${road.width} ${road.height}`}
                 preserveAspectRatio="none"
               >
-                {/* Subtle road track */}
                 <path
                   d={road.path}
                   fill="none"
@@ -225,9 +218,7 @@ export function ProcessSection() {
                   className="text-ink/15"
                 />
 
-                {/* Animated line follows scroll progress */}
                 <path
-                  ref={pathRef}
                   d={road.path}
                   pathLength={1}
                   fill="none"
@@ -240,7 +231,6 @@ export function ProcessSection() {
                   className="text-brand-deep"
                 />
 
-                {/* Moving marker follows the same road */}
                 {!prefersReducedMotion() && (
                   <circle
                     r="4"
@@ -261,19 +251,32 @@ export function ProcessSection() {
               <li
                 key={step.num}
                 data-reveal
-                className="group relative z-10 grid grid-cols-[76px_minmax(0,1fr)] items-start gap-5 sm:min-h-48 sm:grid-cols-[100px_minmax(0,1fr)] sm:gap-8 sm:py-7"
+                className={cn(
+                  // Mobile cards: force a single horizontal row
+                  "group relative z-10 flex w-[82%] min-w-[82%] shrink-0 snap-start flex-col",
+                  "rounded-2xl border border-ink/10 bg-white p-5",
+                  "shadow-[0_8px_28px_-24px_rgba(0,0,0,0.25)]",
+                  // Desktop: restore vertical timeline rows
+                  "sm:grid sm:min-h-48 sm:w-auto sm:min-w-0 sm:shrink sm:snap-none",
+                  "sm:grid-cols-[100px_minmax(0,1fr)] sm:items-start",
+                  "sm:gap-8 sm:rounded-none sm:border-0 sm:bg-transparent",
+                  "sm:p-0 sm:py-7 sm:shadow-none",
+                )}
               >
                 {/* Road node */}
                 <div
                   data-road-node
                   className={cn(
-                    "relative z-10 grid aspect-square place-items-center rounded-[18px] border bg-paper",
+                    "relative z-10 grid size-16 shrink-0 place-items-center",
+                    "rounded-[18px] border bg-paper",
                     "transition-[border-color,box-shadow,transform] duration-300",
                     "shadow-[0_8px_30px_-24px_rgba(0,0,0,0.3)]",
                     i === 0
                       ? "border-brand-deep"
                       : "border-ink/25 group-hover:border-brand-deep",
-                    "group-hover:-translate-y-0.5 group-hover:shadow-[0_12px_35px_-22px_rgba(0,0,0,0.35)]",
+                    "group-hover:-translate-y-0.5",
+                    "group-hover:shadow-[0_12px_35px_-22px_rgba(0,0,0,0.35)]",
+                    "sm:size-full sm:aspect-square",
                   )}
                 >
                   <span className="font-display text-2xl font-extrabold tracking-tight text-brand-deep sm:text-3xl">
@@ -287,7 +290,7 @@ export function ProcessSection() {
                 </div>
 
                 {/* Step content */}
-                <article className="relative border-b border-ink/10 pb-7 pt-2 sm:pb-10">
+                <article className="relative mt-5 min-w-0 sm:mt-0 sm:border-b sm:border-ink/10 sm:pb-10 sm:pt-2">
                   <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-deep/70">
                     Step {String(i + 1).padStart(2, "0")}
                   </p>
@@ -296,21 +299,30 @@ export function ProcessSection() {
                     {step.title}
                   </h3>
 
-                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-grey-600">
+                  <p className="mt-2 text-sm leading-relaxed text-grey-600">
                     {step.text}
                   </p>
                 </article>
               </li>
             ))}
           </ol>
+
+          {/* Mobile swipe hint */}
+          <div className="mt-1 flex items-center justify-between sm:hidden">
+            <p className="text-xs text-grey-600">Explore our process</p>
+            <p className="flex items-center gap-1 text-xs font-semibold text-brand-deep">
+              Swipe
+              <Icon name="arrowRight" className="size-4" />
+            </p>
+          </div>
         </div>
       </Container>
 
       {/* Monthly report + transparency */}
-      <Container className="mt-16 grid gap-10 lg:grid-cols-2 lg:gap-16">
+      <Container className="mt-12 grid gap-6 sm:mt-16 sm:gap-10 lg:grid-cols-2 lg:gap-16">
         <div
           data-reveal
-          className="border border-ink/10 bg-mist p-8 sm:p-10"
+          className="border border-ink/10 bg-mist p-6 sm:p-10"
         >
           <p className="font-display text-h3 font-extrabold tracking-tight">
             {processData.report.title}
@@ -324,7 +336,7 @@ export function ProcessSection() {
               >
                 <Icon
                   name="check"
-                  className="mt-0.5 size-4 text-brand-deep"
+                  className="mt-0.5 size-4 shrink-0 text-brand-deep"
                 />
                 {item}
               </li>

@@ -1,8 +1,10 @@
+
 import type { Block } from "@/lib/content/types";
 
 export type Partner = {
   slug: string;
   name: string;
+  logo: string;
   industry: string;
   city: string;
   oneLine: string;
@@ -15,36 +17,38 @@ export const partners: Partner[] = [
   {
     slug: "tanishq",
     name: "Tanishq",
+    logo: "/images/partners/tanishq.svg",
     industry: "Jewellery",
     city: "Bilaspur",
-    oneLine: "Franchise ke liye festive campaigns aur store visibility.",
+    oneLine: "Festive campaigns aur store visibility.",
     whatWeDid:
-      "Festive collections ke ads, store ke reels, offer creatives aur local awareness ki campaigns.",
+      "Festive collections ke ads, store reels, offer creatives aur local awareness campaigns.",
     featured: true,
     blocks: [
       { type: "heading", text: "Tanishq — Bilaspur", level: 2 },
       {
         type: "text",
-        text: "Tanishq ka Bilaspur franchise hamara partner brand hai. Franchise marketing ka sawaal simple hota hai — brand toh sab jante hain, shehar mein store tak pahunchana hota hai. Hamaara kaam wahi hai: awareness toh local sale tak.",
+        text: "Tanishq ka Bilaspur franchise hamara partner brand hai. Franchise marketing ka focus local customers tak pahunchna aur store visibility badhana hai.",
       },
       {
         type: "stats",
         items: [
-          { value: "Festive", label: "campaign deal hota hai har saal" },
-          { value: "Reels", label: "store ki collections ke" },
-          { value: "Local", label: "awareness ki campaigns" },
+          { value: "Festive", label: "campaigns" },
+          { value: "Reels", label: "store collections ke liye" },
+          { value: "Local", label: "awareness campaigns" },
         ],
       },
       {
         type: "callout",
         title: "Jo humne kiya",
-        text: "Festive season campaigns, new collection reels, offer creatives aur local targeted ads — sab store ki walk-in ki support ke liye.",
+        text: "Festive campaigns, collection reels, offer creatives aur local targeted ads.",
       },
     ],
   },
   {
     slug: "kisna",
     name: "Kisna",
+    logo: "/images/partners/kisna.png",
     industry: "Jewellery",
     city: "Bilaspur",
     oneLine: "Franchise aur daily-wear collection ki digital presentation.",
@@ -55,11 +59,11 @@ export const partners: Partner[] = [
       { type: "heading", text: "Kisna — Bilaspur", level: 2 },
       {
         type: "text",
-        text: "Kisna ki daily-wear aur silver collections ke liye regular content aur festive offers. Store ki walk-in ke support ke liye local campaigns bhi chalai.",
+        text: "Kisna ki daily-wear aur silver collections ke liye regular content, festive offers aur local store campaigns par kaam kiya.",
       },
       {
         type: "quote",
-        text: "Sona bikta hai bharose se — bharosa dikh se banta hai.",
+        text: "Sona bikta hai bharose se — bharosa dikhne se banta hai.",
         by: "FreeKit Media — Jewellery playbook",
       },
     ],
@@ -67,6 +71,7 @@ export const partners: Partner[] = [
   {
     slug: "pathsure",
     name: "Pathsure",
+    logo: "/images/partners/pathsure.svg",
     industry: "Education",
     city: "Chhattisgarh",
     oneLine: "Students aur parents ke liye digital awareness.",
@@ -77,13 +82,14 @@ export const partners: Partner[] = [
       { type: "heading", text: "Pathsure", level: 2 },
       {
         type: "text",
-        text: "Education brand ke saath students aur parents tak pahunchne kar content aur campaigns.",
+        text: "Education brand ke liye students aur parents tak pahunchne ke liye content aur awareness campaigns par kaam kiya.",
       },
     ],
   },
   {
     slug: "next-world",
     name: "Next World",
+    logo: "/images/partners/next-world.jpg",
     industry: "Business Services",
     city: "Chhattisgarh",
     oneLine: "Brand ki digital visibility aur creative support.",
@@ -93,13 +99,14 @@ export const partners: Partner[] = [
       { type: "heading", text: "Next World", level: 2 },
       {
         type: "text",
-        text: "Brand visibility aur creative support ke liye digital campaigns.",
+        text: "Brand visibility aur creative support ke liye digital campaigns aur creatives par kaam kiya.",
       },
     ],
   },
   {
     slug: "mixxit",
     name: "Mixxit",
+    logo: "/images/partners/mixxit.svg",
     industry: "Retail",
     city: "Chhattisgarh",
     oneLine: "Retail offers aur store promotions ka digital push.",
@@ -109,12 +116,12 @@ export const partners: Partner[] = [
       { type: "heading", text: "Mixxit", level: 2 },
       {
         type: "text",
-        text: "Retail offers aur store promotions ke liye digital creatives aur campaigns.",
+        text: "Retail offers aur store promotions ke liye digital creatives aur campaigns par kaam kiya.",
       },
     ],
   },
 ];
 
 export function featuredPartners(partnersList: Partner[]) {
-  return partnersList.filter((p) => p.featured);
+  return partnersList.filter((partner) => partner.featured);
 }
