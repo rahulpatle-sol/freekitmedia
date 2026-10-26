@@ -69,6 +69,40 @@ export const partners: Partner[] = [
     ],
   },
   {
+    slug: "balaji-jewellers",
+    name: "Balaji Jewellers",
+    logo: "/images/partners/Balaji_Jewellers_Logo.avif",
+    industry: "Jewellery",
+    city: "Chhattisgarh",
+    oneLine: "Store offers aur festive collections ki digital reach.",
+    whatWeDid: "Offer creatives, store reels aur local awareness campaigns.",
+    featured: false,
+    blocks: [
+      { type: "heading", text: "Balaji Jewellers", level: 2 },
+      {
+        type: "text",
+        text: "Balaji Jewellers ke liye store offers, festive collections aur local customers tak pahunchne wale campaigns par kaam kiya.",
+      },
+    ],
+  },
+  {
+    slug: "royal-enfield",
+    name: "Royal Enfield",
+    logo: "/images/partners/royal-enfield.png",
+    industry: "Automotive",
+    city: "Chhattisgarh",
+    oneLine: "Ride events aur community campaigns ki digital presence.",
+    whatWeDid: "Event creatives, reels aur community engagement campaigns.",
+    featured: false,
+    blocks: [
+      { type: "heading", text: "Royal Enfield", level: 2 },
+      {
+        type: "text",
+        text: "Royal Enfield ke ride events aur showrooms ke liye creatives, reels aur community-first digital campaigns par kaam kiya.",
+      },
+    ],
+  },
+  {
     slug: "pathsure",
     name: "Pathsure",
     logo: "/images/partners/pathsure.svg",
