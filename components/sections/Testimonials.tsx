@@ -7,31 +7,31 @@ import { useEffect, useRef, useState } from "react";
 const stories = [
   {
     id: 1,
-    title: "Partner story",
+    title: "Dr.  Sharma's  story",
     name: "Partner story 01",
     poster: "/videos/testimonial-1-poster.jpg",
-    video: "/videos/testimonial-1.mp4",
+    video: "/images/partners/videos/sharma%20dental%20feedback.mp4",
   },
   {
     id: 2,
-    title: "Partner story",
+    title: "Tyre Center's story",
     name: "Partner story 02",
     poster: "/videos/testimonial-2-poster.jpg",
-    video: "/videos/testimonial-2.mp4",
+    video: "/images/partners/videos/tyre%20centre%20feedback.mp4",
   },
   {
     id: 3,
-    title: "Partner story",
+    title: "Balaji  & Balaji  Jawellers story",
     name: "Partner story 03",
     poster: "/videos/testimonial-1-poster.jpg",
-    video: "/videos/testimonial-1.mp4",
+    video: "/images/partners/videos/Balaji%20%26%20Balaji%20Feedback.mp4",
   },
   {
     id: 4,
-    title: "Partner story",
+    title: "URS (Ultimate reletionShip Strategy) story",
     name: "Partner story 04",
     poster: "/videos/testimonial-2-poster.jpg",
-    video: "/videos/testimonial-2.mp4",
+    video: "/images/partners/videos/URS%20Feedback.mp4",
   },
   {
     id: 5,
@@ -40,27 +40,27 @@ const stories = [
     poster: "/videos/testimonial-1-poster.jpg",
     video: "/videos/testimonial-1.mp4",
   },
-  {
-    id: 6,
-    title: "Partner story",
-    name: "Partner story 06",
-    poster: "/videos/testimonial-2-poster.jpg",
-    video: "/videos/testimonial-2.mp4",
-  },
-  {
-    id: 7,
-    title: "Partner story",
-    name: "Partner story 07",
-    poster: "/videos/testimonial-1-poster.jpg",
-    video: "/videos/testimonial-1.mp4",
-  },
-  {
-    id: 8,
-    title: "Partner story",
-    name: "Partner story 08",
-    poster: "/videos/testimonial-2-poster.jpg",
-    video: "/videos/testimonial-2.mp4",
-  },
+  // {
+  //   id: 6,
+  //   title: "Partner story",
+  //   name: "Partner story 06",
+  //   poster: "/videos/testimonial-2-poster.jpg",
+  //   video: "/videos/testimonial-2.mp4",
+  // },
+  // {
+  //   id: 7,
+  //   title: "Partner story",
+  //   name: "Partner story 07",
+  //   poster: "/videos/testimonial-1-poster.jpg",
+  //   video: "/videos/testimonial-1.mp4",
+  // },
+  // {
+  //   id: 8,
+  //   title: "Partner story",
+  //   name: "Partner story 08",
+  //   poster: "/videos/testimonial-2-poster.jpg",
+  //   video: "/videos/testimonial-2.mp4",
+  // },
 ];
 
 

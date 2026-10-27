@@ -9,7 +9,7 @@ import { partners, type Partner } from "@/content/partners";
 function PartnerLogo({ partner }: { partner: Partner }) {
   const [imageFailed, setImageFailed] = useState(false);
 
-  if (imageFailed) {
+  if (!partner.logo || imageFailed) {
     return (
       <span className="font-display text-xl font-semibold tracking-tight text-[#171517] sm:text-2xl">
         {partner.name}
@@ -39,10 +39,10 @@ function PartnerCard({ partner }: { partner: Partner }) {
         "overflow-hidden rounded-2xl border border-[#171517]/10",
         "bg-white p-5 sm:p-6",
         "transition-all duration-300 ease-out",
-        "hover:-translate-y-1 hover:border-[#8646FF]/40",
+        "hover:-translate-y-1 hover:border-[#8A6C05]/40",
         "hover:shadow-[0_12px_35px_rgba(23,21,23,0.07)]",
         "focus-visible:outline-none focus-visible:ring-2",
-        "focus-visible:ring-[#8646FF] focus-visible:ring-offset-2",
+        "focus-visible:ring-[#8A6C05] focus-visible:ring-offset-2",
         "motion-reduce:transform-none motion-reduce:transition-none",
       ].join(" ")}
     >
@@ -54,7 +54,7 @@ function PartnerCard({ partner }: { partner: Partner }) {
 
         <span
           aria-hidden="true"
-          className="flex size-9 shrink-0 items-center justify-center rounded-full border border-[#171517]/10 text-sm text-[#171517]/55 transition-all duration-300 group-hover:border-[#8646FF]/30 group-hover:bg-[#8646FF] group-hover:text-white"
+          className="flex size-9 shrink-0 items-center justify-center rounded-full border border-[#171517]/10 text-sm text-[#171517]/55 transition-all duration-300 group-hover:border-[#8A6C05]/30 group-hover:bg-[#8A6C05] group-hover:text-white"
         >
           ↗
         </span>
@@ -63,11 +63,17 @@ function PartnerCard({ partner }: { partner: Partner }) {
       <div className="mt-7">
         <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#171517]/50 sm:text-[11px]">
           {partner.industry}
-          <span className="mx-2 text-[#8646FF]">/</span>
+          <span className="mx-2 text-[#8A6C05]">/</span>
           {partner.city}
+          {partner.franchise && (
+            <>
+              <span className="mx-2 text-[#8A6C05]">/</span>
+              Franchise
+            </>
+          )}
         </p>
 
-        <h3 className="mt-3 font-display text-xl font-semibold tracking-[-0.035em] text-[#171517] transition-colors duration-300 group-hover:text-[#7040D5] sm:text-2xl">
+        <h3 className="mt-3 font-display text-xl font-semibold tracking-[-0.035em] text-[#171517] transition-colors duration-300 group-hover:text-[#8A6C05] sm:text-2xl">
           {partner.name}
         </h3>
 
@@ -77,13 +83,13 @@ function PartnerCard({ partner }: { partner: Partner }) {
       </div>
 
       <div className="mt-auto flex items-center justify-between gap-3 border-t border-[#171517]/10 pt-5 mt-6">
-        <span className="text-sm font-medium text-[#171517]/80 transition-colors duration-300 group-hover:text-[#7040D5]">
+        <span className="text-sm font-medium text-[#171517]/80 transition-colors duration-300 group-hover:text-[#8A6C05]">
           View case study
         </span>
 
         <span
           aria-hidden="true"
-          className="text-lg text-[#171517]/45 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-[#7040D5]"
+          className="text-lg text-[#171517]/45 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-[#8A6C05]"
         >
           →
         </span>
@@ -97,13 +103,13 @@ export default function PartnersSection() {
     <section
       id="partners"
       aria-labelledby="partners-heading"
-      className="overflow-hidden bg-[#FCFBFF] py-16 sm:py-20 lg:py-28"
+      className="overflow-hidden bg-[#F7F6F2] py-16 sm:py-20 lg:py-28"
     >
       <div className="mx-auto max-w-7xl">
         {/* Section heading */}
         <div className="mb-9 flex flex-col gap-5 px-5 sm:mb-12 sm:px-8 md:flex-row md:items-end md:justify-between lg:px-12">
           <div className="max-w-3xl">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#7040D5]">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#8A6C05]">
               Selected partnerships
             </p>
 
@@ -113,7 +119,7 @@ export default function PartnersSection() {
             >
               Good work.
               <br />
-              <span className="text-[#7040D5]">Real brands.</span>
+              <span className="text-[#8A6C05]">Real brands.</span>
             </h2>
           </div>
 
@@ -171,9 +177,9 @@ export default function PartnersSection() {
               "inline-flex min-h-12 shrink-0 items-center justify-center",
               "gap-3 self-start rounded-full bg-[#171517] px-6 py-3",
               "text-sm font-semibold text-white",
-              "transition-colors duration-300 hover:bg-[#7040D5]",
+              "transition-colors duration-300 hover:bg-[#8A6C05]",
               "focus-visible:outline-none focus-visible:ring-2",
-              "focus-visible:ring-[#8646FF] focus-visible:ring-offset-2",
+              "focus-visible:ring-[#8A6C05] focus-visible:ring-offset-2",
               "motion-reduce:transition-none md:self-auto",
             ].join(" ")}
           >

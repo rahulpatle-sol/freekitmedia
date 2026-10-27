@@ -34,19 +34,19 @@ export function PitchSection() {
     <section
       id="industries"
       ref={ref}
-      className="relative overflow-hidden bg-[#F8F7FC] py-20 text-[#29243A] sm:py-28 lg:py-36"
+      className="relative overflow-hidden bg-[#F7F6F2] py-20 text-[#171717] sm:py-28 lg:py-36"
     >
       <Container>
         {/* Section heading */}
         <div
           data-reveal
-          className="flex items-center justify-between gap-4 border-t border-[#302644]/15 pt-5"
+          className="flex items-center justify-between gap-4 border-t border-[#171717]/15 pt-5"
         >
-          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#8069A9] sm:text-xs">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#8A6C05] sm:text-xs">
             Industries we serve
           </p>
 
-          <p className="font-mono text-[10px] text-[#8C849C] sm:text-xs">
+          <p className="font-mono text-[10px] text-[#77766D] sm:text-xs">
             {String(industries.length).padStart(2, "0")} CATEGORIES
           </p>
         </div>
@@ -57,7 +57,7 @@ export function PitchSection() {
             <div className="lg:sticky lg:top-28">
               <p
                 data-reveal
-                className="text-xs font-semibold uppercase tracking-[0.16em] text-[#9673D8]"
+                className="text-xs font-semibold uppercase tracking-[0.16em] text-[#8A6C05]"
               >
                 Built around your business
               </p>
@@ -68,12 +68,12 @@ export function PitchSection() {
               >
                 Every industry.
                 <br />
-                <span className="text-[#9673D8]">Its own strategy.</span>
+                <span className="text-[#8A6C05]">Its own strategy.</span>
               </h2>
 
               <p
                 data-reveal
-                className="mt-5 max-w-md text-sm leading-7 text-[#716A80] sm:text-base"
+                className="mt-5 max-w-md text-sm leading-7 text-[#55524C] sm:text-base"
               >
                 Different customers. Different challenges. We build marketing
                 strategies around what makes your business unique.
@@ -82,7 +82,7 @@ export function PitchSection() {
               {/* Active industry image */}
               <div
                 data-reveal
-                className="group relative mt-8 aspect-[5/4] overflow-hidden rounded-2xl bg-[#E8E1F3] sm:mt-10"
+                className="group relative mt-8 aspect-[5/4] overflow-hidden rounded-2xl bg-[#EAE7DF] sm:mt-10"
               >
                 {activeIndustry && (
                   <>
@@ -96,7 +96,7 @@ export function PitchSection() {
                       className="object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:transition-none"
                     />
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#171322]/80 via-[#171322]/10 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#171717]/80 via-[#171717]/10 to-transparent" />
 
                     <div className="absolute inset-x-0 bottom-0 p-5 text-white sm:p-7">
                       <div className="flex items-end justify-between gap-3">
@@ -122,7 +122,7 @@ export function PitchSection() {
 
               <Link
                 href="/#contact"
-                className="group mt-6 inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-full bg-[#302644] px-6 text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#8060BB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9673D8] focus-visible:ring-offset-2 sm:w-auto"
+                className="group mt-6 inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-full bg-[#171717] px-6 text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#8A6C05] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8A6C05] focus-visible:ring-offset-2 sm:w-auto"
               >
                 Get a free marketing audit
                 <Icon
@@ -136,16 +136,16 @@ export function PitchSection() {
           {/* Right: interactive industry list */}
           <div className="min-w-0 lg:col-span-7">
             <div className="mb-4 flex items-center justify-between gap-3">
-              <p className="text-xs font-semibold text-[#514565]">
+              <p className="text-xs font-semibold text-[#292927]">
                 Find your industry
               </p>
 
-              <p className="text-[10px] text-[#8C849C] sm:text-xs">
+              <p className="text-[10px] text-[#77766D] sm:text-xs">
                 Select to explore
               </p>
             </div>
 
-            <div className="overflow-hidden rounded-2xl border border-[#302644]/10 bg-white/70">
+            <div className="overflow-hidden rounded-2xl border border-[#171717]/10 bg-white/70">
               {industries.map((industry, index) => {
                 const active = activeIndex === index;
 
@@ -158,17 +158,17 @@ export function PitchSection() {
                     onClick={() => setActiveIndex(index)}
                     aria-current={active ? "true" : undefined}
                     className={[
-                      "group block border-b border-[#302644]/10 p-4 outline-none transition-colors duration-300 last:border-b-0 sm:p-5",
+                      "group block border-b border-[#171717]/10 p-4 outline-none transition-colors duration-300 last:border-b-0 sm:p-5",
                       active
-                        ? "bg-[#F1ECF9]"
-                        : "hover:bg-[#F8F5FD] focus-visible:bg-[#F1ECF9]",
+                        ? "bg-[#FFF9E5]"
+                        : "hover:bg-[#F7F6F2] focus-visible:bg-[#FFF9E5]",
                     ].join(" ")}
                   >
                     <div className="grid grid-cols-[2rem_minmax(0,1fr)_2.25rem] items-start gap-3 sm:grid-cols-[2.5rem_minmax(0,1fr)_2.75rem] sm:gap-4">
                       <span
                         className={[
                           "pt-1 font-mono text-xs transition-colors",
-                          active ? "text-[#8060BB]" : "text-[#A7A0B2]",
+                          active ? "text-[#8A6C05]" : "text-[#77766D]",
                         ].join(" ")}
                       >
                         {String(index + 1).padStart(2, "0")}
@@ -178,7 +178,7 @@ export function PitchSection() {
                         <h3
                           className={[
                             "font-display text-lg font-bold leading-snug tracking-[-0.04em] transition-colors sm:text-2xl lg:text-3xl",
-                            active ? "text-[#8060BB]" : "text-[#302644]",
+                            active ? "text-[#8A6C05]" : "text-[#171717]",
                           ].join(" ")}
                         >
                           {industry.name}
@@ -186,18 +186,18 @@ export function PitchSection() {
 
                         <div
                           className={[
-                            "grid transition-[grid-template-rows,opacity] duration-300",
+                            "grid grid-rows-[1fr] opacity-100 sm:transition-[grid-template-rows,opacity] sm:duration-300",
                             active
-                              ? "grid-rows-[1fr] opacity-100"
-                              : "grid-rows-[0fr] opacity-0",
+                              ? "sm:grid-rows-[1fr] sm:opacity-100"
+                              : "sm:grid-rows-[0fr] sm:opacity-0",
                           ].join(" ")}
                         >
                           <div className="overflow-hidden">
-                            <p className="max-w-lg pt-2 text-sm leading-6 text-[#716A80]">
+                            <p className="max-w-lg pt-2 text-sm leading-6 text-[#55524C]">
                               {industry.problemLine}
                             </p>
 
-                            <span className="mt-3 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#8060BB]">
+                            <span className="mt-3 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#8A6C05]">
                               Explore industry
                               <Icon name="arrowRight" className="size-3.5" />
                             </span>
@@ -209,8 +209,8 @@ export function PitchSection() {
                         className={[
                           "grid size-9 place-items-center rounded-full border transition-all duration-300 sm:size-11",
                           active
-                            ? "border-[#8060BB] bg-[#8060BB] text-white"
-                            : "border-[#302644]/15 text-[#716A80] group-hover:border-[#9673D8] group-hover:text-[#8060BB]",
+                            ? "border-[#8A6C05] bg-[#8A6C05] text-white"
+                            : "border-[#171717]/15 text-[#55524C] group-hover:border-[#8A6C05] group-hover:text-[#8A6C05]",
                         ].join(" ")}
                       >
                         <Icon
@@ -227,11 +227,11 @@ export function PitchSection() {
               })}
             </div>
 
-            <p className="mt-5 text-sm leading-6 text-[#716A80]">
+            <p className="mt-5 text-sm leading-6 text-[#55524C]">
               Don’t see your industry?{" "}
               <Link
                 href="/#contact"
-                className="font-semibold text-[#8060BB] underline decoration-[#8060BB]/40 underline-offset-4 transition-colors hover:text-[#302644]"
+                className="font-semibold text-[#8A6C05] underline decoration-[#8A6C05]/40 underline-offset-4 transition-colors hover:text-[#171717]"
               >
                 Let’s talk about your business.
               </Link>

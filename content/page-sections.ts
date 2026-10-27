@@ -64,7 +64,7 @@ export const noShortcuts = {
 } as const;
 
 export const process = {
-  headline: "Pehle aapka business samajhte hain. Phir build karte hain.",
+  headline: "We understand first. Then we build.",
   sub: "Ek clear 6-step process, jo har mahine numbers mein report hota hai.",
   steps: [
     {
@@ -133,7 +133,7 @@ export const process = {
 } as const;
 
 export const proof = {
-  headline: "100+ brands ne bharosa kiya",
+  headline: "150+ brands ne bharosa kiya",
   sub: "Healthcare se Jewellery, Real Estate se Fashion tak — sabse pehle visibility, phir bharosa, aur tabhi sale.",
   testimonial: {
     quote: "Professional enough and know their job. Best agency across Chhattisgarh.",
@@ -143,7 +143,8 @@ export const proof = {
   result: {
     tag: "Result highlight",
     value: "₹6,00,000+",
-    line: "ka order, ek hi din mein, sirf Instagram ads se.",
+    line: "Instagram ads se ek hi din mein jewellery ka direct order.",
+    by: "Kisna Franchise Team",
   },
   videoTestimonials: [
     {
@@ -166,7 +167,7 @@ export const proof = {
 } as const;
 
 export const comparison = {
-  headline: "Hum vs typical agency",
+  headline: "Freekit media vs other agency",
   sub: "Fark bol ke nahi, system se aata hai. Honest comparison:",
   rows: [
     {

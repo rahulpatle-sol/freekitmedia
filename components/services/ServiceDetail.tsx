@@ -18,17 +18,17 @@ import { useReveal } from "@/lib/use-reveal";
 import { cn, whatsappLink } from "@/lib/utils";
 
 const problemAccentStyles = [
-  { badge: "bg-[#302644] text-white" },
-  { badge: "bg-[#9673D8] text-white" },
-  { badge: "bg-[#C4B5FD] text-[#302644]" },
-  { badge: "bg-[#F1ECF9] text-[#8060BB] border border-[#9673D8]/25" },
+  { badge: "bg-[#171717] text-white" },
+  { badge: "bg-[#8A6C05] text-white" },
+  { badge: "bg-[#F7C928] text-[#171717]" },
+  { badge: "bg-[#FFF9E5] text-[#8A6C05] border border-[#8A6C05]/25" },
 ];
 
 const deliverableCardStyles = [
-  { card: "border-[#302644]/10 bg-white", badge: "bg-[#302644] text-white", span: "lg:col-span-7" },
-  { card: "border-[#302644]/10 bg-[#F1ECF9]", badge: "bg-[#9673D8] text-white", span: "lg:col-span-5" },
-  { card: "border-[#302644]/10 bg-[#F1ECF9]", badge: "bg-[#9673D8] text-white", span: "lg:col-span-5" },
-  { card: "border-[#302644]/10 bg-white", badge: "bg-[#302644] text-white", span: "lg:col-span-7" },
+  { card: "border-[#171717]/10 bg-white", badge: "bg-[#171717] text-white", span: "lg:col-span-7" },
+  { card: "border-[#171717]/10 bg-[#FFF9E5]", badge: "bg-[#8A6C05] text-white", span: "lg:col-span-5" },
+  { card: "border-[#171717]/10 bg-[#FFF9E5]", badge: "bg-[#8A6C05] text-white", span: "lg:col-span-5" },
+  { card: "border-[#171717]/10 bg-white", badge: "bg-[#171717] text-white", span: "lg:col-span-7" },
 ];
 
 const signatureRowIcons: IconName[] = ["eye", "phone", "trendingUp", "megaphone"];
@@ -37,12 +37,12 @@ function SectionMark({ children }: { children: React.ReactNode }) {
   return (
     <div
       data-reveal
-      className="flex items-center justify-between gap-4 border-t border-[#302644]/12 pt-4"
+      className="flex items-center justify-between gap-4 border-t border-[#171717]/12 pt-4"
     >
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8060BB]">
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8A6C05]">
         {children}
       </p>
-      <span aria-hidden="true" className="font-mono text-xs text-[#8C849C]">
+      <span aria-hidden="true" className="font-mono text-xs text-[#77766D]">
         ────
       </span>
     </div>
@@ -68,7 +68,7 @@ function PipelineModule({
           >
             <span
               aria-hidden="true"
-              className="absolute left-0 top-6 grid size-8 place-items-center rounded-full border border-[#C4B5FD]/30 bg-[#211B2E] font-mono text-[11px] text-[#C4B5FD] sm:relative sm:top-0 sm:size-9"
+              className="absolute left-0 top-6 grid size-8 place-items-center rounded-full border border-[#F7C928]/30 bg-[#171717] font-mono text-[11px] text-[#F7C928] sm:relative sm:top-0 sm:size-9"
             >
               {String(index + 1).padStart(2, "0")}
             </span>
@@ -76,21 +76,21 @@ function PipelineModule({
             <p className="font-display text-base font-bold tracking-[-0.03em] text-white sm:mt-4 lg:text-[0.95rem]">
               {step.label}
             </p>
-            <p className="mt-1.5 text-xs leading-relaxed text-[#D0BDFB]/80 sm:text-[13px]">
+            <p className="mt-1.5 text-xs leading-relaxed text-[#FBE17D]/80 sm:text-[13px]">
               {step.detail}
             </p>
 
             {index < steps.length - 1 && (
               <span
                 aria-hidden="true"
-                className="absolute left-4 top-[3.75rem] h-[calc(100%-2.4rem)] w-px bg-gradient-to-b from-[#9673D8]/45 to-transparent sm:left-8 sm:top-14 sm:h-px sm:w-[calc(100%-2rem)]"
+                className="absolute left-4 top-[3.75rem] h-[calc(100%-2.4rem)] w-px bg-gradient-to-b from-[#8A6C05]/45 to-transparent sm:left-8 sm:top-14 sm:h-px sm:w-[calc(100%-2rem)]"
               />
             )}
           </li>
         ))}
       </ol>
 
-      <p className="mt-2 max-w-2xl border-t border-white/10 pt-5 text-sm leading-relaxed text-[#D0BDFB]/75">
+      <p className="mt-2 max-w-2xl border-t border-white/10 pt-5 text-sm leading-relaxed text-[#FBE17D]/75">
         {note}
       </p>
     </div>
@@ -101,14 +101,14 @@ function ReportModule({ steps }: { steps: SignatureStep[] }) {
   return (
     <div
       data-reveal
-      className="overflow-hidden rounded-3xl border border-white/10 bg-[#FDFCFF] text-[#29243A] shadow-[0_30px_90px_-40px_rgba(12,8,20,0.55)]"
+      className="overflow-hidden rounded-3xl border border-white/10 bg-[#FFFFFF] text-[#171717] shadow-[0_30px_90px_-40px_rgba(0,0,0,0.55)]"
     >
-      <div className="flex items-center justify-between gap-4 border-b border-[#302644]/10 bg-[#302644] px-6 py-4 text-white sm:px-8">
+      <div className="flex items-center justify-between gap-4 border-b border-[#171717]/10 bg-[#171717] px-6 py-4 text-white sm:px-8">
         <p className="font-display text-sm font-bold tracking-tight sm:text-base">
           Monthly report
         </p>
         <p className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-white/65">
-          <span className="size-1.5 rounded-full bg-[#C4B5FD]" />
+          <span className="size-1.5 rounded-full bg-[#F7C928]" />
           Same four. Every month.
         </p>
       </div>
@@ -119,16 +119,16 @@ function ReportModule({ steps }: { steps: SignatureStep[] }) {
           return (
             <li
               key={step.label}
-              className="flex items-start gap-4 border-b border-[#302644]/8 px-6 py-5 last:border-b-0 sm:px-8 sm:py-6 odd:sm:border-r odd:sm:border-[#302644]/8"
+              className="flex items-start gap-4 border-b border-[#171717]/8 px-6 py-5 last:border-b-0 sm:px-8 sm:py-6 odd:sm:border-r odd:sm:border-[#171717]/8"
             >
-              <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-xl bg-[#F1ECF9] text-[#8060BB]">
+              <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-xl bg-[#FFF9E5] text-[#8A6C05]">
                 <Icon name={IconComponent} className="size-4" />
               </span>
               <div className="min-w-0">
                 <p className="font-display text-[0.95rem] font-bold tracking-tight">
                   {step.label}
                 </p>
-                <p className="mt-1 text-xs leading-relaxed text-[#746C83] sm:text-[13px]">
+                <p className="mt-1 text-xs leading-relaxed text-[#55524C] sm:text-[13px]">
                   {step.detail}
                 </p>
               </div>
@@ -137,11 +137,11 @@ function ReportModule({ steps }: { steps: SignatureStep[] }) {
         })}
       </ul>
 
-      <div className="flex flex-wrap items-center justify-between gap-3 bg-[#F1ECF9] px-6 py-4 sm:px-8">
-        <p className="text-xs font-medium text-[#514565] sm:text-[13px]">
+      <div className="flex flex-wrap items-center justify-between gap-3 bg-[#FFF9E5] px-6 py-4 sm:px-8">
+        <p className="text-xs font-medium text-[#292927] sm:text-[13px]">
           Nothing stays hidden — the report you see is the one we work from.
         </p>
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-[#F7C928] px-3 py-1.5 text-[11px] font-bold text-[#302644]">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-[#F7C928] px-3 py-1.5 text-[11px] font-bold text-[#171717]">
           <Icon name="badgeCheck" className="size-3.5" />
           Transparent
         </span>
@@ -157,22 +157,22 @@ function BoardModule({ steps }: { steps: SignatureStep[] }) {
         {steps.map((step, index) => (
           <li
             key={step.label}
-            className="rounded-2xl border border-white/10 bg-[#211B2E]/60 p-5 sm:p-6"
+            className="rounded-2xl border border-white/10 bg-[#171717]/60 p-5 sm:p-6"
           >
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#C4B5FD]/70">
+            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#F7C928]/70">
               Channel {String(index + 1).padStart(2, "0")}
             </p>
             <p className="font-display mt-3 text-lg font-bold tracking-[-0.03em] text-white">
               {step.label}
             </p>
-            <p className="mt-2 text-[13px] leading-relaxed text-[#D0BDFB]/75">
+            <p className="mt-2 text-[13px] leading-relaxed text-[#FBE17D]/75">
               {step.detail}
             </p>
           </li>
         ))}
       </ol>
 
-      <p className="mt-6 max-w-2xl border-t border-white/10 pt-5 text-sm leading-relaxed text-[#D0BDFB]/75">
+      <p className="mt-6 max-w-2xl border-t border-white/10 pt-5 text-sm leading-relaxed text-[#FBE17D]/75">
         All four are maintained together, every month — posting stops being the
         thing everyone forgets.
       </p>
@@ -189,17 +189,17 @@ function PathModule({ steps }: { steps: SignatureStep[] }) {
             {index < steps.length - 1 && (
               <span
                 aria-hidden="true"
-                className="absolute left-[1.15rem] top-12 h-[calc(100%-2.75rem)] w-px bg-gradient-to-b from-[#9673D8]/50 to-transparent"
+                className="absolute left-[1.15rem] top-12 h-[calc(100%-2.75rem)] w-px bg-gradient-to-b from-[#8A6C05]/50 to-transparent"
               />
             )}
-            <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-full border border-[#C4B5FD]/30 bg-[#211B2E] font-mono text-[11px] text-[#C4B5FD]">
+            <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-full border border-[#F7C928]/30 bg-[#171717] font-mono text-[11px] text-[#F7C928]">
               {String(index + 1).padStart(2, "0")}
             </span>
             <div className="min-w-0 pt-1">
               <p className="font-display text-lg font-bold tracking-[-0.03em] text-white">
                 {step.label}
               </p>
-              <p className="mt-1 text-sm leading-relaxed text-[#D0BDFB]/75">
+              <p className="mt-1 text-sm leading-relaxed text-[#FBE17D]/75">
                 {step.detail}
               </p>
             </div>
@@ -207,7 +207,7 @@ function PathModule({ steps }: { steps: SignatureStep[] }) {
         ))}
       </ol>
 
-      <p className="max-w-2xl border-t border-white/10 pt-5 text-sm leading-relaxed text-[#D0BDFB]/75">
+      <p className="max-w-2xl border-t border-white/10 pt-5 text-sm leading-relaxed text-[#FBE17D]/75">
         The first shoot is the hardest. After that, the face stops being
         stage-fright and starts being leverage.
       </p>
@@ -229,20 +229,20 @@ function SignatureModule({ service }: { service: ServicePage }) {
     );
 
   return (
-    <section className="relative overflow-hidden bg-[#302644] py-16 text-white sm:py-24">
+    <section className="relative overflow-hidden bg-[#171717] py-16 text-white sm:py-24">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-40 top-1/3 size-[26rem] rounded-full bg-[#9673D8]/10 blur-[110px]"
+        className="pointer-events-none absolute -left-40 top-1/3 size-[26rem] rounded-full bg-[#8A6C05]/10 blur-[110px]"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-32 -top-24 size-[22rem] rounded-full bg-[#C4B5FD]/10 blur-[100px]"
+        className="pointer-events-none absolute -right-32 -top-24 size-[22rem] rounded-full bg-[#F7C928]/10 blur-[100px]"
       />
 
       <Container className="relative">
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.6fr] lg:items-start lg:gap-16">
           <div data-reveal className="min-w-0 lg:sticky lg:top-28 lg:self-start">
-            <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#C4B5FD]">
+            <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#F7C928]">
               <span className="size-2 rounded-full bg-[#F7C928]" />
               {signature.kicker}
             </p>
@@ -251,19 +251,19 @@ function SignatureModule({ service }: { service: ServicePage }) {
               {signature.title}
             </h2>
 
-            <p className="mt-5 max-w-sm text-sm leading-7 text-[#D0BDFB]/80 sm:text-base">
+            <p className="mt-5 max-w-sm text-sm leading-7 text-[#FBE17D]/80 sm:text-base">
               {signature.text}
             </p>
 
             {service.story && (
               <Link
                 href={service.story.href}
-                className="group mt-8 block max-w-sm rounded-2xl border border-[#C4B5FD]/25 bg-[#211B2E] p-5 transition-colors duration-300 hover:border-[#C4B5FD]/60 focus-visible:outline-2 focus-visible:outline-[#9673D8] focus-visible:outline-offset-2"
+                className="group mt-8 block max-w-sm rounded-2xl border border-[#F7C928]/25 bg-[#171717] p-5 transition-colors duration-300 hover:border-[#F7C928]/60 focus-visible:outline-2 focus-visible:outline-[#8A6C05] focus-visible:outline-offset-2"
               >
                 <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#F7C928]">
                   Related story
                 </p>
-                <p className="mt-2 text-sm leading-relaxed text-[#D0BDFB]/85">
+                <p className="mt-2 text-sm leading-relaxed text-[#FBE17D]/85">
                   {service.story.text}
                 </p>
                 <p className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-white">
@@ -293,19 +293,19 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
   const related = otherServices(service.slug);
 
   return (
-    <main id="main" ref={ref} className="flex-1 bg-[#F8F7FC] text-[#29243A]">
+    <main id="main" ref={ref} className="flex-1 bg-[#F7F6F2] text-[#171717]">
       {/* ---------------- Hero ---------------- */}
-      <section className="relative overflow-hidden bg-[#302644] pb-14 pt-8 text-white sm:pb-20 sm:pt-10">
+      <section className="relative overflow-hidden bg-[#171717] pb-14 pt-8 text-white sm:pb-20 sm:pt-10">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 -top-40 h-80 bg-[radial-gradient(60%_100%_at_50%_100%,rgba(150,115,216,0.22),transparent_70%)]"
+          className="pointer-events-none absolute inset-x-0 -top-40 h-80 bg-[radial-gradient(60%_100%_at_50%_100%,rgba(247,201,40,0.16),transparent_70%)]"
         />
 
         <Container className="relative">
           <div data-reveal className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
             <Link
               href="/services"
-              className="group inline-flex items-center gap-2 text-sm font-medium text-white/70 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-[#9673D8] focus-visible:outline-offset-4"
+              className="group inline-flex items-center gap-2 text-sm font-medium text-white/70 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-[#8A6C05] focus-visible:outline-offset-4"
             >
               <Icon
                 name="chevronRight"
@@ -321,7 +321,7 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
 
           <div className="grid gap-10 pt-10 lg:grid-cols-12 lg:items-center lg:gap-8 lg:pt-12">
             <div data-reveal className="min-w-0 lg:col-span-7">
-              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#C4B5FD]">
+              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#F7C928]">
                 <span className="size-2 rounded-full bg-[#F7C928]" />
                 {service.tag}
               </p>
@@ -378,7 +378,7 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
             </div>
 
             <div className="lg:col-span-5">
-              <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#211B2E]/40 p-2 sm:p-3">
+              <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#171717]/40 p-2 sm:p-3">
                 <ServiceVisual
                   kind={service.visual}
                   className="aspect-[5/4] w-full"
@@ -396,8 +396,8 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
 
           <div className="mt-8 grid gap-8 sm:mt-10 lg:grid-cols-[0.8fr_1.6fr] lg:gap-16">
             <div data-reveal className="min-w-0 lg:sticky lg:top-28 lg:self-start">
-              <p className="flex items-center gap-2 text-xs font-semibold text-[#8060BB]">
-                <span className="size-2 rounded-full bg-[#9673D8]" />
+              <p className="flex items-center gap-2 text-xs font-semibold text-[#8A6C05]">
+                <span className="size-2 rounded-full bg-[#8A6C05]" />
                 The real reason it feels stuck
               </p>
 
@@ -405,7 +405,7 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
                 Where businesses lose customers first.
               </h2>
 
-              <p className="mt-5 max-w-sm text-sm leading-7 text-[#746C83]">
+              <p className="mt-5 max-w-sm text-sm leading-7 text-[#55524C]">
                 If any of these sound familiar, the fix is system — not more
                 effort scattered in the same places.
               </p>
@@ -416,7 +416,7 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
                 <div
                   key={problem.title}
                   data-reveal
-                  className="flex items-start gap-4 border-b border-[#302644]/10 py-6 sm:gap-6 sm:py-7"
+                  className="flex items-start gap-4 border-b border-[#171717]/10 py-6 sm:gap-6 sm:py-7"
                 >
                   <span
                     className={cn(
@@ -434,7 +434,7 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
                       {problem.title}
                     </h3>
 
-                    <p className="mt-2 max-w-xl text-sm leading-7 text-[#746C83]">
+                    <p className="mt-2 max-w-xl text-sm leading-7 text-[#55524C]">
                       {problem.text}
                     </p>
                   </div>
@@ -446,7 +446,7 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
       </section>
 
       {/* ---------------- Deliverables ---------------- */}
-      <section className="border-y border-[#302644]/8 bg-white py-16 sm:py-20">
+      <section className="border-y border-[#171717]/8 bg-white py-16 sm:py-20">
         <Container>
           <SectionMark>Included</SectionMark>
 
@@ -460,7 +460,7 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
 
             <p
               data-reveal
-              className="max-w-md text-sm leading-7 text-[#746C83]"
+              className="max-w-md text-sm leading-7 text-[#55524C]"
             >
               The scope is agreed before anything starts — sized to your
               business and city, then recountable at every monthly review.
@@ -492,11 +492,11 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
                     {group.items.map((item) => (
                       <li
                         key={item}
-                        className="flex items-start gap-3 text-sm leading-6 text-[#514565]"
+                        className="flex items-start gap-3 text-sm leading-6 text-[#292927]"
                       >
                         <Icon
                           name="check"
-                          className="mt-0.5 size-4 shrink-0 text-[#8060BB]"
+                          className="mt-0.5 size-4 shrink-0 text-[#8A6C05]"
                         />
                         {item}
                       </li>
@@ -527,7 +527,7 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
 
             <p
               data-reveal
-              className="max-w-md text-sm leading-7 text-[#746C83]"
+              className="max-w-md text-sm leading-7 text-[#55524C]"
             >
               No mystery, no pressure. This is the route from your first
               message to your first monthly report.
@@ -545,17 +545,17 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
               <li
                 key={step.title}
                 data-reveal
-                className="group relative rounded-2xl border border-[#302644]/10 bg-white p-6"
+                className="group relative rounded-2xl border border-[#171717]/10 bg-white p-6"
               >
                 <div className="flex items-center justify-between gap-3">
                   <span
-                    className="grid size-10 place-items-center rounded-full bg-[#302644] font-mono text-xs font-semibold text-white transition-colors duration-300 group-hover:bg-[#8060BB]"
+                    className="grid size-10 place-items-center rounded-full bg-[#171717] font-mono text-xs font-semibold text-white transition-colors duration-300 group-hover:bg-[#8A6C05]"
                   >
                     {String(index + 1).padStart(2, "0")}
                   </span>
 
                   {index === 0 && (
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-[#F1ECF9] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[#8060BB]">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-[#FFF9E5] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[#8A6C05]">
                       Step 01 · Free
                     </span>
                   )}
@@ -565,7 +565,7 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
                   {step.title}
                 </h3>
 
-                <p className="mt-2 text-sm leading-7 text-[#746C83]">
+                <p className="mt-2 text-sm leading-7 text-[#55524C]">
                   {step.text}
                 </p>
               </li>
@@ -575,14 +575,14 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
       </section>
 
       {/* ---------------- Fits ---------------- */}
-      <section className="border-y border-[#302644]/8 bg-white py-16 sm:py-20">
+      <section className="border-y border-[#171717]/8 bg-white py-16 sm:py-20">
         <Container>
           <SectionMark>Fit check</SectionMark>
 
           <div className="mt-8 grid gap-8 sm:mt-10 lg:grid-cols-[0.8fr_1.6fr] lg:gap-16">
             <div data-reveal className="min-w-0 lg:sticky lg:top-28 lg:self-start">
-              <p className="flex items-center gap-2 text-xs font-semibold text-[#8060BB]">
-                <span className="size-2 rounded-full bg-[#9673D8]" />
+              <p className="flex items-center gap-2 text-xs font-semibold text-[#8A6C05]">
+                <span className="size-2 rounded-full bg-[#8A6C05]" />
                 Where it works hardest
               </p>
 
@@ -590,7 +590,7 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
                 Built for these businesses.
               </h2>
 
-              <p className="mt-5 max-w-sm text-sm leading-7 text-[#746C83]">
+              <p className="mt-5 max-w-sm text-sm leading-7 text-[#55524C]">
                 We work across Chhattisgarh — Bilaspur, Ambikapur, Korba — and
                 with selective online clients beyond the state.
               </p>
@@ -601,9 +601,9 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
                 <li
                   key={fit.label}
                   data-reveal
-                  className="group flex flex-col gap-3 border-b border-[#302644]/10 py-6 sm:flex-row sm:items-start sm:gap-7 sm:py-7"
+                  className="group flex flex-col gap-3 border-b border-[#171717]/10 py-6 sm:flex-row sm:items-start sm:gap-7 sm:py-7"
                 >
-                  <span className="grid size-11 shrink-0 place-items-center rounded-full border border-[#9673D8]/25 bg-[#F1ECF9] text-[#8060BB] transition-colors duration-300 group-hover:bg-[#8060BB] group-hover:text-white">
+                  <span className="grid size-11 shrink-0 place-items-center rounded-full border border-[#8A6C05]/25 bg-[#FFF9E5] text-[#8A6C05] transition-colors duration-300 group-hover:bg-[#8A6C05] group-hover:text-white">
                     <Icon name={fit.icon} className="size-5" />
                   </span>
 
@@ -613,7 +613,7 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
                     </h3>
                   </div>
 
-                  <p className="max-w-xl flex-1 text-sm leading-7 text-[#746C83]">
+                  <p className="max-w-xl flex-1 text-sm leading-7 text-[#55524C]">
                     {fit.text}
                   </p>
                 </li>
@@ -643,17 +643,17 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
               <Link
                 key={item.slug}
                 href={`/services/${item.slug}`}
-                className="group flex min-h-20 items-center justify-between gap-4 rounded-2xl border border-[#302644]/10 bg-white px-5 py-4 transition-colors duration-300 hover:border-[#9673D8]/40 hover:bg-[#F1ECF9] focus-visible:outline-2 focus-visible:outline-[#9673D8] focus-visible:outline-offset-2"
+                className="group flex min-h-20 items-center justify-between gap-4 rounded-2xl border border-[#171717]/10 bg-white px-5 py-4 transition-colors duration-300 hover:border-[#8A6C05]/40 hover:bg-[#FFF9E5] focus-visible:outline-2 focus-visible:outline-[#8A6C05] focus-visible:outline-offset-2"
               >
                 <span className="flex min-w-0 items-center gap-3">
-                  <span className="font-mono text-[11px] text-[#8060BB]">
+                  <span className="font-mono text-[11px] text-[#8A6C05]">
                     {item.num}
                   </span>
                   <span className="min-w-0">
-                    <span className="block truncate font-display text-base font-bold tracking-[-0.025em] text-[#29243A]">
+                    <span className="block truncate font-display text-base font-bold tracking-[-0.025em] text-[#171717]">
                       {item.title}
                     </span>
-                    <span className="block text-xs text-[#746C83]">
+                    <span className="block text-xs text-[#55524C]">
                       {item.short}
                     </span>
                   </span>
@@ -661,7 +661,7 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
 
                 <Icon
                   name="arrowRight"
-                  className="size-4 shrink-0 text-[#746C83] transition-transform duration-300 group-hover:translate-x-1 group-hover:text-[#8060BB]"
+                  className="size-4 shrink-0 text-[#55524C] transition-transform duration-300 group-hover:translate-x-1 group-hover:text-[#8A6C05]"
                 />
               </Link>
             ))}
@@ -670,16 +670,16 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
       </section>
 
       {/* ---------------- CTA band ---------------- */}
-      <section className="relative overflow-hidden bg-[#302644] py-16 text-white sm:py-24">
+      <section className="relative overflow-hidden bg-[#171717] py-16 text-white sm:py-24">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-24 -top-24 size-[24rem] rounded-full bg-[#9673D8]/12 blur-[110px]"
+          className="pointer-events-none absolute -right-24 -top-24 size-[24rem] rounded-full bg-[#8A6C05]/12 blur-[110px]"
         />
 
         <Container className="relative">
           <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-end">
             <div data-reveal className="min-w-0">
-              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#C4B5FD]">
+              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#F7C928]">
                 <span className="size-2 rounded-full bg-[#F7C928]" />
                 Next step
               </p>
@@ -717,9 +717,9 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
 
             <div
               data-reveal
-              className="min-w-0 rounded-2xl border border-white/10 bg-[#211B2E]/60 p-6 sm:p-7"
+              className="min-w-0 rounded-2xl border border-white/10 bg-[#171717]/60 p-6 sm:p-7"
             >
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#C4B5FD]/70">
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#F7C928]/70">
                 Direct lines
               </p>
 
@@ -729,7 +729,7 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
                     href={`tel:${site.phone.primary.number}`}
                     className="group inline-flex min-h-10 items-center gap-3 text-white/85 transition-colors hover:text-white"
                   >
-                    <span className="grid size-9 place-items-center rounded-xl bg-white/[0.06] text-[#C4B5FD]">
+                    <span className="grid size-9 place-items-center rounded-xl bg-white/[0.06] text-[#F7C928]">
                       <Icon name="phone" className="size-4" />
                     </span>
                     {site.phone.primary.display}
@@ -740,14 +740,14 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
                     href={`mailto:${site.email}`}
                     className="group inline-flex min-h-10 items-center gap-3 text-white/85 transition-colors hover:text-white"
                   >
-                    <span className="grid size-9 place-items-center rounded-xl bg-white/[0.06] text-[#C4B5FD]">
+                    <span className="grid size-9 place-items-center rounded-xl bg-white/[0.06] text-[#F7C928]">
                       <Icon name="mail" className="size-4" />
                     </span>
                     {site.email}
                   </a>
                 </li>
                 <li className="flex items-center gap-3 text-white/60">
-                  <span className="grid size-9 place-items-center rounded-xl bg-white/[0.06] text-[#C4B5FD]">
+                  <span className="grid size-9 place-items-center rounded-xl bg-white/[0.06] text-[#F7C928]">
                     <Icon name="mapPin" className="size-4" />
                   </span>
                   {site.cities.join(", ")}, and online beyond Chhattisgarh

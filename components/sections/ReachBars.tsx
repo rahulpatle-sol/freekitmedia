@@ -22,9 +22,9 @@ export function StickyMobileBar() {
       <div
         className={cn(
           "pointer-events-auto mx-auto grid max-w-lg grid-cols-2 gap-2",
-          "rounded-2xl border border-[#9673D8]/20",
-          "bg-[#FDFCFF]/90 p-2",
-          "shadow-[0_-8px_40px_-18px_rgba(48,38,68,0.22)]",
+          "rounded-2xl border border-[#8A6C05]/20",
+          "bg-[#FFFFFF]/90 p-2",
+          "shadow-[0_-8px_40px_-18px_rgba(23,23,23,0.22)]",
           "backdrop-blur-2xl",
         )}
       >
@@ -35,9 +35,9 @@ export function StickyMobileBar() {
           className={cn(
             "group relative flex h-12 items-center justify-center gap-2",
             "overflow-hidden rounded-xl",
-            "bg-[#302644] text-sm font-semibold text-white",
+            "bg-[#171717] text-sm font-semibold text-white",
             "transition-all duration-300",
-            "hover:bg-[#403354] active:scale-[0.97]",
+            "hover:bg-[#292927] active:scale-[0.97]",
           )}
         >
           <span
@@ -64,10 +64,10 @@ export function StickyMobileBar() {
           className={cn(
             "group relative flex h-12 items-center justify-center gap-2",
             "overflow-hidden rounded-xl",
-            "border border-[#9673D8]/20",
-            "bg-[#EDE5FA] text-sm font-bold text-[#302644]",
+            "border border-[#8A6C05]/20",
+            "bg-[#FFF9E5] text-sm font-bold text-[#171717]",
             "transition-all duration-300",
-            "hover:bg-[#E3D7F7] active:scale-[0.97]",
+            "hover:bg-[#FBE17D] active:scale-[0.97]",
           )}
         >
           <span
@@ -85,7 +85,7 @@ export function StickyMobileBar() {
           <span className="relative">{site.cta.whatsapp}</span>
           <span
             aria-hidden="true"
-            className="absolute right-2 top-2 size-1.5 rounded-full bg-[#9673D8]"
+            className="absolute right-2 top-2 size-1.5 rounded-full bg-[#8A6C05]"
           />
         </a>
       </div>
@@ -108,13 +108,13 @@ export function FloatingWhatsApp() {
       className={cn(
         "group fixed bottom-7 right-7 z-40 hidden lg:flex",
         "items-center gap-3 rounded-full",
-        "border border-white/10 bg-[#302644]/95",
+        "border border-white/10 bg-[#171717]/95",
         "py-3 pl-5 pr-3 text-white",
-        "shadow-[0_16px_50px_-18px_rgba(48,38,68,0.65)]",
+        "shadow-[0_16px_50px_-18px_rgba(23,23,23,0.65)]",
         "backdrop-blur-2xl",
         "transition-all duration-500 ease-out",
-        "hover:-translate-y-1 hover:border-[#9673D8]/60",
-        "hover:shadow-[0_20px_60px_-18px_rgba(48,38,68,0.75)]",
+        "hover:-translate-y-1 hover:border-[#8A6C05]/60",
+        "hover:shadow-[0_20px_60px_-18px_rgba(23,23,23,0.75)]",
       )}
     >
       {/* Text */}
@@ -131,7 +131,7 @@ export function FloatingWhatsApp() {
       <span
         className={cn(
           "relative grid size-11 place-items-center rounded-full",
-          "bg-[#EDE5FA] text-[#302644]",
+          "bg-[#FFF9E5] text-[#171717]",
           "transition-all duration-300",
           "group-hover:rotate-[-8deg] group-hover:scale-105",
         )}
@@ -141,7 +141,7 @@ export function FloatingWhatsApp() {
           aria-hidden="true"
           className={cn(
             "absolute -right-0.5 -top-0.5 size-3 rounded-full",
-            "border-2 border-[#302644] bg-[#B8A0EB]",
+            "border-2 border-[#171717] bg-[#F7C928]",
           )}
         />
       </span>

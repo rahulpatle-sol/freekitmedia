@@ -15,7 +15,7 @@ const initialState: ContactState = {
 };
 
 const inputClasses =
-  "h-14 w-full rounded-xl border border-[#171517]/10 bg-white/80 px-4 text-[15px] text-[#171517] outline-none transition-all duration-300 placeholder:text-[#171517]/40 hover:border-[#8646FF]/30 focus:border-[#8646FF] focus:bg-white focus:ring-4 focus:ring-[#8646FF]/10";
+  "h-14 w-full rounded-xl border border-[#171517]/10 bg-white/80 px-4 text-[15px] text-[#171517] outline-none transition-all duration-300 placeholder:text-[#171517]/40 hover:border-[#8A6C05]/30 focus:border-[#8A6C05] focus:bg-white focus:ring-4 focus:ring-[#8A6C05]/10";
 
 const errorText =
   "mt-2 pl-1 text-xs font-medium text-red-600";
@@ -27,7 +27,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="group inline-flex h-14 w-full items-center justify-center gap-3 rounded-xl bg-[#171517] px-7 font-semibold text-white shadow-sm transition-all duration-300 hover:bg-[#8646FF] hover:shadow-[0_10px_30px_rgba(134,70,255,0.22)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8646FF] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+      className="group inline-flex h-14 w-full items-center justify-center gap-3 rounded-xl bg-[#171517] px-7 font-semibold text-white shadow-sm transition-all duration-300 hover:bg-[#8A6C05] hover:shadow-[0_10px_30px_rgba(247,201,40,0.22)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8A6C05] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
     >
       {pending ? "Sending your request..." : site.cta.submitAudit}
 
@@ -56,14 +56,14 @@ export function ContactForm() {
     return (
       <div
         role="status"
-        className="relative isolate overflow-hidden rounded-3xl border border-[#8646FF]/15 bg-white p-7 shadow-[0_15px_50px_rgba(23,21,23,0.05)] sm:p-9"
+        className="relative isolate overflow-hidden rounded-3xl border border-[#8A6C05]/15 bg-white p-7 shadow-[0_15px_50px_rgba(23,21,23,0.05)] sm:p-9"
       >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-16 -top-16 -z-10 size-48 rounded-full bg-[#8646FF]/10 blur-3xl"
+          className="pointer-events-none absolute -right-16 -top-16 -z-10 size-48 rounded-full bg-[#8A6C05]/10 blur-3xl"
         />
 
-        <div className="flex size-14 items-center justify-center rounded-2xl bg-[#8646FF]/10 text-[#7040D5]">
+        <div className="flex size-14 items-center justify-center rounded-2xl bg-[#8A6C05]/10 text-[#8A6C05]">
           <Icon name="badgeCheck" className="size-7" />
         </div>
 
@@ -83,7 +83,7 @@ export function ContactForm() {
           )}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-[#171517]/10 bg-white px-5 py-3 text-sm font-semibold text-[#171517] transition-all duration-300 hover:border-[#8646FF]/30 hover:bg-[#8646FF]/5 hover:text-[#7040D5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8646FF]"
+          className="mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-[#171517]/10 bg-white px-5 py-3 text-sm font-semibold text-[#171517] transition-all duration-300 hover:border-[#8A6C05]/30 hover:bg-[#8A6C05]/5 hover:text-[#8A6C05] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8A6C05]"
         >
           <Icon name="whatsapp" className="size-4" />
           {site.cta.whatsapp}
@@ -98,12 +98,12 @@ export function ContactForm() {
       {/* Subtle background glow */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-10 -top-10 -z-10 size-40 rounded-full bg-[#8646FF]/10 blur-3xl"
+        className="pointer-events-none absolute -right-10 -top-10 -z-10 size-40 rounded-full bg-[#8A6C05]/10 blur-3xl"
       />
 
       <div className="rounded-3xl border border-[#171517]/10 bg-white/85 p-5 shadow-[0_15px_60px_rgba(23,21,23,0.045)] backdrop-blur-xl sm:p-8 lg:p-9">
         <div className="mb-7">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#7040D5]">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8A6C05]">
             Let’s get started
           </p>
 
@@ -137,7 +137,7 @@ export function ContactForm() {
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-[#7040D5] underline-offset-4 hover:underline"
+              className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-[#8A6C05] underline-offset-4 hover:underline"
             >
               <Icon name="whatsapp" className="size-4" />
               {site.cta.whatsapp}
@@ -158,7 +158,7 @@ export function ContactForm() {
               className="mb-2 block text-sm font-semibold text-[#171517]"
             >
               Your name
-              <span className="ml-1 text-[#8646FF]">*</span>
+              <span className="ml-1 text-[#8A6C05]">*</span>
             </label>
 
             <input
@@ -197,7 +197,7 @@ export function ContactForm() {
               className="mb-2 block text-sm font-semibold text-[#171517]"
             >
               Mobile number
-              <span className="ml-1 text-[#8646FF]">*</span>
+              <span className="ml-1 text-[#8A6C05]">*</span>
             </label>
 
             <input
@@ -238,7 +238,7 @@ export function ContactForm() {
               className="mb-2 block text-sm font-semibold text-[#171517]"
             >
               What type of business do you run?
-              <span className="ml-1 text-[#8646FF]">*</span>
+              <span className="ml-1 text-[#8A6C05]">*</span>
             </label>
 
 
@@ -259,10 +259,10 @@ export function ContactForm() {
     "bg-white/80 px-4 pr-12",
     "text-[15px] text-[#171517]",
     "outline-none transition-all duration-300",
-    "hover:border-[#8646FF]/40",
-    "focus:border-[#8646FF]",
+    "hover:border-[#8A6C05]/40",
+    "focus:border-[#8A6C05]",
     "focus:bg-white focus:ring-4",
-    "focus:ring-[#8646FF]/10",
+    "focus:ring-[#8A6C05]/10",
     "[&>option]:bg-white",
     "[&>option]:text-[#171517]",
     !state.errors?.businessType &&
@@ -317,7 +317,7 @@ export function ContactForm() {
           </div>
 
           <div className="flex items-start gap-2 border-t border-[#171517]/[0.07] pt-4">
-            <span className="mt-0.5 text-[#7040D5]">
+            <span className="mt-0.5 text-[#8A6C05]">
               <Icon
                 name="badgeCheck"
                 className="size-4"

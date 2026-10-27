@@ -4,15 +4,15 @@ import { cn } from "@/lib/utils";
 import type { VisualKind } from "@/content/service-pages";
 
 const WHITE = "#FFFFFF";
-const PLUM = "#302644";
-const PLUM_DEEP = "#211B2E";
-const PURPLE = "#9673D8";
-const PURPLE_MID = "#8060BB";
-const PURPLE_SOFT = "#C4B5FD";
-const PURPLE_MIST = "#F1ECF9";
-const LINE = "#E9E2F3";
+const PLUM = "#171717";
+const PLUM_DEEP = "#171717";
+const PURPLE = "#8A6C05";
+const PURPLE_MID = "#8A6C05";
+const PURPLE_SOFT = "#F7C928";
+const PURPLE_MIST = "#FFF9E5";
+const LINE = "#EAE7DF";
 const YELLOW = "#F7C928";
-const MUTE = "#746C83";
+const MUTE = "#55524C";
 
 function Card({
   x,

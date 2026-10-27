@@ -52,7 +52,11 @@ async function Content({ slugPromise }: { slugPromise: Promise<Params> }) {
           eyebrow: `Partner — ${entry.industry}`,
           title: entry.name,
           intro: entry.oneLine,
-          chips: [entry.industry, entry.city],
+          chips: [
+            entry.industry,
+            entry.city,
+            ...(entry.franchise ? ["Franchise"] : []),
+          ],
           blocks: [
             { type: "heading", text: "Humne kya kiya", level: 2 },
             { type: "text", text: entry.whatWeDid },

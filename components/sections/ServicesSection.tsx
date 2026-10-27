@@ -79,13 +79,13 @@ export function ServiceHoverPreview() {
       >
         {/* Editorial header */}
         <div className="mx-auto max-w-[1600px] px-5 sm:px-8 lg:px-12">
-          <div className="flex items-center justify-between gap-4 border-t border-black/20 py-4 text-[9px] font-semibold uppercase tracking-[0.14em] sm:text-[11px]">
-            <span>Marketing Studio®</span>
+          {/* <div className="flex items-center justify-between gap-4 border-t border-black/20 py-4 text-[9px] font-semibold uppercase tracking-[0.14em] sm:text-[11px]">
+
             <span className="hidden sm:block">
               Strategy, design & technology
             </span>
             <span>Services / 0{services.length}</span>
-          </div>
+          </div> */}
 
           {/* Main typography layout */}
           <div className="grid gap-12 pt-12 lg:grid-cols-12 lg:gap-8 lg:pt-16">
@@ -95,20 +95,13 @@ export function ServiceHoverPreview() {
               </p>
 
               <h2 className="mt-7 font-display text-[clamp(3.5rem,8vw,8rem)] font-black uppercase leading-[0.79] tracking-[-0.075em]">
-                Poora
+                What we do
                 <br />
-                marketing
-                <br />
-                department,
-                <br />
-                ek hi chhat
-                <br />
-                ke neeche<span className="text-[#A69C82]">.</span>
+                Best
               </h2>
 
               <p className="mt-8 max-w-xs text-sm leading-relaxed text-black/55 sm:text-base">
-                Har service alag. Har effort connected.
-                Sab kuch tumhare brand ki growth ke liye.
+             Content se leads taq har service ek dusre se connected
               </p>
             </div>
 

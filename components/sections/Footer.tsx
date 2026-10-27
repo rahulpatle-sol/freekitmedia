@@ -46,28 +46,28 @@ const glassPanel =
   "rounded-2xl border border-white/[0.10] bg-white/[0.045] backdrop-blur-2xl";
 
 const footerLink =
-  "inline-flex text-sm leading-6 text-white/55 transition-colors duration-300 hover:text-[#D0BDFB] focus-visible:text-[#D0BDFB] focus-visible:outline-none";
+  "inline-flex text-sm leading-6 text-white/55 transition-colors duration-300 hover:text-[#FBE17D] focus-visible:text-[#FBE17D] focus-visible:outline-none";
 
 export function Footer() {
   return (
     <footer
       id="footer"
-      className="relative isolate overflow-hidden bg-[#171321] text-[#FDFCFF]"
+      className="relative isolate overflow-hidden bg-[#171717] text-[#FFFFFF]"
     >
       {/* Liquid-glass ambient lighting */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-64 left-1/2 -z-10 h-[34rem] w-[52rem] -translate-x-1/2 rounded-full bg-[#9673D8]/20 blur-[120px]"
+        className="pointer-events-none absolute -top-64 left-1/2 -z-10 h-[34rem] w-[52rem] -translate-x-1/2 rounded-full bg-[#8A6C05]/20 blur-[120px]"
       />
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -bottom-48 -left-32 -z-10 size-[28rem] rounded-full bg-[#8060BB]/15 blur-[110px]"
+        className="pointer-events-none absolute -bottom-48 -left-32 -z-10 size-[28rem] rounded-full bg-[#8A6C05]/15 blur-[110px]"
       />
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-40 top-[45%] -z-10 size-[30rem] rounded-full bg-[#C4B5FD]/[0.07] blur-[120px]"
+        className="pointer-events-none absolute -right-40 top-[45%] -z-10 size-[30rem] rounded-full bg-[#F7C928]/[0.07] blur-[120px]"
       />
 
       <Container className="py-12 sm:py-16 lg:py-20">
@@ -77,12 +77,12 @@ export function Footer() {
         >
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#C4B5FD]/[0.12] via-transparent to-[#9673D8]/[0.06]"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#F7C928]/[0.12] via-transparent to-[#8A6C05]/[0.06]"
           />
 
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -right-16 -top-24 size-64 rounded-full border border-[#C4B5FD]/10 sm:-right-8 sm:size-80"
+            className="pointer-events-none absolute -right-16 -top-24 size-64 rounded-full border border-[#F7C928]/10 sm:-right-8 sm:size-80"
           />
 
           <div
@@ -92,15 +92,15 @@ export function Footer() {
 
           <div className="relative flex flex-col justify-between gap-7 sm:flex-row sm:items-end sm:gap-8">
             <div className="max-w-2xl">
-              <p className="inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#D0BDFB] sm:text-xs">
-                <span className="size-1.5 rounded-full bg-[#C4B5FD]" />
+              <p className="inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#FBE17D] sm:text-xs">
+                <span className="size-1.5 rounded-full bg-[#F7C928]" />
                 Have a project in mind?
               </p>
 
               <h2 className="font-display mt-5 text-[clamp(2.7rem,6vw,5.5rem)] font-extrabold leading-[0.92] tracking-[-0.075em]">
                 Let&apos;s make
                 <br />
-                <span className="bg-gradient-to-r from-[#D9CBFF] via-[#BFA6F5] to-[#9673D8] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#FBE17D] via-[#F7C928] to-[#8A6C05] bg-clip-text text-transparent">
                   something matter.
                 </span>
               </h2>
@@ -112,7 +112,7 @@ export function Footer() {
 
             <Link
               href="/#contact"
-              className="group inline-flex min-h-12 w-full shrink-0 items-center justify-center gap-3 rounded-full border border-[#C4B5FD]/25 bg-[#C4B5FD]/10 px-6 text-sm font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-xl transition-all duration-300 hover:border-[#C4B5FD]/50 hover:bg-[#9673D8]/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C4B5FD] sm:w-auto"
+              className="group inline-flex min-h-12 w-full shrink-0 items-center justify-center gap-3 rounded-full border border-[#F7C928]/25 bg-[#F7C928]/10 px-6 text-sm font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-xl transition-all duration-300 hover:border-[#F7C928]/50 hover:bg-[#8A6C05]/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7C928] sm:w-auto"
             >
               {site.cta.audit}
               <Icon
@@ -130,7 +130,7 @@ export function Footer() {
             <div className="min-w-0 lg:col-span-4">
               <Link
                 href="/"
-                className="inline-flex rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-[#C4B5FD]"
+                className="inline-flex rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-[#F7C928]"
                 aria-label={site.name}
               >
                 <Logo variant="light" />
@@ -153,7 +153,7 @@ export function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.label}
-                      className="grid size-10 place-items-center rounded-full border border-white/10 bg-white/[0.04] text-white/60 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#C4B5FD]/40 hover:bg-[#9673D8]/15 hover:text-[#D0BDFB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C4B5FD]"
+                      className="grid size-10 place-items-center rounded-full border border-white/10 bg-white/[0.04] text-white/60 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#F7C928]/40 hover:bg-[#8A6C05]/15 hover:text-[#FBE17D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7C928]"
                     >
                       <Icon
                         name={social.icon}
@@ -167,7 +167,7 @@ export function Footer() {
 
             {/* Services */}
             <nav aria-label="Services" className="min-w-0 lg:col-span-2">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#D0BDFB]/80">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#FBE17D]/80">
                 Services
               </p>
 
@@ -187,7 +187,7 @@ export function Footer() {
 
             {/* Discover */}
             <nav aria-label="Discover" className="min-w-0 lg:col-span-2">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#D0BDFB]/80">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#FBE17D]/80">
                 Discover
               </p>
 
@@ -240,7 +240,7 @@ export function Footer() {
 
             {/* Contact */}
             <div className="min-w-0 lg:col-span-4">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#D0BDFB]/80">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#FBE17D]/80">
                 Get in touch
               </p>
 
@@ -250,7 +250,7 @@ export function Footer() {
                     <>
                       <Icon
                         name={item.icon}
-                        className="mt-0.5 size-4 shrink-0 text-[#C4B5FD]"
+                        className="mt-0.5 size-4 shrink-0 text-[#F7C928]"
                       />
                       <span className="min-w-0 break-words">
                         {item.label}
@@ -279,7 +279,7 @@ export function Footer() {
                               ? "noopener noreferrer"
                               : undefined
                           }
-                          className="flex items-start gap-3 rounded-lg px-2 py-3 text-sm leading-6 text-white/55 transition-colors hover:bg-white/[0.04] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C4B5FD]"
+                          className="flex items-start gap-3 rounded-lg px-2 py-3 text-sm leading-6 text-white/55 transition-colors hover:bg-white/[0.04] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7C928]"
                         >
                           {content}
                         </a>
@@ -309,7 +309,7 @@ export function Footer() {
 
           <a
             href="#top"
-            className="group inline-flex w-fit items-center gap-2 transition-colors hover:text-[#D0BDFB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C4B5FD]"
+            className="group inline-flex w-fit items-center gap-2 transition-colors hover:text-[#FBE17D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7C928]"
           >
             Back to top
             <Icon

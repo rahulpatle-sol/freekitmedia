@@ -16,31 +16,31 @@ export function ServiceFaq({ faqs }: { faqs: FaqItem[] }) {
   return (
     <div className="grid min-w-0 gap-10 lg:grid-cols-[0.8fr_1.4fr] lg:gap-16">
       <div className="min-w-0 lg:sticky lg:top-28 lg:self-start">
-        <p className="flex items-center gap-2 text-xs font-semibold text-[#8060BB]">
-          <span className="size-2 rounded-full bg-[#9673D8]" />
+        <p className="flex items-center gap-2 text-xs font-semibold text-[#8A6C05]">
+          <span className="size-2 rounded-full bg-[#8A6C05]" />
           Straight answers
         </p>
 
-        <h2 className="font-display mt-5 text-3xl font-extrabold leading-tight tracking-[-0.045em] text-[#29243A] sm:text-4xl">
+        <h2 className="font-display mt-5 text-3xl font-extrabold leading-tight tracking-[-0.045em] text-[#171717] sm:text-4xl">
           Questions before
           <br />
           you decide.
         </h2>
 
-        <p className="mt-5 max-w-sm text-sm leading-7 text-[#746C83] sm:text-base">
+        <p className="mt-5 max-w-sm text-sm leading-7 text-[#55524C] sm:text-base">
           The specific ones for this service. More about the audit, pricing and
           reporting on the{" "}
           <Link
             href="/#faq"
-            className="font-semibold text-[#8060BB] underline decoration-[#8060BB]/40 underline-offset-4 transition-colors hover:text-[#29243A]"
+            className="font-semibold text-[#8A6C05] underline decoration-[#8A6C05]/40 underline-offset-4 transition-colors hover:text-[#171717]"
           >
             main FAQ
           </Link>
           .
         </p>
 
-        <div className="mt-7 border-t border-[#302644]/15 pt-5">
-          <p className="text-xs font-medium text-[#746C83]">
+        <div className="mt-7 border-t border-[#171717]/15 pt-5">
+          <p className="text-xs font-medium text-[#55524C]">
             Still thinking it through?
           </p>
 
@@ -48,7 +48,7 @@ export function ServiceFaq({ faqs }: { faqs: FaqItem[] }) {
             href={whatsappLink(site.phone.primary.number, site.whatsapp.ctaText)}
             target="_blank"
             rel="noopener noreferrer"
-            className="group mt-3 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#302644] px-5 text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#8060BB] focus-visible:outline-2 focus-visible:outline-[#9673D8] focus-visible:outline-offset-2"
+            className="group mt-3 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#171717] px-5 text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#8A6C05] focus-visible:outline-2 focus-visible:outline-[#8A6C05] focus-visible:outline-offset-2"
           >
             {site.cta.whatsapp}
             <Icon
@@ -60,7 +60,7 @@ export function ServiceFaq({ faqs }: { faqs: FaqItem[] }) {
       </div>
 
       <div className="min-w-0">
-        <div className="overflow-hidden rounded-2xl border border-[#302644]/10 bg-white">
+        <div className="overflow-hidden rounded-2xl border border-[#171717]/10 bg-white">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             const answerId = `service-faq-answer-${index}`;
@@ -70,8 +70,8 @@ export function ServiceFaq({ faqs }: { faqs: FaqItem[] }) {
               <article
                 key={faq.q}
                 className={cn(
-                  "border-b border-[#302644]/10 last:border-b-0",
-                  isOpen && "bg-[#F1ECF9]",
+                  "border-b border-[#171717]/10 last:border-b-0",
+                  isOpen && "bg-[#FFF9E5]",
                 )}
               >
                 <h3>
@@ -81,14 +81,14 @@ export function ServiceFaq({ faqs }: { faqs: FaqItem[] }) {
                     aria-expanded={isOpen}
                     aria-controls={answerId}
                     onClick={() => setOpenIndex(isOpen ? null : index)}
-                    className="group flex min-h-[72px] w-full items-center gap-3 px-4 py-5 text-left outline-none transition-colors hover:bg-[#F8F5FD] focus-visible:bg-[#F1ECF9] sm:gap-4 sm:px-6 sm:py-6"
+                    className="group flex min-h-[72px] w-full items-center gap-3 px-4 py-5 text-left outline-none transition-colors hover:bg-[#F7F6F2] focus-visible:bg-[#FFF9E5] sm:gap-4 sm:px-6 sm:py-6"
                   >
                     <span
                       className={cn(
                         "min-w-0 flex-1 font-display text-base font-bold leading-snug tracking-[-0.025em] transition-colors sm:text-lg",
                         isOpen
-                          ? "text-[#8060BB]"
-                          : "text-[#29243A] group-hover:text-[#8060BB]",
+                          ? "text-[#8A6C05]"
+                          : "text-[#171717] group-hover:text-[#8A6C05]",
                       )}
                     >
                       {faq.q}
@@ -98,8 +98,8 @@ export function ServiceFaq({ faqs }: { faqs: FaqItem[] }) {
                       className={cn(
                         "grid size-9 shrink-0 place-items-center rounded-full border transition-all duration-300 sm:size-10",
                         isOpen
-                          ? "rotate-45 border-[#8060BB] bg-[#8060BB] text-white"
-                          : "border-[#302644]/15 text-[#746C83] group-hover:border-[#9673D8] group-hover:text-[#8060BB]",
+                          ? "rotate-45 border-[#8A6C05] bg-[#8A6C05] text-white"
+                          : "border-[#171717]/15 text-[#55524C] group-hover:border-[#8A6C05] group-hover:text-[#8A6C05]",
                       )}
                     >
                       <Icon name="plus" className="size-4" />
@@ -121,7 +121,7 @@ export function ServiceFaq({ faqs }: { faqs: FaqItem[] }) {
                   )}
                 >
                   <div className="overflow-hidden">
-                    <p className="pb-6 pl-4 pr-5 text-sm leading-7 text-[#746C83] sm:pb-7 sm:pl-6 sm:pr-7 sm:text-base">
+                    <p className="pb-6 pl-4 pr-5 text-sm leading-7 text-[#55524C] sm:pb-7 sm:pl-6 sm:pr-7 sm:text-base">
                       {faq.a}
                     </p>
                   </div>

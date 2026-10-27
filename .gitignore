@@ -43,3 +43,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local video assets can be large; keep them out of new commits.
+*.mp4
+*.mov
+*.webm

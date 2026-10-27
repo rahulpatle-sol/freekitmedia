@@ -12,8 +12,8 @@ import { Logo } from "@/components/ui/Logo";
 import { services } from "@/content/services";
 import { site } from "@/content/site";
 
-const YELLOW = "#FFF21A";
-const LAVENDER = "#8646FF";
+const YELLOW = "#F7C928";
+const BRAND_GOLD = "#8A6C05";
 const CHARCOAL = "#171517";
 
 function Broken404Illustration() {
@@ -21,12 +21,12 @@ function Broken404Illustration() {
     <div className="error-visual relative mx-auto w-full max-w-[540px]">
       <div
         aria-hidden="true"
-        className="error-glow absolute inset-[15%] rounded-full bg-[#8646FF]/20 blur-[85px]"
+        className="error-glow absolute inset-[15%] rounded-full bg-[#8A6C05]/20 blur-[85px]"
       />
 
       <div
         aria-hidden="true"
-        className="error-glow-secondary absolute right-[15%] top-[15%] h-24 w-24 rounded-full bg-[#FFF21A]/20 blur-3xl"
+        className="error-glow-secondary absolute right-[15%] top-[15%] h-24 w-24 rounded-full bg-[#F7C928]/20 blur-3xl"
       />
 
       <svg
@@ -44,7 +44,7 @@ function Broken404Illustration() {
           cy="244"
           rx="215"
           ry="155"
-          stroke={LAVENDER}
+          stroke={BRAND_GOLD}
           strokeOpacity=".32"
           strokeWidth="1.5"
           strokeDasharray="5 10"
@@ -66,7 +66,7 @@ function Broken404Illustration() {
         <g className="error-spark">
           <path
             d="M78 115L91 128M91 115L78 128"
-            stroke={LAVENDER}
+            stroke={BRAND_GOLD}
             strokeWidth="3"
             strokeLinecap="round"
           />
@@ -75,7 +75,7 @@ function Broken404Illustration() {
         <g className="error-spark">
           <path
             d="M425 113V145M409 129H441"
-            stroke={LAVENDER}
+            stroke={BRAND_GOLD}
             strokeWidth="3"
             strokeLinecap="round"
           />
@@ -86,7 +86,7 @@ function Broken404Illustration() {
           fill={YELLOW}
         />
 
-        <circle cx="414" cy="290" r="4" fill={LAVENDER} />
+        <circle cx="414" cy="290" r="4" fill={BRAND_GOLD} />
         <circle cx="365" cy="94" r="3" fill={YELLOW} />
         <circle cx="424" cy="339" r="5" fill={YELLOW} />
 
@@ -116,8 +116,8 @@ function Broken404Illustration() {
           {/* Right panel */}
           <path
             d="M267 126H387Q403 126 403 142V341Q403 357 387 357H267L281 323L265 286L281 248L266 213L280 177L267 126Z"
-            fill="#F0E9FF"
-            stroke={LAVENDER}
+            fill="#FFF9E5"
+            stroke={BRAND_GOLD}
             strokeOpacity=".3"
             strokeWidth="1.5"
           />
@@ -133,7 +133,7 @@ function Broken404Illustration() {
             fill={CHARCOAL}
           />
 
-          <circle cx="137" cy="139" r="4" fill={LAVENDER} />
+          <circle cx="137" cy="139" r="4" fill={BRAND_GOLD} />
           <circle cx="151" cy="139" r="4" fill={YELLOW} />
           <circle cx="165" cy="139" r="4" fill="#FFFFFF" fillOpacity=".6" />
 
@@ -165,7 +165,7 @@ function Broken404Illustration() {
           </text>
 
           {/* Error face */}
-          <circle cx="260" cy="231" r="38" fill={LAVENDER} />
+          <circle cx="260" cy="231" r="38" fill={BRAND_GOLD} />
 
           <path
             d="M247 219L255 227M255 219L247 227M266 219L274 227M274 219L266 227"
@@ -185,7 +185,7 @@ function Broken404Illustration() {
           <path
             className="error-crack"
             d="M257 126L270 165L252 187L269 211L251 236L269 260L251 288L264 315L251 357"
-            stroke={LAVENDER}
+            stroke={BRAND_GOLD}
             strokeWidth="4"
             strokeLinejoin="round"
           />
@@ -201,8 +201,8 @@ function Broken404Illustration() {
           <path
             className="error-fragment"
             d="M83 320L111 301L126 325L106 341Z"
-            fill="#EDE3FF"
-            stroke={LAVENDER}
+            fill="#FFF9E5"
+            stroke={BRAND_GOLD}
             strokeOpacity=".65"
           />
 
@@ -229,7 +229,7 @@ function Broken404Illustration() {
           <path
             className="error-fragment"
             d="M380 405L391 393L401 407L390 414Z"
-            fill={LAVENDER}
+            fill={BRAND_GOLD}
             fillOpacity=".6"
           />
 
@@ -245,7 +245,7 @@ function Broken404Illustration() {
             strokeOpacity=".1"
           />
 
-          <circle cx="198" cy="410" r="4" fill={LAVENDER} />
+          <circle cx="198" cy="410" r="4" fill={BRAND_GOLD} />
 
           <text
             x="211"
@@ -394,7 +394,7 @@ export default function NotFound() {
       // Crack shimmer
       gsap.to(".error-crack", {
         opacity: 0.65,
-        filter: "drop-shadow(0px 0px 5px #8646FF)",
+        filter: "drop-shadow(0px 0px 5px #8A6C05)",
         duration: 1.8,
         ease: "sine.inOut",
         repeat: -1,
@@ -448,7 +448,7 @@ export default function NotFound() {
 
           <Link
             href="/contact"
-            className="link-underline text-sm font-semibold text-ink decoration-[#8646FF] decoration-2 underline-offset-4"
+            className="link-underline text-sm font-semibold text-ink decoration-[#8A6C05] decoration-2 underline-offset-4"
           >
             {site.cta.audit}
           </Link>
@@ -457,8 +457,8 @@ export default function NotFound() {
         {/* Hero */}
         <section className="grid flex-1 items-center gap-8 py-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-6 lg:py-16">
           <div className="min-w-0">
-            <p className="error-eyebrow mb-5 inline-flex items-center gap-2 rounded-full border border-[#8646FF]/20 bg-[#8646FF]/[0.07] px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#8646FF]">
-              <span className="h-2 w-2 rounded-full bg-[#FFF21A] ring-1 ring-[#171517]/10" />
+            <p className="error-eyebrow mb-5 inline-flex items-center gap-2 rounded-full border border-[#8A6C05]/20 bg-[#8A6C05]/[0.07] px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#8A6C05]">
+              <span className="h-2 w-2 rounded-full bg-[#F7C928] ring-1 ring-[#171517]/10" />
               Oops! Page not found
             </p>
 
@@ -467,7 +467,7 @@ export default function NotFound() {
 
               <span
                 aria-hidden="true"
-                className="mx-[0.06em] inline-block rounded-md bg-[#FFF21A] px-[0.14em] text-[#171517]"
+                className="mx-[0.06em] inline-block rounded-md bg-[#F7C928] px-[0.14em] text-[#171517]"
               >
                 0
               </span>
@@ -477,7 +477,7 @@ export default function NotFound() {
 
             <h1 className="error-heading font-display mt-7 max-w-2xl text-h1 leading-[1.08] font-extrabold tracking-[-0.045em] text-ink">
               Looks like this page{" "}
-              <span className="box-decoration-clone bg-[#FFF21A] px-2.5 text-[#171517]">
+              <span className="box-decoration-clone bg-[#F7C928] px-2.5 text-[#171517]">
                 went missing.
               </span>
             </h1>
@@ -499,14 +499,14 @@ export default function NotFound() {
 
               <Link
                 href="/blog"
-                className="link-underline px-2 text-sm font-medium text-[#8646FF] decoration-[#8646FF] underline-offset-4"
+                className="link-underline px-2 text-sm font-medium text-[#8A6C05] decoration-[#8A6C05] underline-offset-4"
               >
                 Explore our blog
               </Link>
             </div>
 
             <div className="mt-10 flex items-center gap-3 text-sm text-grey-600">
-              <span className="h-px w-10 bg-[#8646FF]" />
+              <span className="h-px w-10 bg-[#8A6C05]" />
               <span>Lost? Let’s find your way back.</span>
             </div>
           </div>
@@ -522,7 +522,7 @@ export default function NotFound() {
           aria-label="Explore our services"
           className="error-services border-t border-ink/10 pt-8 pb-4 sm:pb-8"
         >
-          <p className="text-xs font-semibold tracking-[0.18em] text-[#8646FF] uppercase">
+          <p className="text-xs font-semibold tracking-[0.18em] text-[#8A6C05] uppercase">
             Explore what we do
           </p>
 
@@ -531,21 +531,21 @@ export default function NotFound() {
               <li key={service.slug}>
                 <Link
                   href={`/services/${service.slug}`}
-                  className="group flex items-center justify-between gap-4 border-t border-ink/10 py-4 transition-colors duration-300 hover:border-[#8646FF]/50"
+                  className="group flex items-center justify-between gap-4 border-t border-ink/10 py-4 transition-colors duration-300 hover:border-[#8A6C05]/50"
                 >
                   <span className="flex items-center gap-3">
-                    <span className="font-display text-sm font-bold text-[#8646FF]">
+                    <span className="font-display text-sm font-bold text-[#8A6C05]">
                       {String(index + 1).padStart(2, "0")}
                     </span>
 
-                    <span className="font-display text-sm font-bold tracking-tight text-ink transition-colors duration-300 group-hover:text-[#8646FF]">
+                    <span className="font-display text-sm font-bold tracking-tight text-ink transition-colors duration-300 group-hover:text-[#8A6C05]">
                       {service.title}
                     </span>
                   </span>
 
                   <Icon
                     name="arrowRight"
-                    className="size-4 text-ink/40 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-[#8646FF]"
+                    className="size-4 text-ink/40 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-[#8A6C05]"
                   />
                 </Link>
               </li>

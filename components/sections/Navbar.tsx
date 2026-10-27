@@ -214,10 +214,10 @@ export function Navbar() {
                           "text-ink/65",
                           "transition-all duration-300 ease-out",
                           "hover:-translate-y-0.5",
-                          "hover:bg-[#8646FF]/[0.07]",
-                          "hover:text-[#8646FF]",
+                          "hover:bg-[#8A6C05]/[0.07]",
+                          "hover:text-[#8A6C05]",
                           "focus-visible:outline-none",
-                          "focus-visible:ring-2 focus-visible:ring-[#8646FF]/40",
+                          "focus-visible:ring-2 focus-visible:ring-[#8A6C05]/40",
                           "motion-reduce:transform-none motion-reduce:transition-none",
                         )}
                       >
@@ -225,13 +225,13 @@ export function Navbar() {
                           {link.label}
                         </span>
 
-                        {/* Animated lavender underline */}
+                        {/* Animated yellow underline */}
                         <span
                           aria-hidden="true"
                           className={cn(
                             "absolute bottom-1.5 left-3 right-3",
                             "h-[2px] origin-center scale-x-0",
-                            "rounded-full bg-[#8646FF]",
+                            "rounded-full bg-[#8A6C05]",
                             "transition-transform duration-300 ease-out",
                             "group-hover:scale-x-100",
                             "group-focus-visible:scale-x-100",
@@ -266,10 +266,10 @@ export function Navbar() {
                 className={cn(
                   "grid size-11 place-items-center rounded-xl border",
                   "transition-all duration-300 ease-out md:hidden",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8646FF]/50",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8A6C05]/50",
                   open
                     ? "rotate-90 border-ink bg-ink text-paper"
-                    : "border-ink/15 bg-paper text-ink hover:border-[#8646FF]/50 hover:bg-[#8646FF]/[0.06] hover:text-[#8646FF]",
+                    : "border-ink/15 bg-paper text-ink hover:border-[#8A6C05]/50 hover:bg-[#8A6C05]/[0.06] hover:text-[#8A6C05]",
                   "motion-reduce:transform-none motion-reduce:transition-none",
                 )}
               >
@@ -325,12 +325,12 @@ export function Navbar() {
                         "group relative flex min-h-[76px]",
                         "items-center justify-between gap-4 py-4 sm:min-h-[94px]",
                         "transition-colors duration-300",
-                        "hover:bg-[#8646FF]/[0.04]",
+                        "hover:bg-[#8A6C05]/[0.04]",
                         "motion-reduce:transition-none",
                       )}
                     >
                       <span className="flex items-start gap-4 sm:gap-6">
-                        <span className="pt-2 font-mono text-[10px] text-[#8646FF] sm:text-xs">
+                        <span className="pt-2 font-mono text-[10px] text-[#8A6C05] sm:text-xs">
                           {String(index + 1).padStart(2, "0")}
                         </span>
 
@@ -342,7 +342,7 @@ export function Navbar() {
                             "text-ink",
                             "transition-all duration-300 ease-out",
                             "group-hover:translate-x-2",
-                            "group-hover:text-[#8646FF]",
+                            "group-hover:text-[#8A6C05]",
                             "motion-reduce:transform-none motion-reduce:transition-none",
                           )}
                         >
@@ -355,7 +355,7 @@ export function Navbar() {
                           "shrink-0 text-ink/35",
                           "transition-all duration-300 ease-out",
                           "group-hover:translate-x-1",
-                          "group-hover:text-[#8646FF]",
+                          "group-hover:text-[#8A6C05]",
                           "motion-reduce:transition-none",
                         )}
                       />

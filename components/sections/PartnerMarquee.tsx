@@ -44,16 +44,26 @@ export function PartnerMarquee() {
                   href={`/partners/${partner.slug}`}
                   tabIndex={duplicate ? -1 : undefined}
                   aria-label={`View our work with ${partner.name}`}
-                  className="flex h-full w-full items-center justify-center outline-offset-4"
+                  className="flex h-full w-full flex-col items-center justify-center gap-1 outline-offset-4"
                 >
-                  <Image
-                    src={partner.logo}
-                    alt={duplicate ? "" : `${partner.name} logo`}
-                    width={300}
-                    height={100}
-                    unoptimized
-                    className="max-h-10 w-full object-contain opacity-65 transition duration-300 hover:scale-105 hover:opacity-100 motion-reduce:transition-none sm:max-h-12"
-                  />
+                  {partner.logo && (
+                    <Image
+                      src={partner.logo}
+                      alt=""
+                      width={300}
+                      height={100}
+                      unoptimized
+                      className="max-h-8 w-full object-contain opacity-65 transition duration-300 hover:scale-105 hover:opacity-100 motion-reduce:transition-none sm:max-h-9"
+                    />
+                  )}
+                  <span className="text-center text-xs font-semibold text-[#171517] sm:text-sm">
+                    {partner.name}
+                    {partner.franchise && (
+                      <span className="ml-1 font-normal text-[#171517]/55">
+                        Franchise
+                      </span>
+                    )}
+                  </span>
                 </Link>
               </li>
             );

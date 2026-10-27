@@ -319,7 +319,7 @@ export function ProcessSection() {
       </Container>
 
       {/* Monthly report + transparency */}
-      <Container className="mt-12 grid gap-6 sm:mt-16 sm:gap-10 lg:grid-cols-2 lg:gap-16">
+      {/* <Container className="mt-12 grid gap-6 sm:mt-16 sm:gap-10 lg:grid-cols-2 lg:gap-16">
         <div
           data-reveal
           className="border border-ink/10 bg-mist p-6 sm:p-10"
@@ -363,7 +363,7 @@ export function ProcessSection() {
             {processData.honesty.line}
           </p>
         </div>
-      </Container>
+      </Container> */}
     </section>
   );
 }

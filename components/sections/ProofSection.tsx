@@ -15,12 +15,12 @@ export function ProofSection() {
     <section
       ref={sectionRef}
       id="proof"
-      className="overflow-hidden bg-[#F8F7FC] py-16 text-[#29243A] sm:py-20 lg:py-28"
+      className="overflow-hidden bg-[#F7F6F2] py-16 text-[#171717] sm:py-20 lg:py-28"
     >
       <Container>
         {/* Section heading */}
         <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex rounded-full border border-[#E9E2F3] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#9673D8]">
+          <span className="inline-flex rounded-full border border-[#EAE7DF] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#8A6C05]">
             Results &amp; client stories
           </span>
 
@@ -28,7 +28,7 @@ export function ProofSection() {
             {proof.headline}
           </h2>
 
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-[#746C83] sm:mt-5 sm:text-base sm:leading-8">
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-[#55524C] sm:mt-5 sm:text-base sm:leading-8">
             {proof.sub}
           </p>
         </div>
@@ -36,71 +36,66 @@ export function ProofSection() {
         {/* Results and testimonial: swipe on mobile, grid on desktop */}
         <div
           aria-label="Results and client testimonial"
-          className="mt-10 -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain px-5 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mt-14 sm:mx-0 sm:px-0 lg:mt-20 lg:grid lg:grid-cols-2 lg:overflow-visible lg:pb-0"
+          className="mt-10 -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain px-5 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mt-14 sm:mx-0 sm:gap-5 sm:px-0 lg:mt-16 lg:grid lg:grid-cols-2 lg:overflow-visible lg:pb-0"
         >
           {/* Result card */}
-          <article className="flex min-h-[300px] w-[88%] shrink-0 snap-start flex-col justify-between rounded-2xl border border-[#E9E2F3] bg-white p-6 sm:min-h-[350px] sm:p-8 lg:w-auto lg:p-10">
+          <article className="flex min-h-[320px] w-[88%] shrink-0 snap-start flex-col rounded-2xl border border-[#EAE7DF] bg-white p-6 sm:min-h-[340px] sm:p-8 lg:min-h-[360px] lg:w-auto lg:p-10">
             <div>
-              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#9673D8]">
+              <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#8A6C05]">
+                <span aria-hidden="true" className="size-2 rounded-full bg-[#F7C928]" />
                 {proof.result.tag}
               </span>
 
-              <h3 className="mt-6 break-words text-3xl font-semibold tracking-tight text-[#29243A] sm:text-4xl lg:text-5xl">
+              <h3 className="mt-8 break-words font-display text-[clamp(2.75rem,5vw,4.5rem)] font-extrabold leading-none tracking-[-0.065em] text-[#171717]">
                 {proof.result.value}
               </h3>
 
-              <p className="mt-4 text-sm leading-7 text-[#746C83] sm:text-base sm:leading-8">
+              <p className="mt-5 max-w-md text-base leading-7 text-[#55524C] sm:text-lg sm:leading-8">
                 {proof.result.line}
               </p>
             </div>
 
-            <div className="mt-8 border-t border-[#EEE9F5] pt-5">
-              <p className="text-sm font-medium text-[#9673D8]">
-                Focused on real business outcomes
+            <div className="mt-auto border-t border-[#EAE7DF] pt-5">
+              <p className="text-xs font-medium text-[#77766D]">Result for</p>
+              <p className="mt-1 font-semibold text-[#8A6C05]">
+                {proof.result.by}
               </p>
             </div>
           </article>
 
           {/* Client testimonial */}
-          <article className="flex min-h-[300px] w-[88%] shrink-0 snap-start flex-col justify-between rounded-2xl border border-[#E9E2F3] bg-[#F1ECF9] p-6 sm:min-h-[350px] sm:p-8 lg:w-auto lg:p-10">
+          <article className="flex min-h-[320px] w-[88%] shrink-0 snap-start flex-col rounded-2xl border border-[#EAE7DF] bg-[#FFF9E5] p-6 sm:min-h-[340px] sm:p-8 lg:min-h-[360px] lg:w-auto lg:p-10">
             <div>
-              <div
-                className="flex gap-1 text-lg text-[#9673D8]"
-                role="img"
-                aria-label="5 out of 5 stars"
-              >
-                {Array.from({ length: 5 }, (_, index) => (
-                  <span key={index} aria-hidden="true">
-                    ★
-                  </span>
-                ))}
-              </div>
+              <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#8A6C05]">
+                <span aria-hidden="true" className="size-2 rounded-full bg-[#F7C928]" />
+                Client story
+              </span>
 
-              <blockquote className="mt-6 text-xl font-medium leading-relaxed tracking-tight sm:mt-8 sm:text-2xl">
+              <blockquote className="mt-8 max-w-xl font-display text-xl font-semibold leading-relaxed tracking-[-0.025em] text-[#171717] sm:text-2xl sm:leading-relaxed lg:text-[1.7rem]">
                 “{proof.testimonial.quote}”
               </blockquote>
             </div>
 
-            <div className="mt-8 border-t border-[#DDD2EE] pt-5">
-              <p className="font-semibold text-[#29243A]">
+            <div className="mt-auto border-t border-[#EAE7DF] pt-5">
+              <p className="font-semibold text-[#171717]">
                 {proof.testimonial.by}
               </p>
 
-              <p className="mt-1 text-sm text-[#746C83]">
+              <p className="mt-1 text-sm leading-6 text-[#55524C]">
                 {proof.testimonial.role}
               </p>
             </div>
           </article>
         </div>
 
-        <p className="mt-2 text-xs text-[#91899F] lg:hidden">
+        <p className="mt-2 text-xs text-[#77766D] lg:hidden">
           Swipe to see more <span aria-hidden="true">→</span>
         </p>
 
         {/* Video testimonials */}
         <div className="mt-14 sm:mt-20">
           <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#9673D8]">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8A6C05]">
               Client experiences
             </p>
 
@@ -108,7 +103,7 @@ export function ProofSection() {
               Real stories. Real experiences.
             </h3>
 
-            <p className="mt-3 text-sm leading-7 text-[#746C83] sm:text-base">
+            <p className="mt-3 text-sm leading-7 text-[#55524C] sm:text-base">
               Hear directly from the people we work with.
             </p>
           </div>
@@ -120,9 +115,9 @@ export function ProofSection() {
             {proof.videoTestimonials.map((video) => (
               <article
                 key={video.src}
-                className="w-[84%] shrink-0 snap-start overflow-hidden rounded-2xl border border-[#E9E2F3] bg-white sm:w-auto"
+                className="w-[84%] shrink-0 snap-start overflow-hidden rounded-2xl border border-[#EAE7DF] bg-white sm:w-auto"
               >
-                <div className="overflow-hidden bg-[#EEE9F5]">
+                <div className="overflow-hidden bg-[#EAE7DF]">
                   <video
                     controls
                     playsInline
@@ -137,15 +132,15 @@ export function ProofSection() {
                 </div>
 
                 <div className="p-5 sm:p-6">
-                  <h4 className="font-semibold text-[#29243A]">
+                  <h4 className="font-semibold text-[#171717]">
                     {video.name}
                   </h4>
 
-                  <p className="mt-2 text-sm leading-6 text-[#746C83]">
+                  <p className="mt-2 text-sm leading-6 text-[#55524C]">
                     {video.role}
                   </p>
 
-                  <p className="mt-2 text-xs font-medium uppercase tracking-[0.12em] text-[#9673D8]">
+                  <p className="mt-2 text-xs font-medium uppercase tracking-[0.12em] text-[#8A6C05]">
                     {video.city}
                   </p>
                 </div>
@@ -154,19 +149,19 @@ export function ProofSection() {
           </div>
 
           {proof.videoTestimonials.length > 0 && (
-            <p className="mt-2 text-xs text-[#91899F] sm:hidden">
+            <p className="mt-2 text-xs text-[#77766D] sm:hidden">
               Swipe to explore videos <span aria-hidden="true">→</span>
             </p>
           )}
         </div>
 
         {/* Industries served */}
-        <div className="mt-14 border-t border-[#E9E2F3] pt-7 sm:mt-20 sm:pt-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#9673D8]">
+        <div className="mt-14 border-t border-[#EAE7DF] pt-7 sm:mt-20 sm:pt-10">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8A6C05]">
             Industries we serve
           </p>
 
-          <p className="mt-4 text-sm leading-7 text-[#746C83] sm:text-base sm:leading-8">
+          <p className="mt-4 text-sm leading-7 text-[#55524C] sm:text-base sm:leading-8">
             {proof.industriesNote}
           </p>
         </div>

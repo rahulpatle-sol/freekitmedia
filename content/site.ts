@@ -38,7 +38,7 @@ export const site = {
   ] as const,
   cities: ["Bilaspur", "Ambikapur", "Korba"] as const,
   heroBadge: {
-    label: "Content & Digital marketing service  agency — Chhattisgarh",
+    label: "Content & Digital Marketing Agency — Chhattisgarh",
     href: "#home",
   },
   address: {
@@ -60,7 +60,7 @@ export const site = {
 export const marqueeNames = [
   "Tanishq",
   "Kisna",
-  "Pathsure",
+  "Pathosure",
   "Next World",
   "Mixxit",
   "& many more",
@@ -82,7 +82,7 @@ export const heroHeading: HeroHeadingPart[] = [
 ];
 
 export const heroSub =
-  "Poora marketing department, ek hi chhat ke neeche. Content, ads, website aur branding — sab ek team se.";
+  "Your entire marketing team, Under one roof. Content, ads, website aur branding- Sab ek team se";
 
 export type TrustItem = { icon: IconName; label: string };
 
