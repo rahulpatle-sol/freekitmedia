@@ -59,38 +59,44 @@ function PipelineModule({
   note: string;
 }) {
   return (
-    <div data-reveal>
-      <ol className="relative flex flex-col gap-0 sm:grid sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-6">
+    <div data-reveal className="mt-12 sm:mt-16">
+      <ol className="grid sm:grid-cols-2 sm:gap-x-8 lg:grid-cols-6 lg:gap-0">
         {steps.map((step, index) => (
           <li
             key={step.label}
-            className="group relative border-b border-white/10 py-5 pl-12 sm:border-b-0 sm:pb-8 sm:pl-0"
+            className="relative min-w-0 border-b border-white/10 py-5 pl-14 last:border-b-0 sm:border-b-0 sm:pb-8 sm:pl-0 sm:pt-1 lg:pr-6"
           >
             <span
               aria-hidden="true"
-              className="absolute left-0 top-6 grid size-8 place-items-center rounded-full border border-[#F7C928]/30 bg-[#171717] font-mono text-[11px] text-[#F7C928] sm:relative sm:top-0 sm:size-9"
+              className="absolute left-0 top-5 z-10 grid size-9 place-items-center rounded-full bg-[#F7C928] font-mono text-[11px] font-semibold text-[#171717] sm:relative sm:top-0 sm:size-10"
             >
               {String(index + 1).padStart(2, "0")}
             </span>
 
-            <p className="font-display text-base font-bold tracking-[-0.03em] text-white sm:mt-4 lg:text-[0.95rem]">
+            {index < steps.length - 1 && (
+              <>
+                <span
+                  aria-hidden="true"
+                  className="absolute bottom-0 left-[17px] top-14 w-px bg-white/15 sm:hidden"
+                />
+                <span
+                  aria-hidden="true"
+                  className="absolute left-10 top-6 hidden h-px w-full bg-white/15 lg:block"
+                />
+              </>
+            )}
+
+            <p className="font-display text-base font-bold tracking-[-0.03em] text-white sm:mt-5 lg:text-[0.95rem]">
               {step.label}
             </p>
-            <p className="mt-1.5 text-xs leading-relaxed text-[#FBE17D]/80 sm:text-[13px]">
+            <p className="mt-2 max-w-[15rem] text-xs leading-relaxed text-white/65 sm:text-[13px]">
               {step.detail}
             </p>
-
-            {index < steps.length - 1 && (
-              <span
-                aria-hidden="true"
-                className="absolute left-4 top-[3.75rem] h-[calc(100%-2.4rem)] w-px bg-gradient-to-b from-[#8A6C05]/45 to-transparent sm:left-8 sm:top-14 sm:h-px sm:w-[calc(100%-2rem)]"
-              />
-            )}
           </li>
         ))}
       </ol>
 
-      <p className="mt-2 max-w-2xl border-t border-white/10 pt-5 text-sm leading-relaxed text-[#FBE17D]/75">
+      <p className="mt-5 max-w-3xl border-t border-white/15 pt-5 text-sm leading-relaxed text-[#FBE17D]/85">
         {note}
       </p>
     </div>
@@ -227,6 +233,48 @@ function SignatureModule({ service }: { service: ServicePage }) {
     ) : (
       <PathModule steps={signature.steps} />
     );
+
+  if (signature.kind === "pipeline") {
+    return (
+      <section className="relative overflow-hidden bg-[#171717] py-16 text-white sm:py-24">
+        <Container>
+          <header className="grid gap-7 border-t border-white/15 pt-5 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-16">
+            <div data-reveal className="min-w-0">
+              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#F7C928]">
+                <span className="size-2 rounded-full bg-[#F7C928]" />
+                {signature.kicker}
+              </p>
+
+              <h2 className="font-display mt-5 max-w-3xl text-[clamp(2.5rem,5vw,4.5rem)] font-extrabold leading-[0.98] tracking-[-0.06em] text-white">
+                {signature.title}
+              </h2>
+            </div>
+
+            <div data-reveal className="max-w-xl lg:justify-self-end">
+              <p className="text-sm leading-7 text-white/70 sm:text-base sm:leading-8">
+                {signature.text}
+              </p>
+
+              {service.story && (
+                <Link
+                  href={service.story.href}
+                  className="group mt-5 inline-flex max-w-full items-center gap-2 text-sm font-semibold text-[#F7C928] underline decoration-[#F7C928]/40 underline-offset-4 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-[#F7C928] focus-visible:outline-offset-4"
+                >
+                  <span className="min-w-0">{service.story.label}</span>
+                  <Icon
+                    name="arrowRight"
+                    className="size-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+                  />
+                </Link>
+              )}
+            </div>
+          </header>
+
+          <PipelineModule steps={signature.steps} note={signature.note} />
+        </Container>
+      </section>
+    );
+  }
 
   return (
     <section className="relative overflow-hidden bg-[#171717] py-16 text-white sm:py-24">

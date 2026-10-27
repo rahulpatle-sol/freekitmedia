@@ -49,11 +49,11 @@ export const site = {
       "Hello FreeKit Media, I’d like to request a free digital audit for my business.",
   },
   navLinks: [
-    { label: "System", href: "#system" },
-    { label: "Services", href: "#services" },
-    { label: "Process", href: "#process" },
-    { label: "Partners", href: "#partners" },
-    { label: "FAQ", href: "#faq" },
+    // { label: "System", href: "/#system" },
+    { label: "Services", href: "/#services" },
+    { label: "Process", href: "/#process" },
+    { label: "Partners", href: "/#partners" },
+    { label: "FAQ", href: "/#faq" },
   ] as const,
 } as const;
 

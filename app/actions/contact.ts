@@ -4,7 +4,7 @@ import { headers } from "next/headers";
 
 import type { ContactState } from "@/lib/content/contact-state";
 import type { ContactFieldErrors } from "@/lib/content/contact-state";
-import { contactBusinessTypes } from "@/content/site";
+import { contactBusinessTypes, site } from "@/content/site";
 
 export type { ContactState };
 
@@ -87,12 +87,48 @@ export async function submitContact(
       return { ok: false, errors, failure: false };
     }
 
-    console.info("[contact-lead]", {
-      name,
-      phone: localPhone,
-      businessType,
-      at: new Date().toISOString(),
+    const apiKey = process.env.RESEND_API_KEY;
+    const from = process.env.CONTACT_FROM_EMAIL;
+    const to = process.env.CONTACT_TO_EMAIL || site.email;
+
+    if (!apiKey || !from) {
+      console.error(
+        "[contact-email-config-error] RESEND_API_KEY and CONTACT_FROM_EMAIL must be configured.",
+      );
+      return { ok: false, errors: null, failure: true };
+    }
+
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from,
+        to: [to],
+        subject: `New FreeKit Media enquiry from ${name}`,
+        text: [
+          "A new contact form enquiry was submitted.",
+          "",
+          `Name: ${name}`,
+          `Phone: +91 ${localPhone}`,
+          `Business type: ${businessType}`,
+          `Received: ${new Date().toISOString()}`,
+        ].join("\n"),
+      }),
+      cache: "no-store",
+      signal: AbortSignal.timeout(10_000),
     });
+
+    if (!response.ok) {
+      const details = await response.text();
+      console.error("[contact-email-error]", {
+        status: response.status,
+        details: details.slice(0, 500),
+      });
+      return { ok: false, errors: null, failure: true };
+    }
 
     return { ok: true, errors: null, failure: false };
   } catch (error) {

@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 
 
 const stories = [
@@ -9,37 +9,33 @@ const stories = [
     id: 1,
     title: "Dr.  Sharma's  story",
     name: "Partner story 01",
-    poster: "/videos/testimonial-1-poster.jpg",
-    video: "/images/partners/videos/sharma%20dental%20feedback.mp4",
+    video: "https://ik.imagekit.io/freekitMedia/Freekit%20media%20Assets/testimonials/sharma%20dental%20feedback.mp4",
   },
   {
     id: 2,
     title: "Tyre Center's story",
     name: "Partner story 02",
-    poster: "/videos/testimonial-2-poster.jpg",
-    video: "/images/partners/videos/tyre%20centre%20feedback.mp4",
+    video: "https://ik.imagekit.io/freekitMedia/Freekit%20media%20Assets/testimonials/tyre%20centre%20feedback.mp4",
   },
   {
     id: 3,
     title: "Balaji  & Balaji  Jawellers story",
     name: "Partner story 03",
-    poster: "/videos/testimonial-1-poster.jpg",
-    video: "/images/partners/videos/Balaji%20%26%20Balaji%20Feedback.mp4",
+    video: "https://ik.imagekit.io/freekitMedia/Freekit%20media%20Assets/testimonials/Balaji%20&%20Balaji%20Feedback.mov",
   },
   {
     id: 4,
-    title: "URS (Ultimate reletionShip Strategy) story",
+    title: "The URS  story",
     name: "Partner story 04",
-    poster: "/videos/testimonial-2-poster.jpg",
-    video: "/images/partners/videos/URS%20Feedback.mp4",
+    video: "https://ik.imagekit.io/freekitMedia/Freekit%20media%20Assets/testimonials/URS%20Feedback.mp4",
   },
-  {
-    id: 5,
-    title: "Partner story",
-    name: "Partner story 05",
-    poster: "/videos/testimonial-1-poster.jpg",
-    video: "/videos/testimonial-1.mp4",
-  },
+  // {
+  //   id: 5,
+  //   title: "Partner story",
+  //   name: "Partner story 05",
+  //   poster: "/videos/testimonial-1-poster.jpg",
+  //   video: "/videos/testimonial-1.mp4",
+  // },
   // {
   //   id: 6,
   //   title: "Partner story",
@@ -71,6 +67,46 @@ export function Testimonials() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!activeStory) return;
+
+    carouselRef.current
+      ?.querySelectorAll<HTMLVideoElement>("[data-story-preview]")
+      .forEach((video) => video.pause());
+  }, [activeStory]);
+
+  const playPreview = (event: MouseEvent<HTMLButtonElement>) => {
+    if (
+      activeStory ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+
+    const carousel = carouselRef.current;
+    const preview = event.currentTarget.querySelector<HTMLVideoElement>(
+      "[data-story-preview]",
+    );
+    if (!carousel || !preview) return;
+
+    carousel
+      .querySelectorAll<HTMLVideoElement>("[data-story-preview]")
+      .forEach((video) => {
+        if (video !== preview) video.pause();
+      });
+
+    preview.play().catch((error: unknown) => {
+      if (
+        error instanceof DOMException &&
+        (error.name === "AbortError" || error.name === "NotAllowedError")
+      ) {
+        return;
+      }
+
+      console.error("Unable to autoplay testimonial preview.", error);
+    });
+  };
 
   const scrollCarousel = (direction: "left" | "right") => {
     const carousel = carouselRef.current;
@@ -205,16 +241,26 @@ export function Testimonials() {
                 key={story.id}
                 data-story-card
                 type="button"
+                onMouseEnter={playPreview}
+                onMouseLeave={(event) =>
+                  event.currentTarget
+                    .querySelector<HTMLVideoElement>("[data-story-preview]")
+                    ?.pause()
+                }
                 onClick={() => setActiveStory(story)}
                 aria-label={`Play ${story.name} video`}
                 className="group relative aspect-[3/4] w-[76vw] max-w-[300px] flex-none snap-start overflow-hidden rounded-2xl bg-neutral-900 text-left shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-neutral-400 motion-reduce:transition-none sm:w-[42vw] sm:max-w-[320px] lg:w-[calc((100%-60px)/4)] lg:max-w-none"
               >
-                <Image
-                  src={story.poster}
-                  alt=""
-                  fill
-                  sizes="(max-width: 639px) 76vw, (max-width: 1023px) 42vw, 25vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:transition-none"
+                <video
+                  data-story-preview
+                  src={story.video}
+                  muted
+                  loop
+                  playsInline
+                  preload="none"
+                  aria-hidden="true"
+                  tabIndex={-1}
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:transition-none"
                 />
 
                 <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/45" />
@@ -285,48 +331,60 @@ export function Testimonials() {
         </div>
 
         {/* Call to Action */}
-        <div className="relative mt-12 overflow-hidden rounded-3xl bg-neutral-950 px-6 py-10 text-center sm:mt-16 sm:px-10 sm:py-14 lg:mt-20">
-          {/* Decorative glow */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-white/[0.06] blur-3xl"
-          />
-
-          <div className="relative z-10">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-neutral-400 sm:text-sm">
-              Let’s Work Together
+        <div className="mt-12 grid overflow-hidden rounded-3xl border border-[#171717]/10 bg-[#F7C928] sm:mt-16 lg:mt-20 lg:grid-cols-[minmax(0,1fr)_22rem]">
+          <div className="px-6 py-9 sm:px-10 sm:py-12 lg:px-12 lg:py-14">
+            <p className="mb-4 flex items-center gap-2 text-sm font-semibold text-[#171717]">
+              <span
+                aria-hidden="true"
+                className="h-2.5 w-2.5 bg-[#171717]"
+              />
+              Let’s work together
             </p>
 
-            <h3 className="mx-auto max-w-2xl font-display text-3xl font-medium leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
-              Ready to create something{" "}
-              <span className="font-serif font-normal italic text-neutral-300">
-                amazing?
-              </span>
+            <h3 className="max-w-2xl font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.06em] text-[#171717] sm:text-5xl lg:text-6xl">
+              Your story could be next.
             </h3>
 
-            <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-neutral-400 sm:text-base sm:leading-7">
-              Your story could be next. Let’s talk about your goals and find
-              the right way to grow your brand together.
+            <p className="mt-5 max-w-xl text-sm leading-7 text-[#171717]/80 sm:text-base">
+              Let’s talk about your goals and find the right way to grow your
+              brand together.
+            </p>
+          </div>
+
+          <div className="flex flex-col items-start justify-center gap-4 border-t border-[#171717]/15 px-6 py-8 sm:px-10 sm:py-9 lg:border-l lg:border-t-0 lg:px-8 lg:py-10">
+            <p className="text-lg font-semibold tracking-tight text-[#171717]">
+              Have a project in mind?
             </p>
 
-            <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:mt-8 sm:flex-row">
-              <a
-                href="/contact"
-                className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-semibold text-neutral-950 transition hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950 sm:w-auto"
+            <Link
+              href="/contact"
+              className="inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-full bg-[#171717] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#171717] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7C928]"
+            >
+              Talk to our team
+              <svg
+                viewBox="0 0 20 20"
+                fill="none"
+                className="h-4 w-4"
+                aria-hidden="true"
               >
-                Let’s Talk About Your Project
-                <span aria-hidden="true">↗</span>
-              </a>
+                <path
+                  d="M4.167 10h11.666m0 0-5-5m5 5-5 5"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </Link>
 
-              <a
-                href="#contact"
-                className="inline-flex min-h-12 w-full items-center justify-center rounded-full border border-white/20 px-7 py-3 text-sm font-semibold text-white transition hover:border-white/50 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:w-auto"
-              >
-                Explore Our Services
-              </a>
-            </div>
+            <Link
+              href="/services"
+              className="link-underline text-sm font-semibold text-[#171717]"
+            >
+              Explore our services
+            </Link>
 
-            <p className="mt-5 text-xs text-neutral-500">
+            <p className="text-xs leading-5 text-[#171717]/75">
               No pressure. Just a conversation about your next big idea.
             </p>
           </div>
@@ -361,9 +419,9 @@ export function Testimonials() {
             <video
               key={activeStory.id}
               src={activeStory.video}
-              poster={activeStory.poster}
               controls
               autoPlay
+              muted
               playsInline
               preload="metadata"
               aria-label={activeStory.name}

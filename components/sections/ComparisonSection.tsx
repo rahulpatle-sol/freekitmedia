@@ -168,19 +168,17 @@ export function ComparisonSection() {
           </div>
 
           {/* Table footer */}
-          <div className="mt-4 flex flex-col gap-2 px-1 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+          {/* <div className="mt-4 flex flex-col gap-2 px-1 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
             <p className="text-[10px] leading-5 text-[#77766D] sm:text-xs">
               Different priorities. Different outcomes.
             </p>
 
-            <p className="font-mono text-[10px] tracking-[0.08em] text-[#77766D] sm:text-xs">
-              FREEKIT / COMPARISON 001
-            </p>
-          </div>
+            
+          </div> */}
         </div>
 
         {/* Closing CTA */}
-        <div
+        {/* <div
           data-reveal
           className="mt-16 border-t border-[#171717]/15 pt-7 sm:mt-24 sm:pt-10"
         >
@@ -210,7 +208,7 @@ export function ComparisonSection() {
               </span>
             </a>
           </div>
-        </div>
+        </div> */}
       </Container>
     </section>
   );

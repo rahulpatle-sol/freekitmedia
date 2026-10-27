@@ -88,11 +88,11 @@ export function ProofSection() {
           </article>
         </div>
 
-        <p className="mt-2 text-xs text-[#77766D] lg:hidden">
+        {/* <p className="mt-2 text-xs text-[#77766D] lg:hidden">
           Swipe to see more <span aria-hidden="true">→</span>
-        </p>
+        </p> */}
 
-        {/* Video testimonials */}
+        {/* Video testimonials
         <div className="mt-14 sm:mt-20">
           <div className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8A6C05]">
@@ -153,10 +153,10 @@ export function ProofSection() {
               Swipe to explore videos <span aria-hidden="true">→</span>
             </p>
           )}
-        </div>
+        </div> */}
 
         {/* Industries served */}
-        <div className="mt-14 border-t border-[#EAE7DF] pt-7 sm:mt-20 sm:pt-10">
+        {/* <div className="mt-14 border-t border-[#EAE7DF] pt-7 sm:mt-20 sm:pt-10">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8A6C05]">
             Industries we serve
           </p>
@@ -164,7 +164,7 @@ export function ProofSection() {
           <p className="mt-4 text-sm leading-7 text-[#55524C] sm:text-base sm:leading-8">
             {proof.industriesNote}
           </p>
-        </div>
+        </div> */}
       </Container>
     </section>
   );

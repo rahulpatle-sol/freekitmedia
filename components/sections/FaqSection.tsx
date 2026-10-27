@@ -68,7 +68,7 @@ export function FaqSection() {
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group mt-3 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#171717] px-5 text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#8A6C05] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8A6C05] focus-visible:ring-offset-2"
+                className="group mt-3 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#8A6C05] px-5 text-sm font-semibold text-white transition-colors duration-300 hover:bg-yellow-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8A6C05] focus-visible:ring-offset-2"
               >
                 {site.cta.whatsapp}
                 <Icon

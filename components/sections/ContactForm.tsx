@@ -27,7 +27,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="group inline-flex h-14 w-full items-center justify-center gap-3 rounded-xl bg-[#171517] px-7 font-semibold text-white shadow-sm transition-all duration-300 hover:bg-[#8A6C05] hover:shadow-[0_10px_30px_rgba(247,201,40,0.22)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8A6C05] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+      className="group inline-flex h-14 w-full items-center justify-center gap-3 rounded-xl bg-[#8A6C05] px-7 font-semibold text-white shadow-sm transition-all duration-300 hover:bg-yellow-500 hover:shadow-[0_10px_30px_rgba(247,201,40,0.22)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8A6C05] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
     >
       {pending ? "Sending your request..." : site.cta.submitAudit}
 
@@ -72,8 +72,9 @@ export function ContactForm() {
         </p>
 
         <p className="mt-3 max-w-lg text-sm leading-7 text-[#171517]/65">
-          We’ll be in touch within one business day. If you prefer,
-          you can also message us directly on WhatsApp.
+          Your request has been emailed to our team. We’ll be in touch within
+          one business day. If you prefer, you can also message us directly on
+          WhatsApp.
         </p>
 
         <a
@@ -149,10 +150,10 @@ export function ContactForm() {
         <form
           ref={formRef}
           action={formAction}
-          className="space-y-5"
+          className="grid gap-5 sm:grid-cols-2"
         >
           {/* Name */}
-          <div>
+          <div className="min-w-0">
             <label
               htmlFor="contact-name"
               className="mb-2 block text-sm font-semibold text-[#171517]"
@@ -191,7 +192,7 @@ export function ContactForm() {
           </div>
 
           {/* Phone */}
-          <div>
+          <div className="min-w-0">
             <label
               htmlFor="contact-phone"
               className="mb-2 block text-sm font-semibold text-[#171517]"
@@ -232,7 +233,7 @@ export function ContactForm() {
           </div>
 
           {/* Business type */}
-          <div>
+          <div className="min-w-0 sm:col-span-2">
             <label
               htmlFor="contact-type"
               className="mb-2 block text-sm font-semibold text-[#171517]"
@@ -297,7 +298,7 @@ export function ContactForm() {
           {/* Honeypot: keep hidden to help filter bots */}
           <div
             aria-hidden="true"
-            className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden"
+            className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden sm:col-span-2"
           >
             <label htmlFor="contact-company">
               Leave this field empty
@@ -312,11 +313,11 @@ export function ContactForm() {
             />
           </div>
 
-          <div className="flex flex-col gap-4 pt-1 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-4 pt-1 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
             <SubmitButton />
           </div>
 
-          <div className="flex items-start gap-2 border-t border-[#171517]/[0.07] pt-4">
+          <div className="flex items-start gap-2 border-t border-[#171517]/[0.07] pt-4 sm:col-span-2">
             <span className="mt-0.5 text-[#8A6C05]">
               <Icon
                 name="badgeCheck"

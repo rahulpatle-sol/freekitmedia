@@ -12,6 +12,7 @@ import { Cursor } from "@/components/sections/Cursor";
 import { FloatingWhatsApp, StickyMobileBar } from "@/components/sections/ReachBars";
 import { Footer } from "@/components/sections/Footer";
 import { Testimonials } from "@/components/sections/Testimonials";
+// import { SystemSection } from "@/components/sections/SystemSection";
 import { faqs } from "@/content/page-sections";
 import { JsonLd, faqJsonLd } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -44,6 +45,7 @@ export default function Home() {
       <main id="main" className="flex-1 pb-16 lg:pb-0">
         <Hero />
         <PartnerMarquee />
+        {/* <SystemSection /> */}
         <Testimonials />
 
         {/* <ProblemSection /> */}

@@ -9,6 +9,7 @@ export function PartnerMarquee() {
 
   return (
     <section
+      id="partners"
       aria-label="Our partner brands"
       className="overflow-hidden border-y border-[#171517]/10 bg-white py-8 sm:py-10"
     >
