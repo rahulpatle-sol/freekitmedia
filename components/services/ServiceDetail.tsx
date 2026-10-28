@@ -375,7 +375,7 @@ export function ServiceDetail({ service }: { service: ServicePage }) {
               </p>
 
               <h1 className="font-display mt-6 max-w-3xl text-[clamp(2.5rem,5.5vw,4.25rem)] font-extrabold leading-[1.02] tracking-[-0.05em] text-white sm:mt-7">
-                {service.headline}
+                {service.title}: {service.headline}
               </h1>
 
               <p className="mt-6 max-w-xl text-sm leading-8 text-white/70 sm:text-base sm:leading-8">

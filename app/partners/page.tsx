@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { partners } from "@/content/partners";
 
 export const metadata: Metadata = {
-  title: "Partners",
+  title: "Partner Work and Digital Marketing Projects",
   description:
     "Brands and businesses FreeKit Media has worked alongside across Chhattisgarh.",
   alternates: { canonical: "/partners" },
@@ -23,7 +23,7 @@ export default function PartnersPage() {
               Partners / The work, together
             </p>
             <h1 className="font-display mt-5 max-w-4xl text-h1 font-extrabold leading-[0.98] tracking-[-0.04em]">
-              Relationships built on real work.
+              Real partnerships. Real digital marketing work.
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-paper/65 sm:text-lg">
               A look at the partner brands and the work described in our

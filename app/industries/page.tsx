@@ -6,9 +6,9 @@ import { Container } from "@/components/ui/Container";
 import { industries } from "@/content/industries";
 
 export const metadata: Metadata = {
-  title: "Industries",
+  title: "Digital Marketing by Industry",
   description:
-    "Industry-specific marketing considerations and digital services from FreeKit Media.",
+    "Explore FreeKit Media's digital marketing approach for healthcare, jewellery, retail, education, real estate and other industries.",
   alternates: { canonical: "/industries" },
 };
 
@@ -23,7 +23,7 @@ export default function IndustriesPage() {
               Industries / Local context matters
             </p>
             <h1 className="font-display mt-5 max-w-4xl text-h1 font-extrabold leading-[0.98] tracking-[-0.04em]">
-              Different businesses. Different customer journeys.
+              Digital marketing for different customer journeys.
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-grey-600 sm:text-lg">
               Explore the challenges and approaches described for the

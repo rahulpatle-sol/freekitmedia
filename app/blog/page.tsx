@@ -7,9 +7,9 @@ import { SubpageHeader } from "@/components/sections/SubpageHeader";
 import { Footer } from "@/components/sections/Footer";
 
 export const metadata: Metadata = {
-  title: "Blog",
+  title: "Digital Marketing Guides",
   description:
-    "FreeKit Media ka blog — digital growth ki simple guide, Hinglish mein.",
+    "Practical digital marketing guides from FreeKit Media on content, ads, social media and online growth.",
   alternates: { canonical: "/blog" },
 };
 
@@ -25,8 +25,9 @@ export default function BlogIndex() {
               Blog
             </p>
             <h1 className="font-display mt-4 max-w-3xl text-h1 leading-[1.05] font-extrabold tracking-[-0.02em]">
-              Simple guides, <span className="text-brand">growth ke logic</span>,
-              jhooth ke bina
+              Digital marketing guides,{" "}
+              <span className="text-brand">growth ke logic</span>, jhooth ke
+              bina
             </h1>
           </Container>
         </div>

@@ -3,62 +3,53 @@
 import Link from "next/link";
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 
+const AUDIT_HREF = "/contact";
+const CALL_HREF = "/contact";
 
 const stories = [
   {
     id: 1,
-    title: "Dr.  Sharma's  story",
-    name: "Partner story 01",
-    video: "https://ik.imagekit.io/freekitMedia/Freekit%20media%20Assets/testimonials/sharma%20dental%20feedback.mp4",
+    title: "Dr. Sharma's story",
+    client: "Dr. Sharma",
+    business: "Dental practice (practice name TODO)",
+    quote: "TODO: Add an approved quote from this video testimonial.",
+    video:
+      "https://ik.imagekit.io/freekitMedia/Freekit%20media%20Assets/testimonials/sharma%20dental%20feedback.mp4",
   },
   {
     id: 2,
     title: "Tyre Center's story",
-    name: "Partner story 02",
-    video: "https://ik.imagekit.io/freekitMedia/Freekit%20media%20Assets/testimonials/tyre%20centre%20feedback.mp4",
+    client: "Tyre Centre",
+    business: "Tyre business (business name TODO)",
+    quote: "TODO: Add an approved quote from this video testimonial.",
+    video:
+      "https://ik.imagekit.io/freekitMedia/Freekit%20media%20Assets/testimonials/tyre%20centre%20feedback.mp4",
   },
   {
     id: 3,
-    title: "Balaji  & Balaji  Jawellers story",
-    name: "Partner story 03",
-    video: "https://ik.imagekit.io/freekitMedia/Freekit%20media%20Assets/testimonials/Balaji%20&%20Balaji%20Feedback.mov",
+    title: "Balaji & Balaji Jawellers story",
+    client: "Balaji & Balaji Jewellers",
+    business: "Jewellery retail",
+    quote: "TODO: Add an approved quote from this video testimonial.",
+    video:
+      "https://ik.imagekit.io/freekitMedia/Freekit%20media%20Assets/testimonials/Balaji%20&%20Balaji%20Feedback.mov",
   },
   {
     id: 4,
-    title: "The URS  story",
-    name: "Partner story 04",
-    video: "https://ik.imagekit.io/freekitMedia/Freekit%20media%20Assets/testimonials/URS%20Feedback.mp4",
+    title: "The URS story",
+    client: "URS",
+    business: "Business type TODO",
+    quote: "TODO: Add an approved quote from this video testimonial.",
+    video:
+      "https://ik.imagekit.io/freekitMedia/Freekit%20media%20Assets/testimonials/URS%20Feedback.mp4",
   },
-  // {
-  //   id: 5,
-  //   title: "Partner story",
-  //   name: "Partner story 05",
-  //   poster: "/videos/testimonial-1-poster.jpg",
-  //   video: "/videos/testimonial-1.mp4",
-  // },
-  // {
-  //   id: 6,
-  //   title: "Partner story",
-  //   name: "Partner story 06",
-  //   poster: "/videos/testimonial-2-poster.jpg",
-  //   video: "/videos/testimonial-2.mp4",
-  // },
-  // {
-  //   id: 7,
-  //   title: "Partner story",
-  //   name: "Partner story 07",
-  //   poster: "/videos/testimonial-1-poster.jpg",
-  //   video: "/videos/testimonial-1.mp4",
-  // },
-  // {
-  //   id: 8,
-  //   title: "Partner story",
-  //   name: "Partner story 08",
-  //   poster: "/videos/testimonial-2-poster.jpg",
-  //   video: "/videos/testimonial-2.mp4",
-  // },
 ];
 
+const auditItems = [
+  "Content & profile check",
+  "Google & ads review",
+  "A clear growth plan",
+];
 
 export function Testimonials() {
   const [activeStory, setActiveStory] =
@@ -144,7 +135,7 @@ export function Testimonials() {
 
       const focusable = Array.from(
         dialogRef.current.querySelectorAll<HTMLElement>(
-          'button:not([disabled]), video[controls]',
+          "button:not([disabled]), video[controls]",
         ),
       ).filter((element) => element.getClientRects().length > 0);
 
@@ -190,6 +181,233 @@ export function Testimonials() {
       id="testimonials"
       className="relative overflow-hidden bg-white px-5 py-16 sm:py-20 lg:py-28"
     >
+      {/* CTA styles: plain CSS, Tailwind pe depend nahi */}
+      <style>{`
+        .fk-cta {
+          position: relative;
+          isolation: isolate;
+          overflow: hidden;
+          margin-top: 48px;
+          border-radius: 28px;
+          background: #F7C928;
+          color: #171717;
+        }
+        .fk-ring {
+          position: absolute;
+          z-index: -1;
+          border-radius: 9999px;
+          border: 1px solid rgba(0,0,0,0.1);
+          pointer-events: none;
+        }
+        .fk-ring-1 { width: 256px; height: 256px; right: -128px; top: -112px; }
+        .fk-ring-2 { width: 192px; height: 192px; right: -80px; top: -64px; }
+
+        .fk-inner {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr);
+          align-items: center;
+          gap: 32px;
+          padding: 32px 20px;
+        }
+        .fk-left { min-width: 0; }
+
+        .fk-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          margin: 0 0 20px;
+          padding: 8px 14px;
+          border-radius: 9999px;
+          background: #000;
+          color: #F7C928;
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+        }
+        .fk-dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 9999px;
+          background: #34d399;
+        }
+
+        .fk-title {
+          margin: 0;
+          max-width: 42rem;
+          font-size: clamp(2.25rem, 6.5vw, 4.25rem);
+          font-weight: 700;
+          line-height: 1.04;
+          letter-spacing: -0.05em;
+        }
+        .fk-italic {
+          font-family: Georgia, "Times New Roman", serif;
+          font-style: italic;
+          font-weight: 400;
+        }
+
+        .fk-desc {
+          margin: 20px 0 0;
+          max-width: 34rem;
+          font-size: 15px;
+          line-height: 1.6;
+          color: rgba(0,0,0,0.75);
+        }
+
+        .fk-btn-row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px;
+          margin-top: 28px;
+        }
+        .fk-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          min-height: 52px;
+          padding: 0 26px;
+          border-radius: 9999px;
+          font-size: 15px;
+          font-weight: 600;
+          text-decoration: none;
+          transition: transform .25s ease, background-color .25s ease, box-shadow .25s ease;
+        }
+        .fk-btn:focus-visible { outline: 2px solid #000; outline-offset: 3px; }
+        .fk-btn-primary {
+          background: #080808;
+          color: #fff;
+          box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+        }
+        .fk-btn-primary:hover { transform: translateY(-2px); background: #262626; }
+        .fk-btn-outline {
+          border: 2px solid #000;
+          color: #000;
+          background: transparent;
+        }
+        .fk-btn-outline:hover { background: rgba(0,0,0,0.06); }
+
+        .fk-ticks {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 8px 20px;
+          margin-top: 16px;
+          font-size: 13px;
+          color: rgba(0,0,0,0.75);
+        }
+        .fk-tick { display: inline-flex; align-items: center; gap: 6px; }
+
+        .fk-stats {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 16px 40px;
+          margin-top: 32px;
+          padding-top: 24px;
+          border-top: 1px solid rgba(0,0,0,0.15);
+        }
+        .fk-stat-big { margin: 0; font-size: 30px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+        .fk-stat-mid { margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+        .fk-stat-label { margin: 4px 0 0; font-size: 13px; color: rgba(0,0,0,0.7); }
+
+        .fk-card {
+          position: relative;
+          min-width: 0;
+          padding: 24px 20px;
+          border-radius: 22px;
+          background: #090909;
+          color: #fff;
+          box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+        }
+        .fk-badge {
+          position: absolute;
+          top: -12px;
+          right: 20px;
+          padding: 8px 14px;
+          border-radius: 9999px;
+          background: #fff;
+          color: #000;
+          font-size: 12px;
+          font-weight: 700;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .fk-card-eyebrow {
+          margin: 0;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: #F7C928;
+        }
+        .fk-card-title {
+          margin: 8px 0 0;
+          font-size: 26px;
+          font-weight: 700;
+          letter-spacing: -0.02em;
+          color: #fff;
+        }
+        .fk-list { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
+        .fk-item { display: flex; align-items: center; gap: 12px; }
+        .fk-num {
+          flex-shrink: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 36px;
+          height: 36px;
+          border-radius: 8px;
+          background: #F7C928;
+          color: #000;
+          font-size: 14px;
+          font-weight: 700;
+        }
+        .fk-item-text { margin: 0; font-size: 16px; font-weight: 500; line-height: 1.3; color: #fff; }
+        .fk-card-foot {
+          margin-top: 24px;
+          padding-top: 18px;
+          border-top: 1px solid rgba(255,255,255,0.15);
+        }
+        .fk-card-foot p { margin: 0; font-size: 13px; line-height: 1.5; color: rgba(255,255,255,0.6); }
+
+        @media (max-width: 419px) {
+          .fk-btn { width: 100%; }
+        }
+        @media (min-width: 640px) {
+          .fk-cta { margin-top: 64px; }
+          .fk-ring-1 { width: 440px; height: 440px; right: -80px; top: -144px; }
+          .fk-ring-2 { width: 340px; height: 340px; right: -40px; top: -96px; }
+          .fk-inner { gap: 40px; padding: 48px 40px; }
+          .fk-pill { font-size: 12px; margin-bottom: 24px; }
+          .fk-desc { font-size: 16px; line-height: 1.75; margin-top: 24px; }
+          .fk-btn-row { margin-top: 32px; }
+          .fk-ticks { font-size: 14px; }
+          .fk-stats { margin-top: 40px; padding-top: 28px; }
+          .fk-stat-big { font-size: 36px; }
+          .fk-stat-mid { font-size: 26px; }
+          .fk-stat-label { font-size: 14px; }
+          .fk-card { padding: 28px; border-radius: 26px; }
+          .fk-badge { right: 24px; }
+          .fk-card-eyebrow { font-size: 12px; }
+          .fk-card-title { font-size: 30px; }
+          .fk-list { margin-top: 24px; }
+        }
+        @media (min-width: 1024px) {
+          .fk-cta { margin-top: 80px; }
+          .fk-ring-1 { width: 520px; height: 520px; }
+          .fk-ring-2 { width: 400px; height: 400px; }
+          .fk-inner {
+            grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+            gap: 48px;
+            padding: 56px 48px;
+          }
+          .fk-card { padding: 32px; transform: rotate(2deg); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .fk-btn { transition: none; }
+          .fk-btn-primary:hover { transform: none; }
+        }
+      `}</style>
+
       <div className="mx-auto max-w-7xl">
         {/* Heading */}
         <div className="mb-9 text-center sm:mb-12 lg:mb-16">
@@ -199,10 +417,8 @@ export function Testimonials() {
 
           <h2 className="font-display text-4xl font-medium leading-tight tracking-[-0.045em] text-neutral-900 sm:text-5xl lg:text-7xl">
             Don’t take{" "}
-            <span className="font-serif font-normal italic">
-              our word
-            </span>{" "}
-            for it.
+            <span className="font-serif font-normal italic">our word</span> for
+            it.
           </h2>
 
           <p className="mx-auto mt-4 max-w-lg text-sm leading-6 text-neutral-600 sm:mt-5 sm:text-base sm:leading-7">
@@ -237,20 +453,23 @@ export function Testimonials() {
             className="flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth pb-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-5 lg:gap-5"
           >
             {stories.map((story) => (
-              <button
+              <article
                 key={story.id}
                 data-story-card
-                type="button"
-                onMouseEnter={playPreview}
-                onMouseLeave={(event) =>
-                  event.currentTarget
-                    .querySelector<HTMLVideoElement>("[data-story-preview]")
-                    ?.pause()
-                }
-                onClick={() => setActiveStory(story)}
-                aria-label={`Play ${story.name} video`}
-                className="group relative aspect-[3/4] w-[76vw] max-w-[300px] flex-none snap-start overflow-hidden rounded-2xl bg-neutral-900 text-left shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-neutral-400 motion-reduce:transition-none sm:w-[42vw] sm:max-w-[320px] lg:w-[calc((100%-60px)/4)] lg:max-w-none"
+                className="w-[76vw] max-w-[300px] flex-none snap-start sm:w-[42vw] sm:max-w-[320px] lg:w-[calc((100%-60px)/4)] lg:max-w-none"
               >
+                <button
+                  type="button"
+                  onMouseEnter={playPreview}
+                  onMouseLeave={(event) =>
+                    event.currentTarget
+                      .querySelector<HTMLVideoElement>("[data-story-preview]")
+                      ?.pause()
+                  }
+                  onClick={() => setActiveStory(story)}
+                  aria-label={`Play ${story.title} testimonial video`}
+                  className="group relative block aspect-[3/4] w-full overflow-hidden rounded-2xl bg-neutral-900 text-left shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-neutral-400 motion-reduce:transition-none"
+                >
                 <video
                   data-story-preview
                   src={story.video}
@@ -277,12 +496,7 @@ export function Testimonials() {
                   >
                     <rect x="3" y="3" width="18" height="18" rx="5" />
                     <circle cx="12" cy="12" r="4" />
-                    <circle
-                      cx="17.5"
-                      cy="6.5"
-                      r=".8"
-                      fill="currentColor"
-                    />
+                    <circle cx="17.5" cy="6.5" r=".8" fill="currentColor" />
                   </svg>
                   {story.title}
                 </div>
@@ -302,7 +516,19 @@ export function Testimonials() {
                 <span className="absolute inset-x-0 bottom-0 p-4 text-sm font-medium text-white opacity-100 sm:p-5 sm:opacity-0 sm:transition-opacity sm:group-hover:opacity-100">
                   Watch story <span aria-hidden="true">↗</span>
                 </span>
-              </button>
+                </button>
+                <div className="border-x border-b border-neutral-200 bg-white p-4 sm:p-5">
+                  <p className="text-sm font-semibold text-neutral-900">
+                    {story.client}
+                  </p>
+                  <p className="mt-1 text-xs leading-5 text-neutral-600">
+                    Business: {story.business}
+                  </p>
+                  <blockquote className="mt-3 border-t border-neutral-200 pt-3 text-sm leading-6 text-neutral-700">
+                    “{story.quote}”
+                  </blockquote>
+                </div>
+              </article>
             ))}
           </div>
 
@@ -330,63 +556,93 @@ export function Testimonials() {
           </p>
         </div>
 
-        {/* Call to Action */}
-        <div className="mt-12 grid overflow-hidden rounded-3xl border border-[#171717]/10 bg-[#F7C928] sm:mt-16 lg:mt-20 lg:grid-cols-[minmax(0,1fr)_22rem]">
-          <div className="px-6 py-9 sm:px-10 sm:py-12 lg:px-12 lg:py-14">
-            <p className="mb-4 flex items-center gap-2 text-sm font-semibold text-[#171717]">
-              <span
-                aria-hidden="true"
-                className="h-2.5 w-2.5 bg-[#171717]"
-              />
-              Let’s work together
-            </p>
+        {/* Free Audit CTA */}
+        <div className="fk-cta">
+          <div aria-hidden="true" className="fk-ring fk-ring-1" />
+          <div aria-hidden="true" className="fk-ring fk-ring-2" />
 
-            <h3 className="max-w-2xl font-display text-4xl font-extrabold leading-[1.02] tracking-[-0.06em] text-[#171717] sm:text-5xl lg:text-6xl">
-              Your story could be next.
-            </h3>
+          <div className="fk-inner">
+            {/* Left content */}
+            <div className="fk-left">
+              <p className="fk-pill">
+                <span className="fk-dot" />
+                Free Digital Audit
+              </p>
 
-            <p className="mt-5 max-w-xl text-sm leading-7 text-[#171717]/80 sm:text-base">
-              Let’s talk about your goals and find the right way to grow your
-              brand together.
-            </p>
-          </div>
+              <h3 className="fk-title font-display">
+                Let&apos;s make your brand{" "}
+                <span className="fk-italic">impossible</span> to ignore.
+              </h3>
 
-          <div className="flex flex-col items-start justify-center gap-4 border-t border-[#171717]/15 px-6 py-8 sm:px-10 sm:py-9 lg:border-l lg:border-t-0 lg:px-8 lg:py-10">
-            <p className="text-lg font-semibold tracking-tight text-[#171717]">
-              Have a project in mind?
-            </p>
+              <p className="fk-desc">
+                Get a free audit of your social media, Google and ads — and see
+                exactly what&apos;s costing you leads.
+              </p>
 
-            <Link
-              href="/contact"
-              className="inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-full bg-[#171717] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#171717] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7C928]"
-            >
-              Talk to our team
-              <svg
-                viewBox="0 0 20 20"
-                fill="none"
-                className="h-4 w-4"
-                aria-hidden="true"
-              >
-                <path
-                  d="M4.167 10h11.666m0 0-5-5m5 5-5 5"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </Link>
+              <div className="fk-btn-row">
+                <Link href={AUDIT_HREF} className="fk-btn fk-btn-primary">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    width="22"
+                    height="22"
+                    style={{ color: "#25D366", flexShrink: 0 }}
+                    aria-hidden="true"
+                  >
+                    <path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.38A9.9 9.9 0 1 0 12.04 2Zm5.8 14.1c-.25.7-1.45 1.33-2 1.4-.52.07-1.17.1-1.88-.12-.43-.14-.98-.32-1.68-.63-2.96-1.28-4.89-4.26-5.04-4.46-.14-.2-1.2-1.6-1.2-3.05 0-1.45.76-2.16 1.03-2.46.27-.3.6-.37.8-.37h.57c.18 0 .43-.07.67.5.25.6.85 2.07.92 2.22.08.15.13.32.03.52-.1.2-.15.32-.3.5-.15.17-.31.38-.44.51-.15.15-.3.31-.13.6.17.3.77 1.26 1.65 2.04 1.13 1 2.09 1.32 2.39 1.47.3.15.47.12.65-.07.17-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.97.3.15.5.22.57.35.07.12.07.72-.18 1.42Z" />
+                  </svg>
+                  Get My Free Audit
+                </Link>
 
-            <Link
-              href="/services"
-              className="link-underline text-sm font-semibold text-[#171717]"
-            >
-              Explore our services
-            </Link>
+                <Link href={CALL_HREF} className="fk-btn fk-btn-outline">
+                  Book a Call <span aria-hidden="true">→</span>
+                </Link>
+              </div>
 
-            <p className="text-xs leading-5 text-[#171717]/75">
-              No pressure. Just a conversation about your next big idea.
-            </p>
+              <div className="fk-ticks">
+                <span className="fk-tick">
+                  <span aria-hidden="true">✓</span> Free
+                </span>
+                <span className="fk-tick">
+                  <span aria-hidden="true">✓</span> No obligation
+                </span>
+              </div>
+
+              <div className="fk-stats">
+                <div>
+                  <p className="fk-stat-big font-display">150+</p>
+                  <p className="fk-stat-label">Brands grown</p>
+                </div>
+                <div>
+                  <p className="fk-stat-mid font-display">Across Chhattisgarh</p>
+                  <p className="fk-stat-label">Statewide</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right black audit card */}
+            <div className="fk-card">
+              <span className="fk-badge">100% free</span>
+
+              <p className="fk-card-eyebrow">Your Free Audit</p>
+              <h4 className="fk-card-title font-display">What you get</h4>
+
+              <div className="fk-list">
+                {auditItems.map((item, index) => (
+                  <div key={item} className="fk-item">
+                    <span className="fk-num">{index + 1}</span>
+                    <p className="fk-item-text">{item}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="fk-card-foot">
+                <p>
+                  No pressure. Just practical insights to help your business
+                  grow.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -402,7 +658,7 @@ export function Testimonials() {
             ref={dialogRef}
             role="dialog"
             aria-modal="true"
-            aria-label={activeStory.name}
+            aria-label={activeStory.title}
             className="relative w-full max-w-4xl overflow-hidden rounded-xl bg-black shadow-2xl sm:rounded-2xl"
             onClick={(event) => event.stopPropagation()}
           >
@@ -424,7 +680,7 @@ export function Testimonials() {
               muted
               playsInline
               preload="metadata"
-              aria-label={activeStory.name}
+              aria-label={`${activeStory.title} video`}
               className="block max-h-[85dvh] min-h-[200px] w-full bg-black object-contain sm:min-h-[300px]"
             >
               Your browser does not support HTML video.

@@ -7,8 +7,8 @@ import { services } from "@/content/services";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Services",
-  description: `Content, advertising, web, social media, and branding services from ${site.name}.`,
+  title: "Digital Marketing Services",
+  description: `Explore content, advertising, website, social media and branding services from ${site.name}.`,
   alternates: { canonical: "/services" },
 };
 
@@ -23,7 +23,7 @@ export default function ServicesPage() {
               Services / One connected team
             </p>
             <h1 className="font-display mt-5 max-w-4xl text-h1 font-extrabold leading-[0.98] tracking-[-0.04em]">
-              Poora marketing department, ek hi chhat ke neeche.
+              Digital marketing services, ek hi chhat ke neeche.
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-paper/65 sm:text-lg">
               Har service alag. Har effort connected. Choose what your

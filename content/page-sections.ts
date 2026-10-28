@@ -146,22 +146,6 @@ export const proof = {
     line: "Instagram ads se ek hi din mein jewellery ka direct order.",
     by: "Kisna Franchise Team",
   },
-  videoTestimonials: [
-    {
-      src: "/videos/testimonial-1.mp4",
-      poster: "/videos/testimonial-1-poster.jpg",
-      name: "Dummy video testimonial 1",
-      role: "Yahan real client video aayegi",
-      city: "Bilaspur",
-    },
-    {
-      src: "/videos/testimonial-2.mp4",
-      poster: "/videos/testimonial-2-poster.jpg",
-      name: "Dummy video testimonial 2",
-      role: "Yahan real client video aayegi",
-      city: "Ambikapur",
-    },
-  ],
   industriesNote:
     "Industries: Healthcare, Jewellery, Automobile, Real Estate, Fashion, Retail, Hotel, Education, Personal Branding.",
 } as const;

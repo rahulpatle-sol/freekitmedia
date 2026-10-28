@@ -194,8 +194,19 @@ export function Footer() {
               <ul className="mt-4 space-y-3">
                 {site.navLinks.map((link) => (
                   <li key={link.href}>
-                    <Link href={`/${link.href}`} className={footerLink}>
+                    <Link href={link.href} className={footerLink}>
                       {link.label}
+                    </Link>
+                  </li>
+                ))}
+
+                {["Bilaspur", "Ambikapur", "Raipur"].map((city) => (
+                  <li key={city}>
+                    <Link
+                      href={`/locations/${city.toLowerCase()}`}
+                      className={footerLink}
+                    >
+                      Digital marketing in {city}
                     </Link>
                   </li>
                 ))}

@@ -20,7 +20,7 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `Digital Marketing Agency Chhattisgarh — ${site.name}`,
+    default: `Digital Marketing Agency in Chhattisgarh | ${site.name}`,
     template: `%s · ${site.name}`,
   },
   description: site.description,
@@ -31,7 +31,8 @@ export const metadata: Metadata = {
   keywords: [
     "digital marketing agency Chhattisgarh",
     "digital marketing agency Bilaspur",
-    "marketing agency Ambikapur",
+    "digital marketing agency Ambikapur",
+    "digital marketing agency Raipur",
     "social media marketing Korba",
     "Instagram ads agency",
     "Google ads agency Chhattisgarh",
@@ -40,14 +41,18 @@ export const metadata: Metadata = {
     "FreeKit Media",
   ],
   openGraph: {
+    title: `Digital Marketing Agency in Chhattisgarh | ${site.name}`,
     siteName: site.name,
     type: "website",
     locale: "en_IN",
     description: site.description,
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
+    title: `Digital Marketing Agency in Chhattisgarh | ${site.name}`,
     description: site.description,
+    images: ["/opengraph-image"],
   },
   alternates: { canonical: "/" },
 };
@@ -57,38 +62,50 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-const orgJsonLd = {
+const structuredData = {
   "@context": "https://schema.org",
-  "@type": ["ProfessionalService", "LocalBusiness"],
-  name: site.name,
-  url: site.url,
-  description: site.description,
-  slogan: site.tagline,
-  image: `${site.url}${site.logo.src}`,
-  telephone: site.phone.primary.number,
-  email: site.email,
-  sameAs: [site.instagram.url],
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: site.address.line,
-    addressLocality: site.cities[0],
-    addressRegion: "Chhattisgarh",
-    addressCountry: "IN",
-  },
-  areaServed: site.cities.map((city) => ({
-    "@type": "City",
-    name: city,
-  })),
-  openingHours: "Mo-Su 10:00-19:00",
-  makesOffer: [
-    "Content Creation & Branding",
-    "Meta Ads & Google Ads",
-    "Website & Social Media Management",
-    "Personal Branding & Influencer Marketing",
-  ].map((name) => ({
-    "@type": "Offer",
-    itemOffered: { "@type": "Service", name },
-  })),
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${site.url}/#organization`,
+      name: site.name,
+      url: site.url,
+      description: site.description,
+      slogan: site.tagline,
+      logo: `${site.url}${site.logo.src}`,
+      sameAs: [site.instagram.url],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${site.url}/#professional-service`,
+      name: site.name,
+      url: site.url,
+      description: site.description,
+      image: `${site.url}${site.logo.src}`,
+      telephone: site.phone.primary.number,
+      email: site.email,
+      parentOrganization: { "@id": `${site.url}/#organization` },
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Bilaspur",
+        addressRegion: "Chhattisgarh",
+        addressCountry: "IN",
+      },
+      areaServed: site.cities.map((city) => ({
+        "@type": "City",
+        name: city,
+      })),
+      makesOffer: [
+        "Content Creation & Branding",
+        "Meta Ads & Google Ads",
+        "Website & Social Media Management",
+        "Personal Branding & Influencer Marketing",
+      ].map((name) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name },
+      })),
+    },
+  ],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -109,7 +126,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </LenisProvider>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </body>
     </html>

@@ -8,7 +8,7 @@ import { ContactChannels } from "@/components/sections/ContactChannels";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Request a Free Digital Audit",
+  title: "Contact FreeKit Media | Request a Digital Marketing Audit",
   description: `${site.cta.auditNote} Tell us about your business and we’ll be in touch.`,
   alternates: { canonical: "/contact" },
   openGraph: {
@@ -49,7 +49,7 @@ export default function ContactPage() {
               Contact
             </p>
             <h1 className="font-display mt-4 text-hero leading-[1.02] font-extrabold tracking-[-0.03em]">
-              Request a free digital audit
+              Request a free digital marketing audit
             </h1>
             <p className="mt-6 max-w-md text-lead leading-relaxed text-paper/65">
               Tell us a little about your business. We’ll review your online

@@ -15,8 +15,8 @@ export const site = {
   tagline: "Aapka brand dikhega, tabhi toh bikega.",
   headlineEn: "Building Brands Through Digital Presence",
   description:
-    "FreeKit Media — Chhattisgarh ka full-service digital marketing agency. Content, ads, website, social media aur branding, sab ek in-house team se. Bilaspur, Ambikapur, Korba.",
-  url: "https://www.freekitmedia.com",
+    "FreeKit Media is a digital marketing agency serving Bilaspur, Ambikapur, Raipur and businesses across Chhattisgarh with content, Meta and Google ads, websites, social media, and branding.",
+  url: "https://freekitmedia.com",
   logo: { src: "/images/logo.jpg", width: 220, height: 220 },
   cta: {
     audit: "Request a free audit",
@@ -36,7 +36,7 @@ export const site = {
   socials: [
     { icon: "instagram", label: "Instagram", href: "https://www.instagram.com/freekitmedia_hub" },
   ] as const,
-  cities: ["Bilaspur", "Ambikapur", "Korba"] as const,
+  cities: ["Bilaspur", "Ambikapur", "Raipur", "Korba"] as const,
   heroBadge: {
     label: "Content & Digital Marketing Agency — Chhattisgarh",
     href: "#home",
@@ -54,6 +54,7 @@ export const site = {
     { label: "Process", href: "/#process" },
     { label: "Partners", href: "/#partners" },
     { label: "FAQ", href: "/#faq" },
+    { label: "Locations", href: "/locations" },
   ] as const,
 } as const;
 
@@ -76,9 +77,9 @@ export const proofStats = [
 export type HeroHeadingPart = { text: string; highlight?: boolean } | "\n";
 
 export const heroHeading: HeroHeadingPart[] = [
-  { text: "Aapka brand dikhega," },
+  { text: "Digital marketing" },
   "\n",
-  { text: "tabhi toh bikega.", highlight: true },
+  { text: "agency for growing brands.", highlight: true },
 ];
 
 export const heroSub =

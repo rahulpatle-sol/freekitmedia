@@ -21,7 +21,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const page = servicePageBySlug(slug);
   if (!page) return {};
-  const title = `${page.title} — Service ${page.num}`;
+  const title = `${page.title} Services`;
   return {
     title,
     description: page.metaDescription,

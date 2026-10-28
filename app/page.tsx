@@ -18,23 +18,26 @@ import { JsonLd, faqJsonLd } from "@/lib/seo";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Digital Marketing Agency Chhattisgarh — Content, Ads, Website, Branding",
+  title: "Digital Marketing Agency in Chhattisgarh | Content, Ads & Branding",
   description:
-    "FreeKit Media is Chhattisgarh ka full-service digital marketing agency. Content, Meta & Google ads, website aur social media management — bilkul ek in-house team se. Bilaspur, Ambikapur, Korba.",
+    "FreeKit Media helps businesses in Bilaspur, Ambikapur, Raipur and across Chhattisgarh with content, Meta and Google ads, websites, social media and branding.",
   keywords: [
     "digital marketing agency Bilaspur",
+    "digital marketing agency Ambikapur",
+    "digital marketing agency Raipur",
     "digital marketing agency Chhattisgarh",
     "social media management Korba",
     "Instagram ads Ambikapur",
     "content creation agency",
   ],
   openGraph: {
-    title: "FreeKit Media — Digital Marketing Agency in Chhattisgarh",
+    title: "Digital Marketing Agency in Chhattisgarh | FreeKit Media",
     description:
-      "Poora marketing department, ek hi chhat ke neeche. Content, ads, website aur branding — sab ek team se.",
+      "Content, ads, websites and branding for businesses in Bilaspur, Ambikapur, Raipur and across Chhattisgarh.",
     type: "website",
     locale: "en_IN",
   },
+  alternates: { canonical: "/" },
 };
 
 export default function Home() {

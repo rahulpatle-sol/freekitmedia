@@ -18,7 +18,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const entry = repo.industries.bySlug(slug);
   if (!entry) return {};
-  const title = `${entry.name} — digital marketing`;
+  const title = `Digital marketing for ${entry.name}`;
   return {
     title,
     description: entry.problemLine,
@@ -62,7 +62,7 @@ async function Content({ slugPromise }: { slugPromise: Promise<Params> }) {
       <DocPage
         entry={{
           eyebrow: "Industry",
-          title: entry.name,
+          title: `Digital marketing for ${entry.name}`,
           intro: entry.problemLine,
           blocks,
         }}

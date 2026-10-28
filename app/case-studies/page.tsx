@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { caseStudies } from "@/content/case-studies";
 
 export const metadata: Metadata = {
-  title: "Case Studies",
+  title: "Digital Marketing Case Studies",
   description:
     "Selected FreeKit Media project stories, with outcomes and context from the available case-study data.",
   alternates: { canonical: "/case-studies" },
@@ -23,7 +23,7 @@ export default function CaseStudiesPage() {
               Selected work / Case studies
             </p>
             <h1 className="font-display mt-5 max-w-4xl text-h1 font-extrabold leading-[0.98] tracking-[-0.04em]">
-              The context behind the work.
+              Digital marketing work, with the context behind it.
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-paper/65 sm:text-lg">
               Project notes with the available strategy, execution, and
