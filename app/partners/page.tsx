@@ -42,10 +42,13 @@ export default function PartnersPage() {
                 >
                   <div className="flex items-center justify-between gap-4 text-[10px] font-semibold uppercase tracking-[0.16em] text-grey-400">
                     <span>{partner.industry}</span>
-                    <span>
-                      {partner.city}
-                      {partner.franchise ? " / Franchise" : ""}
-                    </span>
+                    {(partner.city || partner.franchise) && (
+                      <span>
+                        {[partner.city, partner.franchise ? "Franchise" : ""]
+                          .filter(Boolean)
+                          .join(" / ")}
+                      </span>
+                    )}
                   </div>
                   <h2 className="font-display mt-8 text-3xl font-bold tracking-[-0.04em] sm:text-4xl">
                     {partner.name}

@@ -1,17 +1,72 @@
 
 import type { Block } from "@/lib/content/types";
 
+export type PartnerGalleryItem = {
+  id: string;
+  mediaType: "reel" | "image" | "video";
+  url?: string;
+  src?: string;
+  title: string;
+  caption?: string;
+  contentCategory?: string;
+  instagramUrl?: string;
+};
+
+export type PartnerMetric = {
+  value: string;
+  label: string;
+  hint?: string;
+};
+
+export type PartnerDeliverableGroup = {
+  group: string;
+  items: string[];
+};
+
+export type PartnerStrategyPhase = {
+  intention: "attention" | "discovery" | "credibility" | "education" | "conversion";
+  title: string;
+  description: string;
+};
+
+export type PartnerStory = {
+  client: string;
+  challenge: string;
+  strategy: string;
+  execution: string;
+  results?: string;
+};
+
+export type PartnerTheme = {
+  mode?: "dark" | "light";
+  accent?: string;
+  accentSoft?: string;
+  background?: string;
+  foreground?: string;
+  muted?: string;
+};
+
 export type Partner = {
   slug: string;
   name: string;
   logo?: string;
   franchise?: boolean;
   industry: string;
-  city: string;
+  city?: string;
   oneLine: string;
   whatWeDid: string;
   featured: boolean;
   blocks: Block[];
+  reels?: { title: string; url: string }[];
+  headline?: string;
+  intro?: string;
+  story?: PartnerStory;
+  deliverables?: PartnerDeliverableGroup[];
+  strategy?: PartnerStrategyPhase[];
+  metrics?: PartnerMetric[];
+  gallery?: PartnerGalleryItem[];
+  theme?: PartnerTheme;
+  relatedSlugs?: string[];
 };
 
 export const partners: Partner[] = [
@@ -98,6 +153,12 @@ export const partners: Partner[] = [
     oneLine: "Ride events aur community campaigns ki digital presence.",
     whatWeDid: "Event creatives, reels aur community engagement campaigns.",
     featured: false,
+    reels: [
+      {
+        title: "Stellars Moto Riders Reel",
+        url: "https://www.instagram.com/stellars.moto.riders/reel/Dei3a71gMWJ/",
+      },
+    ],
     blocks: [
       { type: "heading", text: "Royal Enfield", level: 2 },
       {
@@ -105,6 +166,68 @@ export const partners: Partner[] = [
         text: "Royal Enfield ke ride events aur showrooms ke liye creatives, reels aur community-first digital campaigns par kaam kiya.",
       },
     ],
+    headline: "Built for the ride that matters.",
+    intro:
+      "Royal Enfield aur Stellars Moto Riders ke saath humne woh content bana jismein ride events, rider stories aur cinematic reels ek saath aa rahe the.",
+    story: {
+      client: "Royal Enfield aur Stellars Moto Riders",
+      challenge:
+        "Ride events aur showroom launches ka energy online mein kam dikh raha tha aur unka rider community digital bhi nahi mila.",
+      strategy:
+        "Real rides, real riders aur real roads pe cinematic storytelling aur event-led reel content banaya.",
+      execution:
+        "Event creatives, ride event reels aur community-first engagement campaigns banaye.",
+    },
+    deliverables: [
+      {
+        group: "Engaging content",
+        items: [
+          "Event creatives",
+          "Ride event reels",
+          "Community storytelling content",
+        ],
+      },
+    ],
+    strategy: [
+      {
+        intention: "attention",
+        title: "Stop the scroll",
+        description:
+          "Content designed to capture rider attention before the ride itself.",
+      },
+      {
+        intention: "credibility",
+        title: "Earn real trust",
+        description:
+          "Rides and rider stories that reflect the brand honestly.",
+      },
+      {
+        intention: "conversion",
+        title: "Move riders to intent",
+        description:
+          "Campaign content created to move interest toward enquiries and test rides.",
+      },
+    ],
+    gallery: [
+      {
+        id: "stellars-moto-riders-reel",
+        mediaType: "reel",
+        title: "Stellars Moto Riders Reel",
+        caption:
+          "Event energy, real riders aur cinematic reels - the way Royal Enfield ride communities actually move.",
+        instagramUrl:
+          "https://www.instagram.com/stellars.moto.riders/reel/Dei3a71gMWJ/",
+      },
+    ],
+    theme: {
+      mode: "dark",
+      accent: "#F7C928",
+      accentSoft: "#FBE17D",
+      background: "#171717",
+      foreground: "#FFFFFF",
+      muted: "rgba(255, 255, 255, 0.66)",
+    },
+    relatedSlugs: ["renault", "suzuki"],
   },
 
 
@@ -122,6 +245,89 @@ blocks: [{ type: "heading", text: "Suzuki Motorcycles Franchise", level: 2 }],
 }
 
 ,
+  {
+    slug: "mayura-group",
+    name: "Mayura Group",
+    industry: "Business group",
+    oneLine: "Brand storytelling and campaign content for Mayura Group.",
+    whatWeDid: "Brand storytelling and campaign content.",
+    featured: false,
+    reels: [
+      {
+        title: "Mayura Group Reel",
+        url: "https://www.instagram.com/mayura_group/reel/De8t6b7xNXd/",
+      },
+    ],
+    blocks: [{ type: "heading", text: "Mayura Group", level: 2 }],
+    headline: "Where welcome becomes a story.",
+    intro:
+      "Mayura Group ka Hotel Mayura - Raipur wala three-decade-old hospitality story - ke liye humne brand storytelling aur campaign content banaya.",
+    story: {
+      client: "Mayura Group - Hotel Mayura",
+      challenge:
+        "Woh hospitality story online mein nahi dikh raha tha aur unka digital presence usse kam tha.",
+      strategy:
+        "Brand storytelling aur campaign content ke through guest stories ko bharosa banane ki koshish.",
+      execution:
+        "Brand storytelling aur campaign content banaye.",
+    },
+    deliverables: [
+      {
+        group: "Brand storytelling",
+        items: [
+          "Brand story development",
+          "Campaign narrative",
+        ],
+      },
+      {
+        group: "Engaging content",
+        items: [
+          "Reels",
+          "Lifestyle storytelling content",
+        ],
+      },
+    ],
+    strategy: [
+      {
+        intention: "attention",
+        title: "Warmth that stops the scroll",
+        description:
+          "Content designed to make people feel welcome before they ever step in.",
+      },
+      {
+        intention: "education",
+        title: "Show the experience",
+        description:
+          "Content that communicates rooms, food and experiences with honesty.",
+      },
+      {
+        intention: "conversion",
+        title: "Turn stories into stays",
+        description:
+          "Campaign content created to support enquiries and direct bookings.",
+      },
+    ],
+    gallery: [
+      {
+        id: "mayura-group-reel",
+        mediaType: "reel",
+        title: "Mayura Group Reel",
+        caption:
+          "Hospitality wali kahani - rooms, warmth aur stories.",
+        instagramUrl:
+          "https://www.instagram.com/mayura_group/reel/De8t6b7xNXd/",
+      },
+    ],
+    theme: {
+      mode: "light",
+      accent: "#65745B",
+      accentSoft: "#E4E8E1",
+      background: "#F7F6F2",
+      foreground: "#171717",
+      muted: "#55524C",
+    },
+  },
+
   {
     slug: "pathosure",
     name: "Pathosure",

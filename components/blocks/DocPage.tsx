@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { Icon } from "@/components/ui/Icon";
 import { Container } from "@/components/ui/Container";
 import { BlockRenderer } from "@/components/blocks/BlockRenderer";
@@ -18,10 +19,12 @@ export function DocPage({
   entry,
   backHref,
   backLabel,
+  afterContent,
 }: {
   entry: DocEntry;
   backHref: string;
   backLabel: string;
+  afterContent?: ReactNode;
 }) {
   return (
     <>
@@ -56,6 +59,7 @@ export function DocPage({
         </div>
         <Container className="max-w-3xl pt-14">
           <BlockRenderer blocks={entry.blocks} />
+          {afterContent}
           <Link
             href={backHref}
             className="mt-16 inline-flex items-center gap-2 text-sm font-semibold text-ink transition-colors hover:text-brand-deep"

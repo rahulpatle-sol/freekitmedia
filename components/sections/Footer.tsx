@@ -141,7 +141,7 @@ export function Footer() {
               </p>
 
               <p className="mt-3 max-w-sm text-sm leading-6 text-white/45">
-                {site.headlineEn} — {site.cities.join(", ")}.
+                {site.headlineEn} â€” {site.cities.join(", ")}.
               </p>
 
               {/* Social links */}
@@ -305,7 +305,7 @@ export function Footer() {
           {/* Footer metadata */}
           <div className="flex flex-col justify-between gap-3 border-t border-white/[0.09] px-5 py-5 text-[10px] leading-5 text-white/40 sm:flex-row sm:items-center sm:px-8 lg:px-10">
             <p>
-              © 2025–2026 {site.name}. All rights reserved.
+              Â© 2025â€“2026 {site.name}. All rights reserved.
             </p>
 
             <p className="uppercase tracking-[0.12em]">
@@ -313,6 +313,33 @@ export function Footer() {
             </p>
           </div>
         </div>
+
+        {/* Legal */}
+        <nav
+          aria-label="Legal"
+          className="flex flex-wrap items-center gap-x-6 gap-y-2 px-1 pt-5"
+        >
+          <Link
+            href="/terms-and-conditions"
+            className="text-[11px] font-medium uppercase tracking-[0.14em] text-white/40 transition-colors duration-300 hover:text-[#FBE17D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7C928]"
+          >
+            Terms & Conditions
+          </Link>
+
+          <Link
+            href="/privacy-policy"
+            className="text-[11px] font-medium uppercase tracking-[0.14em] text-white/40 transition-colors duration-300 hover:text-[#FBE17D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7C928]"
+          >
+            Privacy Policy
+          </Link>
+
+          <Link
+            href="/refund-policy"
+            className="text-[11px] font-medium uppercase tracking-[0.14em] text-white/40 transition-colors duration-300 hover:text-[#FBE17D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7C928]"
+          >
+            Refund Policy
+          </Link>
+        </nav>
 
         {/* Bottom navigation */}
         <div className="flex flex-col gap-3 px-1 pt-5 text-[9px] uppercase tracking-[0.16em] text-white/35 sm:flex-row sm:items-center sm:justify-between sm:gap-4">

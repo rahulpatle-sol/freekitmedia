@@ -1,7 +1,10 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { DocPage, DocFallback } from "@/components/blocks/DocPage";
+import { SubpageHeader } from "@/components/sections/SubpageHeader";
+import { Footer } from "@/components/sections/Footer";
+import { DocFallback } from "@/components/blocks/DocPage";
+import { PartnerCaseStudy } from "@/components/partners/PartnerCaseStudy";
 import { JsonLd, breadcrumbJsonLd, openGraph } from "@/lib/seo";
 import { repo } from "@/lib/content";
 
@@ -19,7 +22,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const entry = repo.partners.bySlug(slug);
   if (!entry) return {};
-  const title = `${entry.name} — ${entry.industry}`;
+  const title = `${entry.name} - ${entry.industry}`;
   return {
     title,
     description: entry.oneLine,
@@ -47,25 +50,11 @@ async function Content({ slugPromise }: { slugPromise: Promise<Params> }) {
   if (!entry) notFound();
   return (
     <>
-      <DocPage
-        entry={{
-          eyebrow: `Partner — ${entry.industry}`,
-          title: entry.name,
-          intro: entry.oneLine,
-          chips: [
-            entry.industry,
-            entry.city,
-            ...(entry.franchise ? ["Franchise"] : []),
-          ],
-          blocks: [
-            { type: "heading", text: "Humne kya kiya", level: 2 },
-            { type: "text", text: entry.whatWeDid },
-            ...entry.blocks,
-          ],
-        }}
-        backHref="/partners"
-        backLabel="Browse all partners"
-      />
+      <SubpageHeader />
+      <main id="main" className="flex-1 bg-paper">
+        <PartnerCaseStudy partner={entry} />
+      </main>
+      <Footer />
       <JsonLd
         data={breadcrumbJsonLd([
           { name: "Home", path: "/" },
