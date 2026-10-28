@@ -77,9 +77,9 @@ export const proofStats = [
 export type HeroHeadingPart = { text: string; highlight?: boolean } | "\n";
 
 export const heroHeading: HeroHeadingPart[] = [
-  { text: "Digital marketing" },
+  { text: "Aapka brand dikhega," },
   "\n",
-  { text: "agency for growing brands.", highlight: true },
+  { text: "tabhi toh bikega.", highlight: true },
 ];
 
 export const heroSub =

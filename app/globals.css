@@ -133,8 +133,7 @@ svg {
   max-width: 100%;
 }
 
-img,
-video {
+img {
   height: auto;
 }
 

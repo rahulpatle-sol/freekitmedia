@@ -91,7 +91,6 @@ export function PitchSection() {
                       src={getIndustryImage(activeIndex)}
                       alt={`${activeIndustry.name} industry`}
                       fill
-                      priority={activeIndex === 0}
                       sizes="(max-width: 1024px) 100vw, 42vw"
                       className="object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:transition-none"
                     />

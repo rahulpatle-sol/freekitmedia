@@ -1,12 +1,10 @@
 
 "use client";
-import { FaWhatsapp } from "react-icons/fa";
-import { useRef } from "react";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import { Button, AuditButton } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Icon } from "@/components/ui/Icon";
-import { gsap, useGSAP } from "@/lib/gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { whatsappLink, cn } from "@/lib/utils";
 import {
   heroHeading,
@@ -14,17 +12,6 @@ import {
   heroTrust,
   site,
 } from "@/content/site";
-
-gsap.registerPlugin(ScrollTrigger);
-
-const heroSelectors = {
-  badge: "[data-hero-badge]",
-  title: "[data-hero-title]",
-  subtitle: "[data-hero-subtitle]",
-  actions: "[data-hero-actions]",
-  trust: "[data-hero-trust]",
-  card: "[data-hero-card]",
-};
 
 function Title() {
   return (
@@ -61,159 +48,99 @@ export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const videoFrameRef = useRef<HTMLDivElement>(null);
+  const [videoReady, setVideoReady] = useState(false);
 
-  useGSAP(
-    () => {
-      const video = videoRef.current;
-      const videoFrame = videoFrameRef.current;
-      const mm = gsap.matchMedia();
+  useEffect(() => {
+    const video = videoRef.current;
+    const videoFrame = videoFrameRef.current;
+    if (
+      !video ||
+      !videoFrame ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
 
-      mm.add(
-        {
-          motionOK: "(prefers-reduced-motion: no-preference)",
-          reduce: "(prefers-reduced-motion: reduce)",
-        },
-        (context) => {
-          const targets = Object.values(heroSelectors).join(",");
+    let cancelled = false;
+    let cleanup = () => {};
 
-          if (context.conditions?.reduce) {
-            video?.pause();
-            gsap.set(targets, {
-              autoAlpha: 1,
-              y: 0,
-              scale: 1,
-              clearProps: "filter",
-            });
-            return;
-          }
+    const initializeMotion = async () => {
+      const { gsap, ScrollTrigger } = await import("@/lib/gsap");
+      if (cancelled) return;
+      let getProgress = () => 0;
 
-          const intro = gsap.timeline({
-            defaults: { ease: "power3.out" },
-          });
+      const onMetadata = () => {
+        syncVideo();
+        ScrollTrigger.refresh();
+      };
 
-          intro
-            .fromTo(
-              heroSelectors.badge,
-              { y: 12, autoAlpha: 0 },
-              { y: 0, autoAlpha: 1, duration: 0.55 },
-              0
-            )
-            .fromTo(
-              `${heroSelectors.title} span`,
-              { y: 28, autoAlpha: 0, rotateX: -8 },
-              {
-                y: 0,
-                autoAlpha: 1,
-                rotateX: 0,
-                duration: 0.75,
-                stagger: 0.075,
-                clearProps: "transform",
-              },
-              0.1
-            )
-            .fromTo(
-              heroSelectors.subtitle,
-              { y: 16, autoAlpha: 0, filter: "blur(4px)" },
-              {
-                y: 0,
-                autoAlpha: 1,
-                filter: "blur(0px)",
-                duration: 0.65,
-              },
-              0.3
-            )
-            .fromTo(
-              heroSelectors.actions,
-              { y: 14, autoAlpha: 0 },
-              { y: 0, autoAlpha: 1, duration: 0.55 },
-              0.42
-            )
-            .fromTo(
-              heroSelectors.trust,
-              { y: 10, autoAlpha: 0 },
-              { y: 0, autoAlpha: 1, duration: 0.5 },
-              0.52
-            )
-            .fromTo(
-              heroSelectors.card,
-              { y: 30, autoAlpha: 0, scale: 0.975 },
-              { y: 0, autoAlpha: 1, scale: 1, duration: 0.9 },
-              0.55
-            );
-
-          if (!video || !videoFrame) return;
-
-          // Scroll-driven cinematic video reveal.
-          // Playback stays paused so scrolling controls the frame.
-          video.pause();
-
-          const scrollAnimation = gsap.timeline({
-            scrollTrigger: {
-              trigger: videoFrame,
-              start: "top 90%",
-              end: "bottom 15%",
-              scrub: 0.8,
-              invalidateOnRefresh: true,
-            },
-          });
-
-          scrollAnimation
-            .fromTo(
-              videoFrame,
-              { borderRadius: "1.5rem" },
-              {
-                borderRadius: "0.7rem",
-                ease: "none",
-              },
-              0
-            )
-            .fromTo(
-              video,
-              { scale: 1.12 },
-              { scale: 1, ease: "none" },
-              0
-            );
-
-          const syncVideo = () => {
-            if (
-              !video.duration ||
-              !Number.isFinite(video.duration) ||
-              video.readyState < 2
-            ) {
-              return;
-            }
-
-            const targetTime =
-              scrollAnimation.progress() * video.duration;
-
-            if (Math.abs(video.currentTime - targetTime) > 0.06) {
-              try {
-                video.currentTime = targetTime;
-              } catch {
-                // The browser may still be seeking.
-              }
-            }
-          };
-
-          scrollAnimation.eventCallback("onUpdate", syncVideo);
-
-          const onMetadata = () => {
-            syncVideo();
-            ScrollTrigger.refresh();
-          };
-
-          video.addEventListener("loadedmetadata", onMetadata);
-
-          return () => {
-            video.removeEventListener("loadedmetadata", onMetadata);
-          };
+      const syncVideo = () => {
+        if (
+          !video.duration ||
+          !Number.isFinite(video.duration) ||
+          video.readyState < 2
+        ) {
+          return;
         }
-      );
 
-      return () => mm.revert();
-    },
-    { scope: ref }
-  );
+        const targetTime = getProgress() * video.duration;
+        if (!video.seeking && Math.abs(video.currentTime - targetTime) > 0.06) {
+          video.currentTime = targetTime;
+        }
+      };
+
+      video.pause();
+      const context = gsap.context(() => {
+        const scrollAnimation = gsap.timeline({
+          scrollTrigger: {
+            trigger: videoFrame,
+            start: "top 90%",
+            end: "bottom 15%",
+            scrub: 0.8,
+            invalidateOnRefresh: true,
+          },
+        });
+        getProgress = () => scrollAnimation.progress();
+
+        scrollAnimation.fromTo(
+          videoFrame,
+          { borderRadius: "1.5rem" },
+          {
+            borderRadius: "0.7rem",
+            ease: "none",
+          },
+          0
+        );
+        scrollAnimation.eventCallback("onUpdate", syncVideo);
+        video.addEventListener("loadedmetadata", onMetadata);
+        video.preload = "metadata";
+        video.load();
+      }, ref);
+
+      cleanup = () => {
+        video.removeEventListener("loadedmetadata", onMetadata);
+        context.revert();
+      };
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        observer.disconnect();
+        void initializeMotion().catch((error: unknown) => {
+          console.error("Unable to load hero motion", error);
+        });
+      },
+      { rootMargin: "0px 0px -30% 0px" }
+    );
+
+    observer.observe(videoFrame);
+    return () => {
+      cancelled = true;
+      observer.disconnect();
+      cleanup();
+    };
+  }, []);
 
   return (
 
@@ -251,12 +178,10 @@ export function Hero() {
 
   <Container className="relative">
     {/* Hero intro */}
-    <link rel="preload" as="image" href="/videos/hero-poster.jpg" fetchPriority="high" />
     <div className="mx-auto flex max-w-5xl flex-col items-center text-center">
       {/* Badge */}
    <div
   data-hero-badge
-  className="opacity-0"
 >
   <p className="flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#8A6C05] sm:text-sm">
     <span className="size-1.5 rounded-full bg-[#8A6C05]" />
@@ -271,7 +196,7 @@ export function Hero() {
       <p
         data-hero-subtitle
         className={cn(
-          "mt-6 max-w-2xl opacity-0",
+          "mt-6 max-w-2xl",
           "text-base leading-7 text-[#55524C]",
           "sm:mt-7 sm:text-lg sm:leading-8",
           "lg:text-xl lg:leading-9",
@@ -285,7 +210,6 @@ export function Hero() {
         data-hero-actions
         className={cn(
           "mt-8 flex w-full flex-col items-stretch justify-center gap-3",
-          "opacity-0",
           "sm:mt-9 sm:w-auto sm:flex-row sm:items-center sm:gap-4",
         )}
       >
@@ -308,9 +232,9 @@ export function Hero() {
             "hover:border-[#8A6C05]/50 hover:bg-[#FFF9E5]",
           )}
         >
-          <FaWhatsapp
-            className="mr-2 size-5 shrink-0 text-[#8A6C05] transition-transform duration-300 group-hover:scale-110"
-            aria-hidden="true"
+          <Icon
+            name="whatsapp"
+            className="mr-2 size-5 text-[#8A6C05] transition-transform duration-300 group-hover:scale-110"
           />
           {site.cta.whatsapp}
         </Button>
@@ -321,7 +245,7 @@ export function Hero() {
         data-hero-trust
         className={cn(
           "mt-8 flex max-w-3xl flex-wrap items-center justify-center",
-          "gap-x-3 gap-y-3 opacity-0",
+          "gap-x-3 gap-y-3",
           "sm:mt-9 sm:gap-x-4 sm:gap-y-4",
         )}
       >
@@ -355,7 +279,7 @@ export function Hero() {
     <div
       data-hero-card
       className={cn(
-        "relative mx-auto mt-12 w-full max-w-[1360px] opacity-0",
+        "relative mx-auto mt-12 w-full max-w-[1360px]",
         "sm:mt-16 lg:mt-[4.5rem]",
       )}
     >
@@ -376,17 +300,31 @@ export function Hero() {
             "lg:aspect-[2.05/1]",
           )}
         >
+          <Image
+            src="/videos/hero-poster.jpg"
+            alt=""
+            fill
+            preload
+            unoptimized
+            sizes="(max-width: 640px) 100vw, 95vw"
+            className="object-cover"
+          />
           <video
-            ref={videoRef}
-            src="https://ik.imagekit.io/freekitMedia/Freekit%20media%20Assets/testimonials/freekit%20media%20video.mp4"
+          ref={videoRef}
+          src="https://ik.imagekit.io/freekitMedia/Freekit%20media%20Assets/testimonials/freekit%20media%20video.mp4"
             poster="/videos/hero-poster.jpg"
             muted
             playsInline
-            preload="metadata"
+            preload="none"
             disablePictureInPicture
             tabIndex={-1}
             aria-hidden="true"
-            className="absolute inset-0 size-full object-cover will-change-transform"
+            onLoadedData={() => setVideoReady(true)}
+            className={cn(
+              "absolute inset-0 size-full object-cover transition-opacity duration-500",
+              videoReady ? "opacity-100" : "opacity-0",
+            )}
+            style={{ height: "100%" }}
           />
 
           {/* Video overlays */}

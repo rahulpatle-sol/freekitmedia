@@ -53,7 +53,7 @@ export function PartnerMarquee() {
                       alt=""
                       width={300}
                       height={100}
-                      unoptimized
+                      sizes="(max-width: 640px) 144px, 160px"
                       className="max-h-8 w-full object-contain opacity-65 transition duration-300 hover:scale-105 hover:opacity-100 motion-reduce:transition-none sm:max-h-9"
                     />
                   )}
