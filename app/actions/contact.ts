@@ -48,6 +48,138 @@ async function resolveClientKey(): Promise<string> {
   }
 }
 
+async function appendLeadToSheet(lead: {
+  name: string;
+  phone: string;
+  businessType: string;
+}): Promise<void> {
+  const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
+  const webhookToken = process.env.GOOGLE_SHEETS_WEBHOOK_TOKEN;
+
+  if (!webhookUrl || !webhookToken) {
+    throw new Error(
+      "GOOGLE_SHEETS_WEBHOOK_URL and GOOGLE_SHEETS_WEBHOOK_TOKEN must be configured.",
+    );
+  }
+
+  const parsedWebhookUrl = new URL(webhookUrl);
+  if (
+    parsedWebhookUrl.protocol !== "https:" ||
+    parsedWebhookUrl.hostname !== "script.google.com" ||
+    !/^\/macros\/s\/[^/]+\/exec$/.test(parsedWebhookUrl.pathname)
+  ) {
+    throw new Error("GOOGLE_SHEETS_WEBHOOK_URL must be a deployed Apps Script URL.");
+  }
+
+  const response = await fetch(parsedWebhookUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      token: webhookToken,
+      ...lead,
+      receivedAt: new Date().toISOString(),
+    }),
+    cache: "no-store",
+    signal: AbortSignal.timeout(10_000),
+  });
+
+  const contentType = response.headers.get("content-type") ?? "";
+  if (!response.ok || !contentType.includes("application/json")) {
+    const responseBody = await response.text();
+    const details = contentType.includes("text/html")
+      ? responseBody
+          .replace(/<script[\s\S]*?<\/script>/gi, " ")
+          .replace(/<style[\s\S]*?<\/style>/gi, " ")
+          .replace(/<[^>]+>/g, " ")
+          .replace(/\s+/g, " ")
+          .replace(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi, "[redacted email]")
+          .trim()
+          .slice(0, 300)
+      : responseBody.slice(0, 300);
+    console.error("[contact-sheet-error]", {
+      status: response.status,
+      contentType,
+      details,
+    });
+
+    if (response.status === 403 && /you need access/i.test(details)) {
+      throw new Error(
+        "Google blocked anonymous access before the Apps Script webhook ran. Redeploy it with access set to Anyone; if it is already set that way, the deploying Google Workspace account may block public web apps.",
+      );
+    }
+
+    throw new Error(
+      `Google Apps Script returned HTTP ${response.status}; confirm the deployment is public and the executing account can access the spreadsheet.`,
+    );
+  }
+
+  const result: unknown = await response.json();
+  if (
+    typeof result !== "object" ||
+    result === null ||
+    !("ok" in result) ||
+    result.ok !== true
+  ) {
+    console.error("[contact-sheet-error]", {
+      status: response.status,
+      result,
+    });
+    throw new Error("The Google Sheets webhook did not confirm the lead.");
+  }
+}
+
+async function sendContactEmail(lead: {
+  name: string;
+  phone: string;
+  businessType: string;
+}): Promise<void> {
+  const apiKey = process.env.RESEND_API_KEY;
+  const from = process.env.CONTACT_FROM_EMAIL;
+  const to = process.env.CONTACT_TO_EMAIL || site.email;
+
+  if (!apiKey || !from) {
+    console.error(
+      "[contact-email-config-error] RESEND_API_KEY and CONTACT_FROM_EMAIL must be configured.",
+    );
+    return;
+  }
+
+  try {
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from,
+        to: [to],
+        subject: `New FreeKit Media enquiry from ${lead.name}`,
+        text: [
+          "A new contact form enquiry was submitted.",
+          "",
+          `Name: ${lead.name}`,
+          `Phone: ${lead.phone}`,
+          `Business type: ${lead.businessType}`,
+          `Received: ${new Date().toISOString()}`,
+        ].join("\n"),
+      }),
+      cache: "no-store",
+      signal: AbortSignal.timeout(10_000),
+    });
+
+    if (!response.ok) {
+      const details = await response.text();
+      console.error("[contact-email-error]", {
+        status: response.status,
+        details: details.slice(0, 500),
+      });
+    }
+  } catch (error) {
+    console.error("[contact-email-error]", error);
+  }
+}
+
 export async function submitContact(
   _prev: ContactState,
   formData: FormData,
@@ -57,7 +189,7 @@ export async function submitContact(
       return { ok: false, errors: null, failure: true };
     }
 
-    const honeypot = String(formData.get("company") ?? "");
+    const honeypot = String(formData.get("faxNumber") ?? "");
     if (honeypot !== "") {
       return { ok: true, errors: null, failure: false };
     }
@@ -87,48 +219,14 @@ export async function submitContact(
       return { ok: false, errors, failure: false };
     }
 
-    const apiKey = process.env.RESEND_API_KEY;
-    const from = process.env.CONTACT_FROM_EMAIL;
-    const to = process.env.CONTACT_TO_EMAIL || site.email;
+    const lead = {
+      name,
+      phone: `+91 ${localPhone}`,
+      businessType,
+    };
 
-    if (!apiKey || !from) {
-      console.error(
-        "[contact-email-config-error] RESEND_API_KEY and CONTACT_FROM_EMAIL must be configured.",
-      );
-      return { ok: false, errors: null, failure: true };
-    }
-
-    const response = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from,
-        to: [to],
-        subject: `New FreeKit Media enquiry from ${name}`,
-        text: [
-          "A new contact form enquiry was submitted.",
-          "",
-          `Name: ${name}`,
-          `Phone: +91 ${localPhone}`,
-          `Business type: ${businessType}`,
-          `Received: ${new Date().toISOString()}`,
-        ].join("\n"),
-      }),
-      cache: "no-store",
-      signal: AbortSignal.timeout(10_000),
-    });
-
-    if (!response.ok) {
-      const details = await response.text();
-      console.error("[contact-email-error]", {
-        status: response.status,
-        details: details.slice(0, 500),
-      });
-      return { ok: false, errors: null, failure: true };
-    }
+    await appendLeadToSheet(lead);
+    await sendContactEmail(lead);
 
     return { ok: true, errors: null, failure: false };
   } catch (error) {

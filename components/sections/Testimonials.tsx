@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 
@@ -13,26 +14,26 @@ const stories = [
     client: "Dr. Sharma",
     business: "Dental practice (practice name TODO)",
     quote: "TODO: Add an approved quote from this video testimonial.",
-    video:
-      "https://ik.imagekit.io/freekitMedia/Freekit%20media%20Assets/testimonials/sharma%20dental%20feedback.mp4",
+    video: "/images/partners/videos/sharma%20dental%20feedback.mp4",
+    poster: "/images/partners/videos/1.jpeg",
   },
   {
     id: 2,
-    title: "Tyre Center's story",
-    client: "Tyre Centre",
-    business: "Tyre business (business name TODO)",
-    quote: "TODO: Add an approved quote from this video testimonial.",
-    video:
-      "https://ik.imagekit.io/freekitMedia/Freekit%20media%20Assets/testimonials/tyre%20centre%20feedback.mp4",
-  },
-  {
-    id: 3,
     title: "Balaji & Balaji Jawellers story",
     client: "Balaji & Balaji Jewellers",
     business: "Jewellery retail",
     quote: "TODO: Add an approved quote from this video testimonial.",
-    video:
-      "https://ik.imagekit.io/freekitMedia/Freekit%20media%20Assets/testimonials/Balaji%20&%20Balaji%20Feedback.mov",
+    video: "/images/partners/videos/Balaji%20%26%20Balaji%20Feedback.mp4",
+    poster: "/images/partners/videos/2.jpg",
+  },
+  {
+    id: 3,
+    title: "Tyre Center's story",
+    client: "Tyre Centre",
+    business: "Tyre business (business name TODO)",
+    quote: "TODO: Add an approved quote from this video testimonial.",
+    video: "/images/partners/videos/tyre%20centre%20feedback.mp4",
+    poster: "/images/partners/videos/3.jpeg",
   },
   {
     id: 4,
@@ -40,8 +41,8 @@ const stories = [
     client: "URS",
     business: "Business type TODO",
     quote: "TODO: Add an approved quote from this video testimonial.",
-    video:
-      "https://ik.imagekit.io/freekitMedia/Freekit%20media%20Assets/testimonials/URS%20Feedback.mp4",
+    video: "/images/partners/videos/URS%20Feedback.mp4",
+    poster: "/images/partners/videos/4.jpeg",
   },
 ];
 
@@ -54,6 +55,7 @@ const auditItems = [
 export function Testimonials() {
   const [activeStory, setActiveStory] =
     useState<(typeof stories)[number] | null>(null);
+  const [playingPreviewId, setPlayingPreviewId] = useState<number | null>(null);
 
   const carouselRef = useRef<HTMLDivElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -461,11 +463,14 @@ export function Testimonials() {
                 <button
                   type="button"
                   onMouseEnter={playPreview}
-                  onMouseLeave={(event) =>
-                    event.currentTarget
-                      .querySelector<HTMLVideoElement>("[data-story-preview]")
-                      ?.pause()
-                  }
+                  onMouseLeave={(event) => {
+                    const preview =
+                      event.currentTarget.querySelector<HTMLVideoElement>(
+                        "[data-story-preview]",
+                      );
+                    preview?.pause();
+                    if (preview) preview.currentTime = 0;
+                  }}
                   onClick={() => setActiveStory(story)}
                   aria-label={`Play ${story.title} testimonial video`}
                   className="group relative block aspect-[3/4] w-full overflow-hidden rounded-2xl bg-neutral-900 text-left shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-neutral-400 motion-reduce:transition-none"
@@ -473,14 +478,31 @@ export function Testimonials() {
                 <video
                   data-story-preview
                   src={story.video}
+                  poster={story.poster}
                   muted
                   loop
                   playsInline
                   preload="none"
                   aria-hidden="true"
                   tabIndex={-1}
+                  onPlay={() => setPlayingPreviewId(story.id)}
+                  onPause={() =>
+                    setPlayingPreviewId((current) =>
+                      current === story.id ? null : current,
+                    )
+                  }
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:transition-none"
                 />
+
+                {playingPreviewId !== story.id && (
+                  <Image
+                    src={story.poster}
+                    alt=""
+                    fill
+                    sizes="(max-width: 640px) 76vw, (max-width: 1024px) 42vw, 320px"
+                    className="pointer-events-none object-cover"
+                  />
+                )}
 
                 <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/45" />
 
@@ -675,6 +697,7 @@ export function Testimonials() {
             <video
               key={activeStory.id}
               src={activeStory.video}
+              poster={activeStory.poster}
               controls
               autoPlay
               muted

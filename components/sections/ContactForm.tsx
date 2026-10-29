@@ -72,7 +72,7 @@ export function ContactForm() {
         </p>
 
         <p className="mt-3 max-w-lg text-sm leading-7 text-[#171517]/65">
-          Your request has been emailed to our team. We’ll be in touch within
+          Your request has been sent to our team. We’ll be in touch within
           one business day. If you prefer, you can also message us directly on
           WhatsApp.
         </p>
@@ -300,14 +300,14 @@ export function ContactForm() {
             aria-hidden="true"
             className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden sm:col-span-2"
           >
-            <label htmlFor="contact-company">
+            <label htmlFor="contact-fax-number">
               Leave this field empty
             </label>
 
             <input
-              id="contact-company"
+              id="contact-fax-number"
               type="text"
-              name="company"
+              name="faxNumber"
               tabIndex={-1}
               autoComplete="off"
             />
