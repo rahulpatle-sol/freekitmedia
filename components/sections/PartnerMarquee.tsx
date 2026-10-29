@@ -39,7 +39,7 @@ export function PartnerMarquee() {
               <li
                 key={`${partner.slug}-${index}`}
                 aria-hidden={duplicate || undefined}
-                className="flex h-16 w-40 shrink-0 items-center justify-center px-8 sm:h-20 sm:w-52 sm:px-10"
+                className="flex h-20 w-44 shrink-0 items-center justify-center px-6 sm:h-24 sm:w-56 sm:px-8"
               >
                 <Link
                   href={`/partners/${partner.slug}`}
@@ -48,14 +48,15 @@ export function PartnerMarquee() {
                   className="flex h-full w-full flex-col items-center justify-center gap-1 outline-offset-4"
                 >
                   {partner.logo && (
-                    <Image
-                      src={partner.logo}
-                      alt=""
-                      width={300}
-                      height={100}
-                      sizes="(max-width: 640px) 144px, 160px"
-                      className="max-h-8 w-full object-contain opacity-65 transition duration-300 hover:scale-105 hover:opacity-100 motion-reduce:transition-none sm:max-h-9"
-                    />
+                    <span className="relative block h-11 w-full max-w-40 bg-white sm:h-14 sm:max-w-48">
+                      <Image
+                        src={partner.logo}
+                        alt=""
+                        fill
+                        sizes="(max-width: 640px) 128px, 160px"
+                        className="object-contain opacity-65 transition duration-300 hover:scale-105 hover:opacity-100 motion-reduce:transition-none"
+                      />
+                    </span>
                   )}
                   <span className="text-center text-xs font-semibold text-[#171517] sm:text-sm">
                     {partner.name}

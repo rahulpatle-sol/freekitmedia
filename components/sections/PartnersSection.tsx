@@ -18,14 +18,16 @@ function PartnerLogo({ partner }: { partner: Partner }) {
   }
 
   return (
-    <Image
-      src={partner.logo}
-      alt={`${partner.name} logo`}
-      width={180}
-      height={72}
-      onError={() => setImageFailed(true)}
-      className="max-h-12 w-auto max-w-[170px] object-contain"
-    />
+    <span className="relative block h-12 w-full max-w-[170px] shrink-0 bg-white">
+      <Image
+        src={partner.logo}
+        alt={`${partner.name} logo`}
+        fill
+        sizes="170px"
+        onError={() => setImageFailed(true)}
+        className="object-contain"
+      />
+    </span>
   );
 }
 

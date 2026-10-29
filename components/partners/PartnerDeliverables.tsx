@@ -2,6 +2,7 @@
 
 import { Container } from "@/components/ui/Container";
 import { Icon } from "@/components/ui/Icon";
+import { Reveal, SectionHead } from "@/components/partners/Reveal";
 import type { Partner } from "@/content/partners";
 
 export function PartnerDeliverables({ partner }: { partner: Partner }) {
@@ -12,43 +13,41 @@ export function PartnerDeliverables({ partner }: { partner: Partner }) {
   }
 
   return (
-    <section className="bg-white py-16 sm:py-24">
+    <section className="bg-[#F7F6F2] py-14 text-[#171717] sm:py-20 lg:py-28">
       <Container>
-        <header className="max-w-2xl">
-          <p className="text-xs font-semibold tracking-[0.18em] text-brand-deep uppercase">
-            The work
-          </p>
-          <h2 className="font-display mt-4 text-[clamp(2.4rem,5vw,4rem)] font-extrabold leading-[1.02] tracking-[-0.045em] text-ink">
-            What we delivered.
-          </h2>
-          <p className="mt-4 text-base leading-7 text-grey-600 sm:text-lg">
-            Only the services this partnership actually covered.
-          </p>
-        </header>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {groups.map((group) => (
-            <article
-              key={group.group}
-              className="rounded-2xl border border-ink/10 bg-mist p-6 sm:p-7"
-            >
-              <span className="inline-flex rounded-full bg-ink px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-brand">
-                {group.group}
-              </span>
-              <ul className="mt-5 space-y-3">
-                {group.items.map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-3 text-sm leading-6 text-ink/80"
-                  >
-                    <Icon
-                      name="check"
-                      className="mt-0.5 size-4 shrink-0 text-brand-deep"
-                    />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </article>
+        <SectionHead
+          eyebrow="The work"
+          count={`${String(groups.length).padStart(2, "0")} SERVICES`}
+          title="What we delivered."
+          sub="Sirf wahi services jo is partnership mein hui."
+        />
+
+        <div className="mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+          {groups.map((group, index) => (
+            <Reveal key={group.group} delay={Math.min(index, 5) * 0.07}>
+              <article className="h-full rounded-2xl border border-[#171717]/10 bg-white/75 p-5 transition-colors duration-300 hover:border-[#8A6C05]/40 hover:bg-[#FFF9E5] sm:p-7">
+                <span className="inline-flex rounded-full bg-[#171717] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#F7C928] sm:text-[11px]">
+                  {group.group}
+                </span>
+
+                <ul className="mt-5 space-y-3">
+                  {group.items.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-3 text-sm leading-6 text-[#292927]"
+                    >
+                      <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-[#8A6C05]/10">
+                        <Icon
+                          name="check"
+                          className="size-3 text-[#8A6C05]"
+                        />
+                      </span>
+                      <span className="min-w-0">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            </Reveal>
           ))}
         </div>
       </Container>

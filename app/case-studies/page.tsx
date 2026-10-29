@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+
 import { Footer } from "@/components/sections/Footer";
 import { SubpageHeader } from "@/components/sections/SubpageHeader";
+import {
+  CaseStudiesList,
+  FadeUp,
+} from "@/components/sections/CaseStudiesMotion";
 import { Container } from "@/components/ui/Container";
 import { caseStudies } from "@/content/case-studies";
 
@@ -16,72 +20,60 @@ export default function CaseStudiesPage() {
   return (
     <>
       <SubpageHeader />
-      <main id="main" className="flex-1">
-        <section className="bg-ink py-16 text-paper sm:py-24">
+
+      <main id="main" className="flex-1 bg-[#F7F6F2] text-[#171717]">
+        {/* Hero */}
+        <section className="relative isolate overflow-clip pb-10 pt-14 sm:pb-14 sm:pt-20 lg:pb-16 lg:pt-28">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_12%_0%,rgba(247,201,40,0.22),transparent_45%),radial-gradient(ellipse_at_90%_10%,rgba(247,201,40,0.12),transparent_45%)]"
+          />
+
           <Container>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
-              Selected work / Case studies
-            </p>
-            <h1 className="font-display mt-5 max-w-4xl text-h1 font-extrabold leading-[0.98] tracking-[-0.04em]">
-              Digital marketing work, with the context behind it.
-            </h1>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-paper/65 sm:text-lg">
-              Project notes with the available strategy, execution, and
-              outcomes. No results beyond what the source data provides.
-            </p>
+            <FadeUp>
+              <div className="flex items-center justify-between gap-4 border-t border-[#171717]/15 pt-5">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#8A6C05] sm:text-xs">
+                  Selected work
+                </p>
+
+                <p className="shrink-0 font-mono text-[10px] text-[#77766D] sm:text-xs">
+                  {String(caseStudies.length).padStart(2, "0")} CASE STUDIES
+                </p>
+              </div>
+            </FadeUp>
+
+            <FadeUp delay={0.1}>
+              <h1 className="font-display mt-8 max-w-4xl text-balance text-[clamp(2.2rem,7.5vw,5.5rem)] font-semibold leading-[1] tracking-[-0.05em] sm:mt-10 lg:leading-[0.95] lg:tracking-[-0.06em]">
+                Digital marketing work,{" "}
+                <span className="text-[#8A6C05]">
+                  with the context behind it.
+                </span>
+              </h1>
+            </FadeUp>
+
+            <FadeUp delay={0.2}>
+              <p className="mt-5 max-w-xl text-pretty text-[15px] leading-7 text-[#55524C] sm:mt-6 sm:text-lg sm:leading-8">
+                Strategy, execution aur outcome, bina kisi badhe-chadhe daave
+                ke. Jo hua, wahi likha hai.
+              </p>
+            </FadeUp>
           </Container>
         </section>
 
-        <section className="py-14 sm:py-20">
+        {/* List */}
+        <section className="pb-20 sm:pb-28 lg:pb-36">
           <Container>
             {caseStudies.length > 0 ? (
-              <div className="space-y-8">
-                {caseStudies.map((study, index) => (
-                  <article
-                    key={study.slug}
-                    className="grid gap-8 border-y border-ink/15 py-8 sm:py-12 lg:grid-cols-12 lg:gap-10"
-                  >
-                    <div className="lg:col-span-7">
-                      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-deep">
-                        {study.industry} / {study.city} /{" "}
-                        {String(index + 1).padStart(2, "0")}
-                      </p>
-                      <h2 className="font-display mt-4 max-w-3xl text-3xl font-extrabold leading-tight tracking-[-0.04em] sm:text-5xl">
-                        {study.title}
-                      </h2>
-                      <p className="mt-5 max-w-2xl text-sm leading-relaxed text-grey-600 sm:text-base">
-                        {study.summary}
-                      </p>
-                    </div>
-                    <div className="flex flex-col justify-between gap-6 lg:col-span-5">
-                      <ul className="flex flex-wrap gap-2">
-                        {study.servicesUsed.map((service) => (
-                          <li
-                            key={service}
-                            className="border border-ink/15 px-3 py-1.5 text-xs text-grey-600"
-                          >
-                            {service}
-                          </li>
-                        ))}
-                      </ul>
-                      <Link
-                        href={`/case-studies/${study.slug}`}
-                        className="inline-flex items-center gap-2 self-start text-sm font-semibold text-ink hover:text-brand-deep focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-deep"
-                      >
-                        Read the case study <span aria-hidden="true">↗</span>
-                      </Link>
-                    </div>
-                  </article>
-                ))}
-              </div>
+              <CaseStudiesList studies={caseStudies} />
             ) : (
-              <p className="border-y border-ink/15 py-8 text-grey-600">
-                Case studies are being prepared. Check back soon.
+              <p className="rounded-2xl border border-[#171717]/10 bg-white/70 p-8 text-center text-sm text-[#55524C]">
+                Case studies jaldi aa rahi hain.
               </p>
             )}
           </Container>
         </section>
       </main>
+
       <Footer />
     </>
   );

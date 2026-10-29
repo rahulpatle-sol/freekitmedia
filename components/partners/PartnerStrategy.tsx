@@ -1,6 +1,7 @@
 "use client";
 
 import { Container } from "@/components/ui/Container";
+import { Reveal, SectionHead } from "@/components/partners/Reveal";
 import type { Partner } from "@/content/partners";
 
 const intentionLabels: Record<string, string> = {
@@ -19,32 +20,41 @@ export function PartnerStrategy({ partner }: { partner: Partner }) {
   }
 
   return (
-    <section className="bg-paper py-16 sm:py-24">
+    <section className="bg-[#F7F6F2] py-14 text-[#171717] sm:py-20 lg:py-28">
       <Container>
-        <header className="max-w-2xl">
-          <p className="text-xs font-semibold tracking-[0.18em] text-brand-deep uppercase">
-            Strategy
-          </p>
-          <h2 className="font-display mt-4 text-[clamp(2.4rem,5vw,4rem)] font-extrabold leading-[1.02] tracking-[-0.045em] text-ink">
-            Why we made the content that way.
-          </h2>
-        </header>
-        <ol className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {phases.map((phase) => (
-            <li
+        <SectionHead
+          eyebrow="Strategy"
+          count={`${String(phases.length).padStart(2, "0")} PHASES`}
+          title="Why we made the content that way."
+        />
+
+        <ol className="mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+          {phases.map((phase, index) => (
+            <Reveal
               key={phase.title}
-              className="rounded-2xl border border-ink/10 bg-white p-6"
+              delay={Math.min(index, 5) * 0.07}
+              className="h-full"
             >
-              <p className="font-mono text-[10px] font-semibold tracking-[0.18em] text-brand-deep uppercase">
-                {intentionLabels[phase.intention] ?? phase.intention}
-              </p>
-              <h3 className="font-display mt-4 text-xl font-bold tracking-tight text-ink">
-                {phase.title}
-              </h3>
-              <p className="mt-3 text-sm leading-7 text-grey-600">
-                {phase.description}
-              </p>
-            </li>
+              <li className="flex h-full list-none flex-col rounded-2xl border border-[#171717]/10 bg-white/75 p-5 transition-colors duration-300 hover:border-[#8A6C05]/40 hover:bg-[#FFF9E5] sm:p-6">
+                <div className="flex items-center justify-between gap-3">
+                  <p className="font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-[#8A6C05]">
+                    {intentionLabels[phase.intention] ?? phase.intention}
+                  </p>
+
+                  <span className="font-mono text-xs text-[#77766D]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+
+                <h3 className="font-display mt-4 text-balance text-xl font-semibold leading-snug tracking-[-0.025em] sm:text-2xl">
+                  {phase.title}
+                </h3>
+
+                <p className="mt-3 text-pretty text-sm leading-6 text-[#55524C] sm:leading-7">
+                  {phase.description}
+                </p>
+              </li>
+            </Reveal>
           ))}
         </ol>
       </Container>

@@ -10,87 +10,87 @@ export const industries: Industry[] = [
     slug: "healthcare",
     name: "Healthcare",
     problemLine:
-      "Achhe doctor ka naam sirf muh-bol ke pahunchta hai; online reviews aur profile weak hote hain.",
+      "Aapki expertise top-class hai, par online patients ko woh dikhti nahi — aur trust kisi aur ke paas chala jaata hai.",
     weDo: [
-      "Doctor personal branding — face of the practice",
-      "Patient stories aur expertise reels",
-      "Google My Business aur reviews ka management",
+      "Doctor-led personal branding jo practice ka face bane",
+      "Patient stories aur expertise reels jo trust build karein",
+      "Google Business Profile aur review engine jo appointments laaye",
     ],
   },
   {
     slug: "jewellery",
     name: "Jewellery",
     problemLine:
-      "Showroom sirf festive tak zinda dikhta hai; baaki mahino online presence zero hoti hai.",
+      "Showroom premium hai, par online presence sirf festive season tak simat jaati hai — baaki saal growth ruki rehti hai.",
     weDo: [
-      "Festive + off-season campaigns",
-      "Collection reels aur purity/trust content",
-      "Instagram ads se walk-in aur order",
+      "Festive aur off-season campaigns ka year-round calendar",
+      "Collection reels aur purity-trust content jo brand ko premium banaye",
+      "Instagram ads jo walk-ins aur orders dono laaye",
     ],
   },
   {
     slug: "automobile",
     name: "Automobile",
     problemLine:
-      "Big-ticket purchase — customer showroom aane se pehle 10 baar online check kar chuka hota hai.",
+      "Showroom aane se pehle customer 10 baar online research kar chuka hota hai — deal wahin jeeti ya haari jaati hai.",
     weDo: [
-      "Walkthrough + test-drive reels",
+      "Walkthrough aur test-drive reels jo showroom visit trigger karein",
       "Offer creatives aur price-band campaigns",
-      "Lead campaigns (call/WhatsApp click ads)",
+      "Lead campaigns — call aur WhatsApp click ads se seedha enquiry",
     ],
   },
   {
     slug: "real-estate",
     name: "Real Estate",
     problemLine:
-      "Site visit se pehle customer ka pehla impression online content se hi banta hai.",
+      "Site visit se pehle buyer ka mann ban chuka hota hai — aur woh decision aapke online content se hi banta hai.",
     weDo: [
-      "Property walkthrough videos",
-      "Investment aur lifestyle storytelling",
-      "Location-targeted lead campaigns",
+      "Cinematic property walkthroughs jo pehli nazar mein impress karein",
+      "Investment aur lifestyle storytelling jo serious buyers ko khinche",
+      "Location-targeted lead campaigns jo sahi audience tak pahunchein",
     ],
   },
   {
     slug: "fashion",
     name: "Fashion",
     problemLine:
-      "Trend fast hai, par content calendar nahi — isliye feed thakhi lagti hai.",
+      "Trends tez chalte hain, par consistent content calendar ke bina brand feed mein peeche reh jaata hai.",
     weDo: [
-      "Monthly lookbook shoots",
-      "Trend content aur UGC collabs",
-      "Offers ka Instagram flow",
+      "Monthly lookbook shoots jo brand ki identity set karein",
+      "Trend-led content aur UGC collabs jo reach badhayein",
+      "Instagram offer flow jo views ko sales mein badle",
     ],
   },
   {
     slug: "retail",
     name: "Retail",
     problemLine:
-      "Offer sirf dukaan tak simeet hoti hai; poore shehar tak pahunchti hi nahi.",
+      "Offer kitna bhi strong ho, agar woh sirf dukaan tak seemit hai to poora shehar uska fayda nahi uthata.",
     weDo: [
       "Offer creatives aur boosted store campaigns",
-      "New arrivals ka regular content",
-      "GMB + local search optimisation",
+      "New arrivals ka regular content jo customers ko wapas laaye",
+      "Google Business aur local search optimisation — 'near me' mein sabse upar",
     ],
   },
   {
     slug: "hotel",
     name: "Hotel",
     problemLine:
-      "Rooms acche hain, par online presentation ke peeche hi bookings lagte hain.",
+      "Property shandaar hai, par online presentation weak ho to bookings seedha competitor ke paas chali jaati hain.",
     weDo: [
-      "Property tours aur amenity reels",
-      "Seasonal offers aur festival packages",
-      "Review strategy aur online presence",
+      "Property tours aur amenity reels jo stay ka experience bechein",
+      "Seasonal offers aur festival packages jo occupancy badhayein",
+      "Review strategy aur online reputation jo direct bookings laaye",
     ],
   },
   {
     slug: "education",
     name: "Education",
     problemLine:
-      "Admission ka faisla parents content aur results dekh kar karte hain — jo abhi dikhta hi nahi.",
+      "Parents decision content aur results dekh kar lete hain — institute ki asli strength unhe dikhni chahiye.",
     weDo: [
-      "Campus tours aur result storytelling",
-      "Admission season campaigns",
+      "Campus tours aur result storytelling jo credibility build karein",
+      "Admission season campaigns jo enquiries ko admissions banayein",
       "Parent-trust videos aur alumni stories",
     ],
   },
@@ -98,11 +98,11 @@ export const industries: Industry[] = [
     slug: "personal-branding",
     name: "Personal Branding",
     problemLine:
-      "Founder khud brand ka best face hai, par camera se peeche hai.",
+      "Founder hi brand ka sabse powerful face hai — jab tak woh camera ke saamne nahi, authority adhoori hai.",
     weDo: [
-      "Face-of-the-brand content series",
-      "Founder story aur interview snippets",
-      "LinkedIn + Instagram ki positioning",
+      "Face-of-the-brand content series jo aapko category ka naam banaye",
+      "Founder story aur interview snippets jo connection build karein",
+      "LinkedIn aur Instagram positioning jo opportunities khud laaye",
     ],
   },
 ];

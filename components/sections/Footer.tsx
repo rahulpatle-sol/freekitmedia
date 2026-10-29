@@ -1,13 +1,15 @@
-
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
+import { useLenis } from "@/components/providers/LenisProvider";
 import { Container } from "@/components/ui/Container";
 import { Icon } from "@/components/ui/Icon";
 import { Logo } from "@/components/ui/Logo";
 import { services } from "@/content/services";
 import { site } from "@/content/site";
+import { prefersReducedMotion } from "@/lib/gsap";
 import { whatsappLink } from "@/lib/utils";
 
 const contactItems = [
@@ -18,10 +20,7 @@ const contactItems = [
   },
   {
     icon: "whatsapp",
-    href: whatsappLink(
-      site.phone.secondary.number,
-      site.whatsapp.ctaText,
-    ),
+    href: whatsappLink(site.phone.secondary.number, site.whatsapp.ctaText),
     label: site.phone.secondary.display,
   },
   {
@@ -36,116 +35,146 @@ const contactItems = [
   },
   {
     icon: "mapPin",
-    href: "#top",
-    label: "Cities: Bilaspur, Ambikapur, Korba",
+    label: site.cities.join(", "),
     plain: true,
   },
 ] as const;
 
-const glassPanel =
-  "rounded-2xl border border-white/[0.10] bg-white/[0.045] backdrop-blur-2xl";
+const footerHeading =
+  "text-[10px] font-medium uppercase tracking-[0.2em] text-[#F7C928]";
 
 const footerLink =
-  "inline-flex text-sm leading-6 text-white/55 transition-colors duration-300 hover:text-[#FBE17D] focus-visible:text-[#FBE17D] focus-visible:outline-none";
+  "inline-flex min-h-8 w-fit max-w-full items-center text-[13px] font-light leading-5 text-white/65 transition-colors duration-200 hover:text-[#F7C928] focus-visible:rounded-sm focus-visible:text-[#F7C928] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7C928]";
+
+const legalLinks = [
+  { href: "/terms-and-conditions", label: "Terms & Conditions" },
+  { href: "/privacy-policy", label: "Privacy Policy" },
+  { href: "/refund-policy", label: "Refund Policy" },
+];
+
+/* "#proof" jaise links subpages pe toot jaate hain, isliye "/#proof" banate hain */
+function normalizeHref(href: string) {
+  if (href.startsWith("#")) return `/${href}`;
+  if (href.startsWith("/") || href.startsWith("http")) return href;
+  return `/${href}`;
+}
+
+const exploreLinks = [
+  ...site.navLinks,
+  { href: "/services", label: "All services" },
+  { href: "/case-studies", label: "Case studies" },
+  { href: "/industries", label: "Industries" },
+  { href: "/partners", label: "Partners" },
+  { href: "/locations", label: "Locations" },
+  { href: "/blog", label: "Blog" },
+  { href: "/contact", label: "Contact" },
+]
+  .map((link) => ({ ...link, href: normalizeHref(link.href) }))
+  .filter(
+    (link, index, links) =>
+      links.findIndex((item) => item.href === link.href) === index,
+  );
 
 export function Footer() {
+  const [currentYear, setCurrentYear] = useState<number | null>(null);
+  const lenisRef = useLenis();
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      setCurrentYear(new Date().getFullYear());
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  const backToTop = () => {
+    const lenis = lenisRef?.current ?? null;
+
+    if (lenis) {
+      lenis.scrollTo(0);
+    } else {
+      window.scrollTo({
+        top: 0,
+        behavior: prefersReducedMotion() ? "auto" : "smooth",
+      });
+    }
+  };
+
   return (
     <footer
       id="footer"
-      className="relative isolate overflow-hidden bg-[#171717] text-[#FFFFFF]"
+      className="relative overflow-hidden bg-[#171717] text-white"
     >
-      {/* Liquid-glass ambient lighting */}
+      {/* Ambient glow */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-64 left-1/2 -z-10 h-[34rem] w-[52rem] -translate-x-1/2 rounded-full bg-[#8A6C05]/20 blur-[120px]"
+        className="pointer-events-none absolute -top-48 left-1/2 h-80 w-[42rem] max-w-none -translate-x-1/2 rounded-full bg-[#F7C928]/[0.055] blur-[100px]"
       />
 
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -bottom-48 -left-32 -z-10 size-[28rem] rounded-full bg-[#8A6C05]/15 blur-[110px]"
-      />
-
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-40 top-[45%] -z-10 size-[30rem] rounded-full bg-[#F7C928]/[0.07] blur-[120px]"
-      />
-
-      <Container className="py-12 sm:py-16 lg:py-20">
-        {/* Glass CTA */}
-        <div
-          className={`${glassPanel} relative mb-6 overflow-hidden p-6 sm:p-9 lg:p-12`}
-        >
+      <Container className="relative pb-[max(2rem,env(safe-area-inset-bottom))] pt-10 sm:pt-14 lg:pt-16">
+        {/* CTA card */}
+        <section className="relative mb-4 overflow-hidden rounded-2xl border border-white/[0.1] bg-[#202020] px-5 py-7 sm:mb-5 sm:px-8 sm:py-9 lg:mb-6 lg:px-10 lg:py-11">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#F7C928]/[0.12] via-transparent to-[#8A6C05]/[0.06]"
+            className="pointer-events-none absolute -right-20 -top-28 size-64 rounded-full border border-[#F7C928]/10 sm:size-80"
           />
 
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -right-16 -top-24 size-64 rounded-full border border-[#F7C928]/10 sm:-right-8 sm:size-80"
-          />
-
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -right-4 -top-12 size-48 rounded-full border border-white/[0.06] sm:right-8 sm:size-64"
-          />
-
-          <div className="relative flex flex-col justify-between gap-7 sm:flex-row sm:items-end sm:gap-8">
-            <div className="max-w-2xl">
-              <p className="inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#FBE17D] sm:text-xs">
-                <span className="size-1.5 rounded-full bg-[#F7C928]" />
+          <div className="relative flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
+            <div className="min-w-0 max-w-2xl">
+              <p className="inline-flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.18em] text-[#F7C928] sm:text-xs">
+                <span className="size-1.5 shrink-0 rounded-full bg-[#F7C928]" />
                 Have a project in mind?
               </p>
 
-              <h2 className="font-display mt-5 text-[clamp(2.7rem,6vw,5.5rem)] font-extrabold leading-[0.92] tracking-[-0.075em]">
-                Let&apos;s make
-                <br />
-                <span className="bg-gradient-to-r from-[#FBE17D] via-[#F7C928] to-[#8A6C05] bg-clip-text text-transparent">
-                  something matter.
-                </span>
+              <h2 className="font-display mt-4 text-balance text-[clamp(2.1rem,7.5vw,4.5rem)] font-semibold leading-[1] tracking-[-0.05em]">
+                Let&apos;s make{" "}
+                <span className="text-[#F7C928]">something matter.</span>
               </h2>
 
-              <p className="mt-5 max-w-md text-sm leading-7 text-white/55 sm:text-base">
-                {site.tagline}
+              <p className="mt-4 max-w-lg text-pretty text-sm font-light leading-6 text-white/60 sm:text-base sm:leading-7">
+                Free audit mein hum aapki online presence dekhkar practical
+                next steps batate hain.
               </p>
             </div>
 
             <Link
-              href="/#contact"
-              className="group inline-flex min-h-12 w-full shrink-0 items-center justify-center gap-3 rounded-full border border-[#F7C928]/25 bg-[#F7C928]/10 px-6 text-sm font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-xl transition-all duration-300 hover:border-[#F7C928]/50 hover:bg-[#8A6C05]/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7C928] sm:w-auto"
+              href="/contact"
+              className="group inline-flex min-h-12 w-full shrink-0 items-center justify-center gap-3 rounded-full bg-[#F7C928] px-6 text-sm font-semibold text-[#171717] transition-colors duration-200 hover:bg-[#FBE17D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7C928] focus-visible:ring-offset-2 focus-visible:ring-offset-[#202020] sm:w-auto"
             >
               {site.cta.audit}
               <Icon
                 name="arrowRight"
-                className="size-4 transition-transform duration-300 group-hover:translate-x-1"
+                className="size-4 transition-transform duration-200 group-hover:translate-x-1"
               />
             </Link>
           </div>
-        </div>
+        </section>
 
-        {/* Main liquid-glass surface */}
-        <div className={`${glassPanel} overflow-hidden`}>
-          <div className="grid min-w-0 gap-9 p-5 sm:gap-10 sm:p-8 lg:grid-cols-12 lg:gap-8 lg:p-10 xl:p-12">
+        {/* Main footer */}
+        <div className="overflow-hidden rounded-2xl border border-white/[0.09] bg-[#1D1D1D]">
+          <div className="grid gap-9 px-5 py-7 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-10 sm:px-8 sm:py-9 lg:grid-cols-12 lg:gap-8 lg:px-9 lg:py-11 xl:px-10">
             {/* Brand */}
-            <div className="min-w-0 lg:col-span-4">
+            <div className="min-w-0 sm:col-span-2 lg:col-span-3">
               <Link
                 href="/"
-                className="inline-flex rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-[#F7C928]"
                 aria-label={site.name}
+                className="inline-flex rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7C928]"
               >
                 <Logo variant="light" />
               </Link>
 
-              <p className="font-display mt-5 max-w-sm text-lg font-semibold leading-snug text-white/90 sm:text-xl">
+              <p className="font-display mt-4 max-w-xs text-balance text-base font-medium leading-snug tracking-[-0.01em] text-white/90 sm:text-lg">
                 {site.tagline}
               </p>
 
-              <p className="mt-3 max-w-sm text-sm leading-6 text-white/45">
-                {site.headlineEn} â€” {site.cities.join(", ")}.
+              <p className="mt-2 max-w-xs text-[13px] font-light leading-5 text-white/45">
+                {site.headlineEn} — {site.cities.join(", ")}.
               </p>
 
-              {/* Social links */}
-              <ul className="mt-6 flex flex-wrap gap-2">
+              <ul
+                className="mt-5 flex flex-wrap gap-2"
+                aria-label="Social media"
+              >
                 {site.socials.map((social) => (
                   <li key={social.label}>
                     <a
@@ -153,12 +182,9 @@ export function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.label}
-                      className="grid size-10 place-items-center rounded-full border border-white/10 bg-white/[0.04] text-white/60 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#F7C928]/40 hover:bg-[#8A6C05]/15 hover:text-[#FBE17D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7C928]"
+                      className="grid size-11 place-items-center rounded-full border border-white/10 text-white/60 transition-colors duration-200 hover:border-[#F7C928]/50 hover:bg-[#F7C928]/[0.08] hover:text-[#F7C928] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7C928] sm:size-10"
                     >
-                      <Icon
-                        name={social.icon}
-                        className="size-[1.1rem]"
-                      />
+                      <Icon name={social.icon} className="size-4" />
                     </a>
                   </li>
                 ))}
@@ -166,12 +192,13 @@ export function Footer() {
             </div>
 
             {/* Services */}
-            <nav aria-label="Services" className="min-w-0 lg:col-span-2">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#FBE17D]/80">
-                Services
-              </p>
+            <nav
+              aria-label="Services"
+              className="min-w-0 border-t border-white/[0.07] pt-7 sm:border-t-0 sm:pt-0 lg:col-span-3"
+            >
+              <h3 className={footerHeading}>Services</h3>
 
-              <ul className="mt-4 space-y-3">
+              <ul className="mt-4 space-y-1">
                 {services.map((service) => (
                   <li key={service.slug}>
                     <Link
@@ -185,77 +212,29 @@ export function Footer() {
               </ul>
             </nav>
 
-            {/* Discover */}
-            <nav aria-label="Discover" className="min-w-0 lg:col-span-2">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#FBE17D]/80">
-                Discover
-              </p>
+            {/* Explore */}
+            <nav
+              aria-label="Explore"
+              className="min-w-0 border-t border-white/[0.07] pt-7 sm:border-t-0 sm:pt-0 lg:col-span-3"
+            >
+              <h3 className={footerHeading}>Explore</h3>
 
-              <ul className="mt-4 space-y-3">
-                {site.navLinks.map((link) => (
-                  <li key={link.href}>
+              <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-1">
+                {exploreLinks.map((link) => (
+                  <li key={link.href} className="min-w-0">
                     <Link href={link.href} className={footerLink}>
                       {link.label}
                     </Link>
                   </li>
                 ))}
-
-                {["Bilaspur", "Ambikapur", "Raipur"].map((city) => (
-                  <li key={city}>
-                    <Link
-                      href={`/locations/${city.toLowerCase()}`}
-                      className={footerLink}
-                    >
-                      Digital marketing in {city}
-                    </Link>
-                  </li>
-                ))}
-
-                <li>
-                  <Link href="/services" className={footerLink}>
-                    All services
-                  </Link>
-                </li>
-
-                <li>
-                  <Link href="/case-studies" className={footerLink}>
-                    Case studies
-                  </Link>
-                </li>
-
-                <li>
-                  <Link href="/partners" className={footerLink}>
-                    Partners
-                  </Link>
-                </li>
-
-                <li>
-                  <Link href="/industries" className={footerLink}>
-                    Industries
-                  </Link>
-                </li>
-
-                <li>
-                  <Link href="/blog" className={footerLink}>
-                    Blog
-                  </Link>
-                </li>
-
-                <li>
-                  <Link href="/#contact" className={footerLink}>
-                    Contact
-                  </Link>
-                </li>
               </ul>
             </nav>
 
             {/* Contact */}
-            <div className="min-w-0 lg:col-span-4">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#FBE17D]/80">
-                Get in touch
-              </p>
+            <div className="min-w-0 border-t border-white/[0.07] pt-7 sm:col-span-2 sm:pt-9 lg:col-span-3 lg:border-t-0 lg:pt-0">
+              <h3 className={footerHeading}>Get in touch</h3>
 
-              <ul className="mt-4 space-y-1">
+              <ul className="mt-4 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-1">
                 {contactItems.map((item) => {
                   const content = (
                     <>
@@ -270,9 +249,9 @@ export function Footer() {
                   );
 
                   return (
-                    <li key={`${item.icon}-${item.label}`}>
+                    <li key={`${item.icon}-${item.label}`} className="min-w-0">
                       {"plain" in item ? (
-                        <span className="flex items-start gap-3 rounded-lg px-2 py-3 text-sm leading-6 text-white/50">
+                        <span className="flex min-h-11 items-start gap-2.5 py-2.5 text-[13px] font-light leading-5 text-white/50">
                           {content}
                         </span>
                       ) : (
@@ -290,7 +269,7 @@ export function Footer() {
                               ? "noopener noreferrer"
                               : undefined
                           }
-                          className="flex items-start gap-3 rounded-lg px-2 py-3 text-sm leading-6 text-white/55 transition-colors hover:bg-white/[0.04] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7C928]"
+                          className="flex min-h-11 items-start gap-2.5 rounded-lg py-2.5 text-[13px] font-light leading-5 text-white/65 transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7C928]"
                         >
                           {content}
                         </a>
@@ -302,59 +281,48 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Footer metadata */}
-          <div className="flex flex-col justify-between gap-3 border-t border-white/[0.09] px-5 py-5 text-[10px] leading-5 text-white/40 sm:flex-row sm:items-center sm:px-8 lg:px-10">
-            <p>
-              Â© 2025â€“2026 {site.name}. All rights reserved.
-            </p>
+          {/* Bottom bar */}
+          <div className="border-t border-white/[0.08] px-5 py-5 sm:px-8 lg:px-9 xl:px-10">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+              <p className="text-xs font-light leading-5 text-white/40">
+                © {currentYear ? `${currentYear} ` : ""}
+                {site.name}. All rights reserved.
+              </p>
 
-            <p className="uppercase tracking-[0.12em]">
-              Made in Chhattisgarh, for Chhattisgarh.
-            </p>
+              <p className="text-[10px] font-medium uppercase tracking-[0.12em] text-white/35">
+                Made in Chhattisgarh, for Chhattisgarh.
+              </p>
+            </div>
+
+            <div className="mt-4 flex flex-col gap-4 border-t border-white/[0.07] pt-4 sm:flex-row sm:items-center sm:justify-between">
+              <nav
+                aria-label="Legal"
+                className="flex flex-wrap gap-x-5 gap-y-1"
+              >
+                {legalLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="inline-flex min-h-9 items-center text-[11px] font-light text-white/45 transition-colors duration-200 hover:text-[#F7C928] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7C928]"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+
+              <button
+                type="button"
+                onClick={backToTop}
+                className="group inline-flex min-h-9 w-fit items-center gap-2 text-[11px] font-medium text-white/50 transition-colors duration-200 hover:text-[#F7C928] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7C928]"
+              >
+                Back to top
+                <Icon
+                  name="arrowRight"
+                  className="size-3 -rotate-90 transition-transform duration-200 group-hover:-translate-y-0.5"
+                />
+              </button>
+            </div>
           </div>
-        </div>
-
-        {/* Legal */}
-        <nav
-          aria-label="Legal"
-          className="flex flex-wrap items-center gap-x-6 gap-y-2 px-1 pt-5"
-        >
-          <Link
-            href="/terms-and-conditions"
-            className="text-[11px] font-medium uppercase tracking-[0.14em] text-white/40 transition-colors duration-300 hover:text-[#FBE17D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7C928]"
-          >
-            Terms & Conditions
-          </Link>
-
-          <Link
-            href="/privacy-policy"
-            className="text-[11px] font-medium uppercase tracking-[0.14em] text-white/40 transition-colors duration-300 hover:text-[#FBE17D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7C928]"
-          >
-            Privacy Policy
-          </Link>
-
-          <Link
-            href="/refund-policy"
-            className="text-[11px] font-medium uppercase tracking-[0.14em] text-white/40 transition-colors duration-300 hover:text-[#FBE17D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7C928]"
-          >
-            Refund Policy
-          </Link>
-        </nav>
-
-        {/* Bottom navigation */}
-        <div className="flex flex-col gap-3 px-1 pt-5 text-[9px] uppercase tracking-[0.16em] text-white/35 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-          <span>Independent thinking. Honest work.</span>
-
-          <a
-            href="#top"
-            className="group inline-flex w-fit items-center gap-2 transition-colors hover:text-[#FBE17D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F7C928]"
-          >
-            Back to top
-            <Icon
-              name="arrowRight"
-              className="size-3 -rotate-45 transition-transform duration-300 group-hover:-translate-y-0.5"
-            />
-          </a>
         </div>
       </Container>
     </footer>

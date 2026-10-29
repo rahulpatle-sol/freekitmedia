@@ -145,6 +145,8 @@ export const proof = {
     value: "₹6,00,000+",
     line: "Instagram ads se ek hi din mein jewellery ka direct order.",
     by: "Kisna Franchise Team",
+    quote:
+      "Freekit team is very professional and they know their job. They have helped us to get more enquiries and sales through Instagram ads.",
   },
   industriesNote:
     "Industries: Healthcare, Jewellery, Automobile, Real Estate, Fashion, Retail, Hotel, Education, Personal Branding.",
@@ -232,31 +234,27 @@ export const pitchItems = [
 
 export const faqs = [
   {
-    q: "Kitne din mein result dikhega?",
-    a: "Enquiries jaldi aa sakti hain — lekin asli farak strategy aur consistency ke saath 3 mahine mein hota hai. Timeline par hum pehle hi honest hote hain, jhootha vaada nahi karte.",
+    q: "Result kitne din mein dikhta hai?",
+    a: "Pehle 2-3 hafton mein enquiries ka flow shuru ho jaata hai. Brand ki asli pakad 3 mahine ki consistent strategy ke baad banti hai. Timeline hum pehle din hi saaf bata dete hain, bina kisi jhoothe vaade ke.",
   },
   {
-    q: "Pricing kitni hoti hai?",
-    a: "Business, sheher aur pace ke hisaab se package banta hai. Free audit ke baad aapko WhatsApp par ek clear quotation milti hai — koi hidden charge nahi.",
+    q: "Pricing kaise decide hoti hai?",
+    a: "Aapke business, target audience aur growth goals ke hisaab se custom package banta hai. Free audit ke baad WhatsApp par ek clear quotation milti hai, jisme koi hidden charge nahi hota.",
   },
   {
-    q: "Kya sirf ek service le sakte hain?",
-    a: "Haan — koi sirf ads le leta hai, koi sirf reels. Par asli leverage tab milti hai jab visibility aur trust dono saath chalein.",
+    q: "Kya main sirf ek service le sakta hoon?",
+    a: "Bilkul. Aap sirf ads, sirf reels ya koi bhi ek service le sakte hain. Par best results tab milte hain jab visibility aur trust dono saath chalte hain, aur hum wahi strategy suggest karte hain jo aapke goal ke liye sahi ho.",
   },
   {
-    q: "Offline print bhi karte ho?",
-    a: "Haan. Hoarding, banner, brochure, festive print design aur marketing consultation — sab online strategy ke saath hi chalta hai. One partner, online & offline.",
-  },
-  {
-    q: "Shehar ke bahar kaam karte ho?",
-    a: "Core hamara Chhattisgarh hai — Bilaspur, Ambikapur, Korba. CG ke bahar bhi selective online clients lete hain.",
+    q: "Offline marketing bhi karte ho?",
+    a: "Haan. Hoarding, banner, brochure aur festive creatives ka design hum banate hain, saath mein marketing consultation bhi. Print aap apne trusted vendor se karwa sakte hain, taaki rate aur quality par aapka poora control rahe. Design hamesha aapki online strategy ke saath align rehta hai.",
   },
   {
     q: "Report kaisi milti hai?",
-    a: "Har mahine ek clear report: reach, enquiries aur calls, cost per enquiry aur campaign-wise performance. Numbers chhupe nahi hote.",
+    a: "Har mahine ek clear report: reach, enquiries aur calls, cost per enquiry aur campaign-wise performance. Aapko hamesha pata hota hai ki paisa kahan lag raha hai aur kya return aa raha hai.",
   },
   {
-    q: "Free audit mein exactly kya hota hai?",
-    a: "30 minute — aapke office par ya online. Hum aapki online presence (Google, Instagram, website) check karte hain: customer aapko kahan miss kar raha hai, aur sabse pehle kya theek karna hai. Aapka business samajh wahi main kaam hai.",
+    q: "Free audit mein kya hota hai?",
+    a: "30 minute ka session, aapke office par ya online. Hum aapki Google, Instagram aur website presence check karte hain aur batate hain ki customer aapko kahan miss kar raha hai. Saath hi ek clear action plan milta hai ki sabse pehle kya theek karna hai.",
   },
 ] as const;

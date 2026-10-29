@@ -74,7 +74,7 @@ export function ComparisonSection() {
 
                 <div className="relative mt-7">
                   <h3 className="text-2xl font-semibold tracking-[-0.06em] sm:text-4xl lg:text-5xl">
-                    FreeKit<span className="text-[#F7C928]">.</span>
+                    Freekit<span className="text-[#F7C928]">.</span>
                   </h3>
 
                   <p className="mt-2 text-[11px] leading-5 text-white/60 sm:text-sm">

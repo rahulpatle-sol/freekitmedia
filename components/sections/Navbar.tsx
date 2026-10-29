@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -29,7 +28,7 @@ function MenuIcon({ open }: { open: boolean }) {
         <path
           d="M6 6L18 18M18 6L6 18"
           stroke="currentColor"
-          strokeWidth="1.7"
+          strokeWidth="1.5"
           strokeLinecap="round"
         />
       ) : (
@@ -37,19 +36,19 @@ function MenuIcon({ open }: { open: boolean }) {
           <path
             d="M3 7H21"
             stroke="currentColor"
-            strokeWidth="1.7"
+            strokeWidth="1.5"
             strokeLinecap="round"
           />
           <path
             d="M8 12H21"
             stroke="currentColor"
-            strokeWidth="1.7"
+            strokeWidth="1.5"
             strokeLinecap="round"
           />
           <path
             d="M3 17H16"
             stroke="currentColor"
-            strokeWidth="1.7"
+            strokeWidth="1.5"
             strokeLinecap="round"
           />
         </>
@@ -69,7 +68,7 @@ function ArrowIcon({ className }: { className?: string }) {
       <path
         d="M5 12H19M12 5L19 12L12 19"
         stroke="currentColor"
-        strokeWidth="1.6"
+        strokeWidth="1.4"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -95,7 +94,7 @@ function scrollToHash(hash: string, lenis: Lenis | null) {
   if (!target) return;
 
   if (lenis) {
-    lenis.scrollTo(target, { offset: 16 });
+    lenis.scrollTo(target, { offset: -96 });
   } else {
     target.scrollIntoView({
       behavior: prefersReducedMotion() ? "auto" : "smooth",
@@ -128,8 +127,12 @@ export function Navbar() {
   useEffect(() => {
     if (!open) return;
 
+    const lenis = lenisRef?.current ?? null;
     const previousOverflow = document.body.style.overflow;
+
+    // Menu khule to background page scroll na ho (Lenis + native dono band)
     document.body.style.overflow = "hidden";
+    lenis?.stop();
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setOpen(false);
@@ -144,10 +147,11 @@ export function Navbar() {
 
     return () => {
       document.body.style.overflow = previousOverflow;
+      lenis?.start();
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("resize", onResize);
     };
-  }, [open]);
+  }, [open, lenisRef]);
 
   const onHashClick =
     (href: string) => (event: MouseEvent<HTMLAnchorElement>) => {
@@ -165,7 +169,11 @@ export function Navbar() {
       if (!document.querySelector(hash)) return;
 
       event.preventDefault();
-      scrollToHash(hash, lenisRef?.current ?? null);
+
+      // Menu band hone aur scroll unlock hone ke baad scroll karo
+      window.setTimeout(() => {
+        scrollToHash(hash, lenisRef?.current ?? null);
+      }, 60);
     };
 
   return (
@@ -182,13 +190,13 @@ export function Navbar() {
         )}
       >
         <Container className="max-w-[1600px]">
-          <div className="flex h-[76px] items-center justify-between gap-5 sm:h-[84px]">
+          <div className="flex h-[68px] items-center justify-between gap-4 sm:h-[84px] sm:gap-5">
             {/* Logo */}
             <Link
               href="/"
               onClick={() => setOpen(false)}
               aria-label={`${site.name} home`}
-              className="relative z-30 shrink-0 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+              className="relative z-30 min-w-0 shrink-0 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
             >
               <Logo />
             </Link>
@@ -210,7 +218,7 @@ export function Navbar() {
                         className={cn(
                           "group relative flex min-h-11 items-center",
                           "rounded-xl px-3 lg:px-4",
-                          "text-[13px] font-medium lg:text-sm",
+                          "text-[13px] font-normal tracking-[0.01em] lg:text-sm",
                           "text-ink/65",
                           "transition-all duration-300 ease-out",
                           "hover:-translate-y-0.5",
@@ -225,12 +233,12 @@ export function Navbar() {
                           {link.label}
                         </span>
 
-                        {/* Animated yellow underline */}
+                        {/* Animated underline */}
                         <span
                           aria-hidden="true"
                           className={cn(
                             "absolute bottom-1.5 left-3 right-3",
-                            "h-[2px] origin-center scale-x-0",
+                            "h-px origin-center scale-x-0",
                             "rounded-full bg-[#8A6C05]",
                             "transition-transform duration-300 ease-out",
                             "group-hover:scale-x-100",
@@ -245,7 +253,7 @@ export function Navbar() {
               </ul>
             </nav>
 
-            {/* Desktop CTA and mobile menu button */}
+            {/* CTA (sm+) and mobile menu button */}
             <div className="relative z-30 flex shrink-0 items-center gap-3">
               <Button
                 href="/contact"
@@ -268,9 +276,9 @@ export function Navbar() {
                   "transition-all duration-300 ease-out md:hidden",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8A6C05]/50",
                   open
-                    ? "rotate-90 border-ink bg-ink text-paper"
+                    ? "border-ink bg-ink text-paper"
                     : "border-ink/15 bg-paper text-ink hover:border-[#8A6C05]/50 hover:bg-[#8A6C05]/[0.06] hover:text-[#8A6C05]",
-                  "motion-reduce:transform-none motion-reduce:transition-none",
+                  "motion-reduce:transition-none",
                 )}
               >
                 <MenuIcon open={open} />
@@ -283,11 +291,12 @@ export function Navbar() {
       {/* Full-screen mobile navigation */}
       <div
         id="fullscreen-navigation"
+        data-lenis-prevent
         aria-label="Full-screen navigation"
         aria-hidden={!open}
         inert={!open}
         className={cn(
-          "fixed inset-0 z-10 overflow-y-auto bg-paper",
+          "fixed inset-0 z-10 overflow-y-auto overscroll-contain bg-paper",
           "transition-[opacity,visibility] duration-300 ease-out",
           "motion-reduce:transition-none md:hidden",
           open
@@ -295,19 +304,25 @@ export function Navbar() {
             : "invisible pointer-events-none opacity-0",
         )}
       >
-        <div className="flex min-h-full flex-col px-5 pb-8 pt-28 sm:px-10 sm:pt-32">
+        <div
+          className={cn(
+            "flex min-h-full flex-col px-5 sm:px-10",
+            "pt-[calc(68px+1.5rem)] sm:pt-[calc(84px+2rem)]",
+            "pb-[max(1.5rem,env(safe-area-inset-bottom))]",
+          )}
+        >
           {/* Menu heading */}
-          <div className="mb-8 flex items-center justify-between border-b border-ink/15 pb-4">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ink/50">
+          <div className="mb-2 flex items-center justify-between border-b border-ink/15 pb-4">
+            <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-ink/50">
               Explore FreeKit
             </p>
 
-            <p className="font-mono text-[10px] text-ink/40">
+            <p className="font-mono text-[10px] font-light text-ink/40">
               {String(site.navLinks.length).padStart(2, "0")} PAGES
             </p>
           </div>
 
-          {/* Animated mobile links */}
+          {/* Mobile links */}
           <nav aria-label="Full-screen mobile menu">
             <ul>
               {site.navLinks.map((link, index) => {
@@ -316,33 +331,47 @@ export function Navbar() {
                 return (
                   <li
                     key={link.href}
-                    className="border-b border-ink/10"
+                    style={{
+                      transitionDelay: open
+                        ? `${80 + index * 45}ms`
+                        : "0ms",
+                    }}
+                    className={cn(
+                      "border-b border-ink/10",
+                      "transition-[opacity,transform] duration-500 ease-out",
+                      "motion-reduce:transition-none",
+                      open
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-3 opacity-0",
+                    )}
                   >
                     <Link
                       href={href}
                       onClick={onHashClick(href)}
                       className={cn(
-                        "group relative flex min-h-[76px]",
-                        "items-center justify-between gap-4 py-4 sm:min-h-[94px]",
+                        "group relative flex min-h-[64px] items-center justify-between gap-4 py-3",
+                        "sm:min-h-[88px] sm:py-4",
                         "transition-colors duration-300",
-                        "hover:bg-[#8A6C05]/[0.04]",
+                        "hover:bg-[#8A6C05]/[0.04] active:bg-[#8A6C05]/[0.08]",
+                        "focus-visible:outline-none focus-visible:bg-[#8A6C05]/[0.06]",
                         "motion-reduce:transition-none",
                       )}
                     >
-                      <span className="flex items-start gap-4 sm:gap-6">
-                        <span className="pt-2 font-mono text-[10px] text-[#8A6C05] sm:text-xs">
+                      <span className="flex min-w-0 items-center gap-3 sm:gap-6">
+                        {/* Fixed width: saare labels ek hi line mein align */}
+                        <span className="w-6 shrink-0 font-mono text-[10px] font-light text-[#8A6C05] sm:w-8 sm:text-xs">
                           {String(index + 1).padStart(2, "0")}
                         </span>
 
                         <span
                           className={cn(
-                            "font-display font-bold",
-                            "text-[clamp(2rem,8vw,4.25rem)]",
-                            "leading-[0.95] tracking-[-0.065em]",
+                            "min-w-0 break-words font-display font-light",
+                            "text-[clamp(1.6rem,7.5vw,3.5rem)]",
+                            "leading-[1.05] tracking-[-0.03em]",
                             "text-ink",
                             "transition-all duration-300 ease-out",
-                            "group-hover:translate-x-2",
-                            "group-hover:text-[#8A6C05]",
+                            "group-hover:translate-x-2 group-active:translate-x-1",
+                            "group-hover:text-[#8A6C05] group-active:text-[#8A6C05]",
                             "motion-reduce:transform-none motion-reduce:transition-none",
                           )}
                         >
@@ -352,10 +381,10 @@ export function Navbar() {
 
                       <ArrowIcon
                         className={cn(
-                          "shrink-0 text-ink/35",
+                          "shrink-0 text-ink/30",
                           "transition-all duration-300 ease-out",
                           "group-hover:translate-x-1",
-                          "group-hover:text-[#8A6C05]",
+                          "group-hover:text-[#8A6C05] group-active:text-[#8A6C05]",
                           "motion-reduce:transition-none",
                         )}
                       />
@@ -367,7 +396,7 @@ export function Navbar() {
           </nav>
 
           {/* Mobile CTA buttons */}
-          <div className="mt-auto grid gap-3 pt-10 sm:grid-cols-2">
+          <div className="mt-auto grid gap-3 pt-8 sm:grid-cols-2 sm:pt-10">
             <Button
               href={waHref}
               variant="outline"
@@ -387,12 +416,12 @@ export function Navbar() {
           </div>
 
           {/* Footer */}
-          <div className="mt-8 flex flex-wrap items-end justify-between gap-4 border-t border-ink/10 pt-5">
-            <p className="max-w-xs text-xs leading-relaxed text-ink/55">
+          <div className="mt-6 flex flex-wrap items-end justify-between gap-3 border-t border-ink/10 pt-4">
+            <p className="max-w-xs text-xs font-light leading-relaxed text-ink/55">
               Thoughtful work. Honest growth.
             </p>
 
-            <p className="text-[9px] font-semibold uppercase tracking-[0.17em] text-ink/40">
+            <p className="text-[9px] font-medium uppercase tracking-[0.17em] text-ink/40">
               Chhattisgarh, India
             </p>
           </div>
