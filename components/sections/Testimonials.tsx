@@ -24,7 +24,7 @@ const stories = [
     business: "Jewellery retail",
     quote: "TODO: Add an approved quote from this video testimonial.",
     video: "/images/partners/videos/Balaji%20%26%20Balaji%20Feedback.mp4",
-    poster: "/images/partners/videos/2.jpg",
+    poster: "/images/partners/videos/3.png",
   },
   {
     id: 3,
@@ -452,13 +452,13 @@ export function Testimonials() {
           <div
             ref={carouselRef}
             aria-label="Customer video stories"
-            className="flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth pb-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-5 lg:gap-5"
+            className="flex items-stretch snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth pb-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-5 lg:gap-5"
           >
             {stories.map((story) => (
               <article
                 key={story.id}
                 data-story-card
-                className="w-[76vw] max-w-[300px] flex-none snap-start sm:w-[42vw] sm:max-w-[320px] lg:w-[calc((100%-60px)/4)] lg:max-w-none"
+                className="flex w-[76vw] min-w-0 max-w-[300px] flex-none snap-start flex-col sm:w-[42vw] sm:max-w-[320px] lg:w-[calc((100%-60px)/4)] lg:max-w-none"
               >
                 <button
                   type="button"
@@ -539,16 +539,16 @@ export function Testimonials() {
                   Watch story <span aria-hidden="true">↗</span>
                 </span>
                 </button>
-                <div className="border-x border-b border-neutral-200 bg-white p-4 sm:p-5">
+                <div className="flex-1 border-x border-b border-neutral-200 bg-white p-4 sm:p-5">
                   <p className="text-sm font-semibold text-neutral-900">
                     {story.client}
                   </p>
                   <p className="mt-1 text-xs leading-5 text-neutral-600">
                     Business: {story.business}
                   </p>
-                  <blockquote className="mt-3 border-t border-neutral-200 pt-3 text-sm leading-6 text-neutral-700">
+                  {/* <blockquote className="mt-3 border-t border-neutral-200 pt-3 text-sm leading-6 text-neutral-700">
                     “{story.quote}”
-                  </blockquote>
+                  </blockquote> */}
                 </div>
               </article>
             ))}
